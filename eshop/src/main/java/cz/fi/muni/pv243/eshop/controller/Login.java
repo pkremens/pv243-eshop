@@ -34,6 +34,11 @@ public class Login implements Serializable {
 			this.currentUser = user;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Welcome, " + currentUser.getName()));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(
+							"Non existing user, or passoword or both :)"));
 		}
 	}
 

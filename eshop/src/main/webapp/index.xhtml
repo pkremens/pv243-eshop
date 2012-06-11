@@ -9,8 +9,8 @@
 
       <h:messages />
       <h:form id="loginForm">
-         <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
-            <h:outputLabel for="email" value="Email:"/>
+         <h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+            <h:outputLabel for="email" value="Email: "/>
             <h:inputText id="email" value="#{credentials.email}" />
             <h:message for="email" errorClass="invalid"/>
             
@@ -23,8 +23,16 @@
             action="#{login.login}" rendered="#{!login.loggedIn}" />
          <h:commandButton id="logout" value="Logout"
             action="#{login.logout}" rendered="#{login.loggedIn}" />
+         <h:commandButton id="action1" value="Action1"
+            action="#{login.logout}" rendered="#{login.loggedIn}" />
+         <h:commandButton id="action2" value="Action2"
+            action="#{login.logout}" rendered="#{login.loggedIn}" />
+         <h:commandButton id="action3" value="Action3"
+            action="#{login.logout}" rendered="#{login.loggedIn}" />      
       </h:form>
   <!-- <h:link outcome="/users.xhtml">View users</h:link> -->    
+
+
 
       <div>
          <p>You have successfully deployed a Java EE 6 web application.</p>

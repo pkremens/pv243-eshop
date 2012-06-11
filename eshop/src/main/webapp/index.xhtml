@@ -32,6 +32,28 @@
          <img src="resources/gfx/dualbrand_as7eap.png"/>
       </div>
 
+<h1>Users</h1>
+      <h:dataTable value="#{products}" var="p">
+         <h:column>
+            <f:facet name="header">
+               Product's id
+            </f:facet>
+            <h:outputText value="#{p.id}" />
+         </h:column>
+         <h:column>
+            <f:facet name="header">
+               name
+            </f:facet>
+            <h:outputText value="#{p.name}" />
+         </h:column>
+         <h:column>
+            <f:facet name="header">
+               price
+            </f:facet>
+            <h:outputText value="#{p.price}" />
+         </h:column>
+      </h:dataTable>
+
       <h:form id="reg">
          <h2>Member Registration</h2>
          <p>Enforces annotation-based constraints defined on the model class.</p>

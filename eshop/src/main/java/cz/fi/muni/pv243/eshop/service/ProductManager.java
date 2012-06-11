@@ -8,10 +8,10 @@ public interface ProductManager {
 
 	public List<Product> getProducts() throws Exception;
 
-	public String addProduct() throws Exception;
+	public void addProduct(Product product) throws Exception;
 
 	public Product findProduct(long id) throws Exception;
 
-	public Product getNewProduct();
+	// public Product getNewProduct();
 
 }

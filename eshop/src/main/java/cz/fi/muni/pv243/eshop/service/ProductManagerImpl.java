@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,6 +24,9 @@ public class ProductManagerImpl implements ProductManager {
 	@Inject
 	private EntityManager productDatabase;
 
+	@Inject
+	private Event<Product> productEventSrc;
+
 	private final Product newProduct = new Product();
 
 	@Override
@@ -36,11 +40,17 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public String addProduct() throws Exception {
-		productDatabase.persist(newProduct);
-		logger.info("Added " + newProduct);
-		return "userAdded";
+	public void addProduct(Product product) throws Exception {
+		logger.info("Adding " + product.getName());
+		productDatabase.persist(product);
+		productEventSrc.fire(product);
 	}
+
+	// public void register(Product product) throws Exception {
+	// logger.info("Adding " + product.getName());
+	// productDatabase.persist(product);
+	// productEventSrc.fire(product);
+	// }
 
 	@Override
 	public Product findProduct(long id) throws Exception {
@@ -58,12 +68,12 @@ public class ProductManagerImpl implements ProductManager {
 		}
 	}
 
-	@Override
-	@Produces
-	@RequestScoped
-	@Named
-	public Product getNewProduct() {
-		return newProduct;
-	}
+	// @Override
+	// @Produces
+	// @RequestScoped
+	// @Named
+	// public Product getNewProduct() {
+	// return newProduct;
+	// }
 
 }

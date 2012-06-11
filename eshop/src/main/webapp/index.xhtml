@@ -7,6 +7,25 @@
    <ui:define name="content">
       <h1>Welcome to JBoss!</h1>
 
+      <h:messages />
+      <h:form id="loginForm">
+         <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
+            <h:outputLabel for="email" value="Email:"/>
+            <h:inputText id="email" value="#{credentials.email}" />
+            <h:message for="email" errorClass="invalid"/>
+            
+            <h:outputLabel for="password" value="Password: "/>
+            <h:inputSecret id="password" value="#{credentials.password}" />
+            <h:message for="password" errorClass="invalid"/>
+            
+         </h:panelGrid>
+         <h:commandButton id="login" value="Login"
+            action="#{login.login}" rendered="#{!login.loggedIn}" />
+         <h:commandButton id="logout" value="Logout"
+            action="#{login.logout}" rendered="#{login.loggedIn}" />
+      </h:form>
+  <!-- <h:link outcome="/users.xhtml">View users</h:link> -->    
+
       <div>
          <p>You have successfully deployed a Java EE 6 web application.</p>
          <h3>Your application can run on:</h3>

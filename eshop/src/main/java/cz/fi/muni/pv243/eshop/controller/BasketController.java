@@ -8,7 +8,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import cz.fi.muni.pv243.eshop.model.Product;
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
 /**
@@ -38,9 +37,12 @@ public class BasketController implements Serializable {
 		productInBasket = new ProductInBasket();
 	}
 
-	public void addProductToBasket(Product product) throws Exception {
-		basket.addProduct(productInBasket.getProduct(),
-				productInBasket.getQuantity());
+	public void addProductToBasket() throws Exception {
+		System.err.println("values: "
+				+ productInBasket.getProductId().getValue().toString());
+		basket.addProduct(
+				Long.parseLong(productInBasket.getProductId().getValue()
+						.toString()), productInBasket.getQuantity());
 	}
 
 }

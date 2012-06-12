@@ -7,8 +7,6 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import cz.fi.muni.pv243.eshop.model.Product;
-
 /**
  * @author Matous Jobanek
  */
@@ -20,13 +18,11 @@ public class BasketBean implements Basket {
 	private final static Logger LOGGER = Logger.getLogger(BasketBean.class
 			.getPackage().toString());
 
-	private final HashMap<Product, Integer> basket = new HashMap<Product, Integer>();
+	private final HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
 
 	@Override
 	@Named
-	public void addProduct(Product product, int quantity) {
-
-		System.err.println("jboss sucks!");
+	public void addProduct(Long product, int quantity) {
 
 		if (basket.containsKey(product)) {
 			int currentQuantity = basket.get(product);
@@ -35,10 +31,14 @@ public class BasketBean implements Basket {
 		} else {
 			basket.put(product, quantity);
 		}
+
+		// for (Long key : basket.keySet()) {
+		// System.err.println(key);
+		// }
 	}
 
 	@Override
-	public HashMap<Product, Integer> getBasketContent() {
+	public HashMap<Long, Integer> getBasketContent() {
 		return basket;
 	}
 

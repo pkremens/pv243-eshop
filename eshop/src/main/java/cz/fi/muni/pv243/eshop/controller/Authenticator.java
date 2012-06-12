@@ -24,25 +24,33 @@ public class Authenticator extends BaseAuthenticator {
 
 	@Override
 	public void authenticate() {
-
-		Customer customer = customerManager.findCustomer(
-				credentials.getUsername(),
-				((PasswordCredential) credentials.getCredential()).getValue());
-
-		if (customer != null) {
-			setStatus(AuthenticationStatus.SUCCESS);
-			setUser(customer);
-			System.err.println(customer.toString());
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Welcome, " + customer.getName()));
-
-		} else {
+		if (!customerManager.isRegistred(credentials.getUsername())) {
 			setStatus(AuthenticationStatus.FAILURE);
+			System.out.println("Non-existing user"); // TODO nevypisuje message,
+														// protoze komunikujem
+														// pomoci identity
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(
 							"Non existing user, or passoword or both :)"));
+		} else {
+			Customer customer = customerManager.findCustomer(credentials
+					.getUsername(), ((PasswordCredential) credentials
+					.getCredential()).getValue());
 
+			if (customer != null) {
+				setStatus(AuthenticationStatus.SUCCESS);
+				setUser(customer);
+				System.err.println(customer.toString());
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Welcome, " + customer.getName()));
+
+			} else {
+				setStatus(AuthenticationStatus.FAILURE);
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Wrong Password"));
+
+			}
 		}
 	}
 

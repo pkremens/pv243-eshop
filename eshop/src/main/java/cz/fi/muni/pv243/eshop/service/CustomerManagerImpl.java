@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,6 +26,9 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	private final Customer newCustomer = new Customer();
 
+	@Inject
+	private Event<Customer> customerEventSrc;
+
 	@Override
 	@SuppressWarnings("unchecked")
 	@Produces
@@ -36,10 +40,11 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
-	public String addCustomer() throws Exception {
+	public void addCustomer(Customer customer) throws Exception {
+
 		customerDatabase.persist(newCustomer);
-		logger.info("Added " + newCustomer);
-		return "userAdded";
+		logger.info("Adding " + customer.toString());
+		customerEventSrc.fire(customer);
 	}
 
 	@Override
@@ -57,18 +62,25 @@ public class CustomerManagerImpl implements CustomerManager {
 		}
 	}
 
-	@Override
-	@Produces
-	@RequestScoped
-	@Named
-	public Customer getNewCustomer() {
-		return newCustomer;
-	}
+	// @Override
+	// @Produces
+	// @RequestScoped
+	// @Named
+	// public Customer getNewCustomer() {
+	// return newCustomer;
+	// }
 
 	@Override
-	public List<String> geCustomerNames() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isRegistred(String email) {
+		try {
+			customerDatabase
+					.createQuery(
+							"select c from Customer c where c.email=:email")
+					.setParameter("email", email).getSingleResult();
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 
 }

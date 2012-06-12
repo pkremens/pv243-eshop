@@ -8,12 +8,12 @@ public interface CustomerManager {
 
 	public List<Customer> getCustomers() throws Exception;
 
-	public String addCustomer() throws Exception;
+	public void addCustomer(Customer customer) throws Exception;
 
 	public Customer findCustomer(String username, String passwordCredential);
 
-	public Customer getNewCustomer();
+	// public Customer getNewCustomer();
 
-	public List<String> geCustomerNames();
+	public boolean isRegistred(String email);
 
 }

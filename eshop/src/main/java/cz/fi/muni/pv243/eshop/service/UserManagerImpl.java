@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
+import org.picketlink.idm.impl.api.PasswordCredential;
+
 import cz.fi.muni.pv243.eshop.model.User;
 
 @Named("userManager")
@@ -42,13 +44,32 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public User findUser(String email, String password) throws Exception {
+	public User findUser(String email, PasswordCredential passwordCredential) throws Exception {
 		@SuppressWarnings("unchecked")
 		List<User> results = userDatabase
 				.createQuery(
 						"select u from User u where u.email=:email and u.password=:password")
 				.setParameter("email", email)
-				.setParameter("password", password).getResultList();
+				.setParameter("password", passwordCredential).getResultList();
+		if (results.isEmpty()) {
+			return null;
+		} else if (results.size() > 1) {
+			throw new IllegalStateException(
+					"Cannot have more than one user with the same email!");
+		} else {
+			return results.get(0);
+		}
+	}
+	
+	//TODO erase on finish
+	@Override
+	public User findUser(String email, String passwordCredential) throws Exception {
+		@SuppressWarnings("unchecked")
+		List<User> results = userDatabase
+				.createQuery(
+						"select u from User u where u.email=:email and u.password=:password")
+				.setParameter("email", email)
+				.setParameter("password", passwordCredential).getResultList();
 		if (results.isEmpty()) {
 			return null;
 		} else if (results.size() > 1) {

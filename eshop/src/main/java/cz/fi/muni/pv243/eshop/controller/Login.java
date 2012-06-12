@@ -9,7 +9,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import cz.fi.muni.pv243.eshop.data.Credentials;
+import org.jboss.seam.security.Credentials;
+import org.picketlink.idm.impl.api.PasswordCredential;
+
+
 import cz.fi.muni.pv243.eshop.model.User;
 import cz.fi.muni.pv243.eshop.service.UserManager;
 
@@ -28,8 +31,9 @@ public class Login implements Serializable {
 	private User currentUser;
 
 	public void login() throws Exception {
-		User user = userManager.findUser(credentials.getEmail(),
-				credentials.getPassword());
+		User user = userManager.findUser(credentials.getUsername(),
+				((PasswordCredential)credentials.getCredential()).getValue());
+		
 		if (user != null) {
 			this.currentUser = user;
 			FacesContext.getCurrentInstance().addMessage(null,

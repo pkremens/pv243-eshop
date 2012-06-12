@@ -70,13 +70,14 @@
             <h:inputText id="name" value="#{newProduct.name}" />
             <h:message for="name" errorClass="invalid"/>
 
+			<h:outputLabel for="visible" value="Visible:"/>
+			<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
+			<h:message for="visible" errorClass="invalid"/>
+			
             <h:outputLabel for="price" value="Price:"/>
-            <h:inputText id="price" value="#{newProduct.price}"/>
+            <h:inputText id="price" value="#{newProduct.price}" />
             <h:message for="price" errorClass="invalid"/>
 
-            <h:outputLabel for="visible" value="Visible:"/>
-            <h:inputText id="visible" value="#{newProduct.visible}"/>
-            <h:message for="visible" errorClass="invalid"/>
          </h:panelGrid>
 
          <p>

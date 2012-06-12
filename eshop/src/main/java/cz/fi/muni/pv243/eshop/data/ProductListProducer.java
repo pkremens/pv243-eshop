@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import cz.fi.muni.pv243.eshop.model.Product;
@@ -48,7 +49,8 @@ public class ProductListProducer {
 		// criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
 		// TODO jen visible=true
 		criteria.select(product).orderBy(cb.asc(product.get("id")));
-		products = em.createQuery(criteria).getResultList();
+		Expression<Boolean> isVisible = product.get("visible");
+		products = em.createQuery(criteria.where(cb.isTrue(isVisible))).getResultList();
 
 	}
 }

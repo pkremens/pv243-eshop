@@ -75,7 +75,7 @@
 			<h:message for="visible" errorClass="invalid"/>
 			
             <h:outputLabel for="price" value="Price:"/>
-            <h:inputText id="price" value="#{newProduct.price}" />
+            <h:inputText id="price" value="#{newProduct.price}" validator="#{productController.validateNumberRange}" />
             <h:message for="price" errorClass="invalid"/>
 
          </h:panelGrid>

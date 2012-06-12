@@ -26,8 +26,7 @@ public class Product implements Serializable {
 	private String name;
 
 	@NotNull
-	@Size(min = 1, max = 25)
-	private String price;
+	private int price;
 	private boolean visible;
 
 	/**
@@ -63,7 +62,7 @@ public class Product implements Serializable {
 	/**
 	 * @return the price
 	 */
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
@@ -71,7 +70,7 @@ public class Product implements Serializable {
 	 * @param price
 	 *            the price to set
 	 */
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -112,7 +111,7 @@ public class Product implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + price;
 		result = prime * result + (visible ? 1231 : 1237);
 		return result;
 	}
@@ -141,10 +140,7 @@ public class Product implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
+		if (price != other.price)
 			return false;
 		if (visible != other.visible)
 			return false;

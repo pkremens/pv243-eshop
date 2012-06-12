@@ -27,7 +27,7 @@ public class ProductManagerImpl implements ProductManager {
 	@Inject
 	private Event<Product> productEventSrc;
 
-	private final Product newProduct = new Product();
+	// private final Product newProduct = new Product();
 
 	@Override
 	@SuppressWarnings("unchecked")

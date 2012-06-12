@@ -57,7 +57,7 @@ public class ProductController implements Serializable {
 			UIComponent toValidate, Object value) {
 		int input = (Integer) value;
 
-		if (input < 0 || input > 100) {
+		if (input < 0 || input > 10000) {
 			((UIInput) toValidate).setValid(false);
 
 			FacesMessage message = new FacesMessage("Invalid number");

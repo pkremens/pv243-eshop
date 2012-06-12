@@ -3,7 +3,7 @@ package cz.fi.muni.pv243.eshop.service;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
@@ -13,9 +13,9 @@ import javax.persistence.EntityManager;
 
 import cz.fi.muni.pv243.eshop.model.Product;
 
+// @RequestScoped
 @Named("productManager")
-@RequestScoped
-@Stateful
+@Stateless
 public class ProductManagerImpl implements ProductManager {
 
 	@Inject
@@ -41,7 +41,7 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public void addProduct(Product product) throws Exception {
-		logger.info("Adding " + product.getName());
+		logger.info("Adding " + product.toString());
 		productDatabase.persist(product);
 		productEventSrc.fire(product);
 	}

@@ -30,16 +30,6 @@ public class Authenticator extends BaseAuthenticator {
 				((PasswordCredential) credentials.getCredential()).getValue());
 
 		if (customer != null) {
-
-			// Customer customer = (Customer) em
-			// .createQuery(
-			// "select m from Customer m where m.email = :email and m.password = :password")
-			// .setParameter("email", credentials.getUsername())
-			// .setParameter(
-			// "password",
-			// ((PasswordCredential) credentials.getCredential())
-			// .getValue()).getSingleResult();
-
 			setStatus(AuthenticationStatus.SUCCESS);
 			setUser(customer);
 			System.err.println(customer.toString());

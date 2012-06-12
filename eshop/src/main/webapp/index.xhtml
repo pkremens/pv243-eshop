@@ -43,10 +43,8 @@
 				<h:outputLabel value="Password" for="password" />
 				<h:inputSecret id="password" value="#{credentials.password}" />
 			</h:panelGrid>
-			<h:commandButton action="#{identity.login}" value="Login" />
+			<h:commandButton action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
 
-			<div>The default username/passwords: manager1/manager,
-				manager2/manager, admin/admin</div>
 			<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user}"

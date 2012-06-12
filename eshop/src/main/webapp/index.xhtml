@@ -1,148 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://java.sun.com/jsf/facelets"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html"
-   template="/WEB-INF/templates/default.xhtml">
-   <ui:define name="content">
-      <h1>Welcome to JBoss!</h1>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Welcome to JBoss!</h1>
 
-      <h:messages />
-      <h:form id="loginForm">
-         <h:panelGrid columns="3" rendered="#{!login.loggedIn}">
-            <h:outputLabel for="email" value="Email: "/>
-            <h:inputText id="email" value="#{credentials.email}" />
-            <h:message for="email" errorClass="invalid"/>
-            
-            <h:outputLabel for="password" value="Password: "/>
-            <h:inputSecret id="password" value="#{credentials.password}" />
-            <h:message for="password" errorClass="invalid"/>
-            
-         </h:panelGrid>
-         <h:commandButton id="login" value="Login"
-            action="#{login.login}" rendered="#{!login.loggedIn}" />
-         <h:commandButton id="logout" value="Logout"
-            action="#{login.logout}" rendered="#{login.loggedIn}" />
-         <h:commandButton id="action1" value="Action1"
-            action="#{login.logout}" rendered="#{login.loggedIn}" />
-         <h:commandButton id="action2" value="Action2"
-            action="#{login.logout}" rendered="#{login.loggedIn}" />
-         <h:commandButton id="action3" value="Action3"
-            action="#{login.logout}" rendered="#{login.loggedIn}" />      
-      </h:form>
-  <!-- <h:link outcome="/users.xhtml">View users</h:link> -->    
+		<h:messages />
+		<h:form id="loginForm">
+			<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+				<h:outputLabel for="email" value="Email: " />
+				<h:inputText id="email" value="#{credentials.email}" />
+				<h:message for="email" errorClass="invalid" />
+
+				<h:outputLabel for="password" value="Password: " />
+				<h:inputSecret id="password" value="#{credentials.password}" />
+				<h:message for="password" errorClass="invalid" />
+
+			</h:panelGrid>
+			<h:commandButton id="login" value="Login" action="#{login.login}"
+				rendered="#{!login.loggedIn}" />
+			<h:commandButton id="logout" value="Logout" action="#{login.logout}"
+				rendered="#{login.loggedIn}" />
+			<h:commandButton id="action1" value="Action1"
+				action="#{login.logout}" rendered="#{login.loggedIn}" />
+			<h:commandButton id="action2" value="Action2"
+				action="#{login.logout}" rendered="#{login.loggedIn}" />
+			<h:commandButton id="action3" value="Action3"
+				action="#{login.logout}" rendered="#{login.loggedIn}" />
+		</h:form>
+		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 
 
 
-      <div>
-         <p>You have successfully deployed a Java EE 6 web application.</p>
-         <h3>Your application can run on:</h3>
-         <img src="resources/gfx/dualbrand_as7eap.png"/>
-      </div>
+		<div>
+			<p>You have successfully deployed a Java EE 6 web application.</p>
+			<h3>Your application can run on:</h3>
+			<img src="resources/gfx/dualbrand_as7eap.png" />
+		</div>
 
-<h1>Users</h1>
-      <h:dataTable value="#{ascProducts}" var="p">
-         <h:column>
-            <f:facet name="header">
+		<h1>Users</h1>
+		<h:dataTable value="#{ascProducts}" var="p">
+			<h:column>
+				<f:facet name="header">
                Product's id
             </f:facet>
-            <h:outputText value="#{p.id}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">
+				<h:outputText value="#{p.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
                name
             </f:facet>
-            <h:outputText value="#{p.name}" />
-         </h:column>
-         <h:column>
-            <f:facet name="header">
+				<h:outputText value="#{p.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
                price
             </f:facet>
-            <h:outputText value="#{p.price}" />
-         </h:column>
-      </h:dataTable>
-      
-      <h:form id="addProduct">
-         <h2>Adding product</h2>
-         <p>Enforces annotation-based constraints defined on the model class.</p>
-         <h:panelGrid columns="3" columnClasses="titleCell" rendered="#{login.loggedIn}">
-            <h:outputLabel for="name" value="Name:"/>
-            <h:inputText id="name" value="#{newProduct.name}" />
-            <h:message for="name" errorClass="invalid"/>
+				<h:outputText value="#{p.price}" />
+			</h:column>
 
-			<h:outputLabel for="visible" value="Visible:"/>
-			<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
-			<h:message for="visible" errorClass="invalid"/>
-			
-            <h:outputLabel for="price" value="Price:"/>
-            <h:inputText id="price" value="#{newProduct.price}" validator="#{productController.validateNumberRange}" />
-            <h:message for="price" errorClass="invalid"/>
+			<h:column>
+				<h:outputLabel for="quantity" value="quantity" />
+				<h:inputText id="quantity" value="#{productInBasket.quantity}"
+					validator="#{productController.validateNumberRange}" />
+				<h:message for="quantity" errorClass="invalid" />
+			</h:column>
+			<h:column>
+				<!-- <input type="hidden" name="product" id="p"
+					value="#{productInBasket.product}" /> -->
+				<h:commandButton id="addProductToBasket" value="add"
+					action="#{basketController.addProductToBasket}">
+					<f:attribute name="product" value="#{p}" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:form id="addProduct">
+			<h2>Adding product</h2>
+			<p>Enforces annotation-based constraints defined on the model
+				class.</p>
+			<h:panelGrid columns="3" columnClasses="titleCell"
+				rendered="#{login.loggedIn}">
+				<h:outputLabel for="name" value="Name:" />
+				<h:inputText id="name" value="#{newProduct.name}" />
+				<h:message for="name" errorClass="invalid" />
 
-         </h:panelGrid>
+				<h:outputLabel for="visible" value="Visible:" />
+				<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
+				<h:message for="visible" errorClass="invalid" />
 
-         <p>
-            <h:panelGrid columns="2">
-               <h:commandButton id="register" action="#{productController.register}" value="Register" styleClass="register" rendered="#{login.loggedIn}"/>
-               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
-                           globalOnly="true"/>
-            </h:panelGrid>
-         </p>
-      </h:form>
-      
+				<h:outputLabel for="price" value="Price:" />
+				<h:inputText id="price" value="#{newProduct.price}"
+					validator="#{productController.validateNumberRange}" />
+				<h:message for="price" errorClass="invalid" />
 
-      <h:form id="reg">
-         <h2>Member Registration</h2>
-         <p>Enforces annotation-based constraints defined on the model class.</p>
-         <h:panelGrid columns="3" columnClasses="titleCell">
-            <h:outputLabel for="name" value="Name:"/>
-            <h:inputText id="name" value="#{newMember.name}" />
-            <h:message for="name" errorClass="invalid"/>
+			</h:panelGrid>
 
-            <h:outputLabel for="email" value="Email:"/>
-            <h:inputText id="email" value="#{newMember.email}"/>
-            <h:message for="email" errorClass="invalid"/>
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{productController.register}" value="Register"
+						styleClass="register" rendered="#{login.loggedIn}" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
 
-            <h:outputLabel for="phoneNumber" value="Phone #:"/>
-            <h:inputText id="phoneNumber" value="#{newMember.phoneNumber}"/>
-            <h:message for="phoneNumber" errorClass="invalid"/>
-         </h:panelGrid>
 
-         <p>
-            <h:panelGrid columns="2">
-               <h:commandButton id="register" action="#{memberController.register}" value="Register" styleClass="register"/>
-               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
-                           globalOnly="true"/>
-            </h:panelGrid>
-         </p>
-      </h:form>
-      <h2>Members</h2>
-      <h:panelGroup rendered="#{empty members}">
-         <em>No registered members.</em>
-      </h:panelGroup>
-      <h:dataTable var="_member" value="#{members}" rendered="#{not empty members}" styleClass="simpletablestyle">
-         <h:column>
-            <f:facet name="header">Id</f:facet>
+		<h:form id="reg">
+			<h2>Member Registration</h2>
+			<p>Enforces annotation-based constraints defined on the model
+				class.</p>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="Name:" />
+				<h:inputText id="name" value="#{newMember.name}" />
+				<h:message for="name" errorClass="invalid" />
+
+				<h:outputLabel for="email" value="Email:" />
+				<h:inputText id="email" value="#{newMember.email}" />
+				<h:message for="email" errorClass="invalid" />
+
+				<h:outputLabel for="phoneNumber" value="Phone #:" />
+				<h:inputText id="phoneNumber" value="#{newMember.phoneNumber}" />
+				<h:message for="phoneNumber" errorClass="invalid" />
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{memberController.register}" value="Register"
+						styleClass="register" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
+		<h2>Members</h2>
+		<h:panelGroup rendered="#{empty members}">
+			<em>No registered members.</em>
+		</h:panelGroup>
+		<h:dataTable var="_member" value="#{members}"
+			rendered="#{not empty members}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
                 #{_member.id}
             </h:column>
-         <h:column>
-            <f:facet name="header">Name</f:facet>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
                 #{_member.name}
             </h:column>
-         <h:column>
-            <f:facet name="header">Email</f:facet>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
                 #{_member.email}
             </h:column>
-         <h:column>
-            <f:facet name="header">Phone #</f:facet>
+			<h:column>
+				<f:facet name="header">Phone #</f:facet>
                 #{_member.phoneNumber}
             </h:column>
-         <h:column>
-            <f:facet name="header">REST URL</f:facet>
-            <a href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
-         </h:column>
-         <f:facet name="footer">
-            REST URL for all members: <a href="#{request.contextPath}/rest/members">/rest/members</a>
-         </f:facet>
-      </h:dataTable>
-   </ui:define>
+			<h:column>
+				<f:facet name="header">REST URL</f:facet>
+				<a href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
+			</h:column>
+			<f:facet name="footer">
+            REST URL for all members: <a
+					href="#{request.contextPath}/rest/members">/rest/members</a>
+			</f:facet>
+		</h:dataTable>
+	</ui:define>
 </ui:composition>

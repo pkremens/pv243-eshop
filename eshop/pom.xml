@@ -24,6 +24,9 @@
             to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 
             maven repository. -->
         <!-- <jboss.bom.version>1.0.0.M6-redhat-1</jboss.bom.version>> -->
+        <javaee6.web.spec.version>2.0.0.Final</javaee6.web.spec.version>
+        <jbossas.version>7.1.1.Final</jbossas.version>
+        <seam.version>3.1.0.Final</seam.version>
     </properties>
 
 
@@ -51,6 +54,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            
+            <dependency>
+	            <groupId>org.jboss.spec</groupId>
+	            <artifactId>jboss-javaee-web-6.0</artifactId>
+	            <version>${javaee6.web.spec.version}</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	        
+	        <dependency>
+	            <groupId>org.jboss.seam</groupId>
+	            <artifactId>seam-bom</artifactId>
+	            <version>${seam.version}</version>
+	            <scope>import</scope>
+	            <type>pom</type>
+	         </dependency>
+            
         </dependencies>
     </dependencyManagement>
     
@@ -162,7 +182,44 @@
             <scope>test</scope>
         </dependency>
 
+      <dependency>
+        <groupId>org.jboss.seam.security</groupId>
+        <artifactId>seam-security</artifactId>
+        <scope>compile</scope>
+      </dependency>
+
     </dependencies>
+
+     <repositories>
+        <!-- The JBoss Community public repository is a composite repository 
+           of several major repositories -->
+        <!-- see http://community.jboss.org/wiki/MavenGettingStarted-Users -->
+        <repository>
+           <id>jboss-public-repository</id>
+           <name>JBoss Repository</name>
+           <url>http://repository.jboss.org/nexus/content/groups/public</url>
+           <!-- These optional flags are designed to speed up your builds 
+              by reducing remote server calls -->
+           <releases>
+           </releases>
+           <snapshots>
+              <enabled>false</enabled>
+           </snapshots>
+        </repository>
+     </repositories>
+
+     <pluginRepositories>
+        <pluginRepository>
+           <id>jboss-public-repository</id>
+           <name>JBoss Repository</name>
+           <url>http://repository.jboss.org/nexus/content/groups/public</url>
+           <releases>
+           </releases>
+           <snapshots>
+              <enabled>false</enabled>
+           </snapshots>
+        </pluginRepository>
+     </pluginRepositories>
 
     <build>
         <!-- Maven will append the version to the finalName (which is the 

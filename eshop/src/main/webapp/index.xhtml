@@ -7,6 +7,7 @@
 	<ui:define name="content">
 		<h1>Welcome to JBoss!</h1>
 
+		<!-- 
 		<h:messages />
 		<h:form id="loginForm">
 			<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
@@ -30,7 +31,7 @@
 			<h:commandButton id="action3" value="Action3"
 				action="#{login.logout}" rendered="#{login.loggedIn}" />
 		</h:form>
-
+ -->
 
 
 		<h1>Login</h1>
@@ -42,10 +43,8 @@
 				<h:outputLabel value="Password" for="password" />
 				<h:inputSecret id="password" value="#{credentials.password}" />
 			</h:panelGrid>
-			<h:commandButton action="#{identity.login}" value="Login" />
+			<h:commandButton action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
 
-			<div>The default username/passwords: manager1/manager,
-				manager2/manager, admin/admin</div>
 			<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user}"
@@ -105,7 +104,7 @@
 			<p>Enforces annotation-based constraints defined on the model
 				class.</p>
 			<h:panelGrid columns="3" columnClasses="titleCell"
-				rendered="#{login.loggedIn}">
+				rendered="#{identity.loggedIn}">
 				<h:outputLabel for="name" value="Name:" />
 				<h:inputText id="name" value="#{newProduct.name}" />
 				<h:message for="name" errorClass="invalid" />
@@ -125,7 +124,7 @@
 				<h:panelGrid columns="2">
 					<h:commandButton id="register"
 						action="#{productController.register}" value="Register"
-						styleClass="register" rendered="#{login.loggedIn}" />
+						styleClass="register" rendered="#{identity.loggedIn}" />
 					<h:messages styleClass="messages" errorClass="invalid"
 						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>

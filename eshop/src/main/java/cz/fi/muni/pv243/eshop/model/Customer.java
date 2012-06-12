@@ -3,6 +3,7 @@ package cz.fi.muni.pv243.eshop.model;
 import java.io.Serializable;
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -12,8 +13,10 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import org.picketlink.idm.api.User;
+
 @Entity
-public class User implements Serializable {
+public class Customer implements User, Serializable {
 	/**
 	 * 
 	 */
@@ -120,7 +123,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Customer other = (Customer) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -137,6 +140,16 @@ public class User implements Serializable {
 		} else if (!password.equals(other.password))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String getKey() {
+		return getId();
+	}
+
+	@Override
+	public String getId() {
+		return getEmail();
 	}
 
 }

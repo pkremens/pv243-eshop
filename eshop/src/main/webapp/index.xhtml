@@ -11,7 +11,7 @@
 		<h:form id="loginForm">
 			<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
 				<h:outputLabel for="email" value="Email: " />
-				<h:inputText id="email" value="#{credentials.email}" />
+				<h:inputText id="email" value="#{credentials.password}" />
 				<h:message for="email" errorClass="invalid" />
 
 				<h:outputLabel for="password" value="Password: " />
@@ -29,6 +29,27 @@
 				action="#{login.logout}" rendered="#{login.loggedIn}" />
 			<h:commandButton id="action3" value="Action3"
 				action="#{login.logout}" rendered="#{login.loggedIn}" />
+		</h:form>
+
+
+
+		<h1>Login</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Username" for="username" />
+				<h:inputText id="username" value="#{credentials.username}" />
+
+				<h:outputLabel value="Password" for="password" />
+				<h:inputSecret id="password" value="#{credentials.password}" />
+			</h:panelGrid>
+			<h:commandButton action="#{identity.login}" value="Login" />
+
+			<div>The default username/passwords: manager1/manager,
+				manager2/manager, admin/admin</div>
+			<h:commandButton id="logout" value="Logout"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user}"
+				rendered="#{identity.loggedIn}" />
 		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 

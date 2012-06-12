@@ -27,8 +27,7 @@ public class Product implements Serializable {
 
 	@NotNull
 	@Size(min = 1, max = 25)
-	@Pattern(regexp = "[0-9]*,\\?[0-9]*", message = "must contain only letters and spaces")
-	private double price;
+	private String price;
 	private boolean visible;
 
 	/**
@@ -64,7 +63,7 @@ public class Product implements Serializable {
 	/**
 	 * @return the price
 	 */
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
@@ -72,7 +71,7 @@ public class Product implements Serializable {
 	 * @param price
 	 *            the price to set
 	 */
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -113,9 +112,7 @@ public class Product implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + (visible ? 1231 : 1237);
 		return result;
 	}
@@ -144,8 +141,10 @@ public class Product implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (Double.doubleToLongBits(price) != Double
-				.doubleToLongBits(other.price))
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
 			return false;
 		if (visible != other.visible)
 			return false;

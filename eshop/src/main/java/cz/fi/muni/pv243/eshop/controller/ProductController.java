@@ -1,9 +1,13 @@
 package cz.fi.muni.pv243.eshop.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,7 +20,12 @@ import cz.fi.muni.pv243.eshop.service.ProductManager;
 // Read more about the @Model stereotype in this FAQ:
 // http://sfwk.org/Documentation/WhatIsThePurposeOfTheModelAnnotation
 @Model
-public class ProductController {
+public class ProductController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private FacesContext facesContext;
@@ -42,5 +51,17 @@ public class ProductController {
 	@PostConstruct
 	public void initNewProduct() {
 		newProduct = new Product();
+	}
+
+	public void validateNumberRange(FacesContext context,
+			UIComponent toValidate, Object value) {
+		int input = (Integer) value;
+
+		if (input < 0 || input > 100) {
+			((UIInput) toValidate).setValid(false);
+
+			FacesMessage message = new FacesMessage("Invalid number");
+			context.addMessage(toValidate.getClientId(context), message);
+		}
 	}
 }

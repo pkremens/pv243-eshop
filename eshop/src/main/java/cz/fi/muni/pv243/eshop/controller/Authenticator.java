@@ -21,53 +21,63 @@ public class Authenticator extends BaseAuthenticator {
 	EntityManager em;
 
 	@Inject
+	private FacesContext facesContext;
+
+	@Inject
 	private CustomerManager customerManager;
 
 	@Override
 	public void authenticate() {
-		
-//		System.err.println("a");
-//		for (Customer c: customerManager.getCustomers()) {
-//			System.err.println(c);
-//		}
-//		System.err.println("b");
-		
-		Customer customer = customerManager.isRegistred(credentials
-				.getUsername());
-		if (customer == null) {
+		// System.err.println("a");
+		// for (Customer c: customerManager.getCustomers()) {
+		// System.err.println(c);
+		// }
+		// System.err.println("b");
+
+		if (credentials.getUsername().equals("")) {
 			setStatus(AuthenticationStatus.FAILURE);
-			FacesContext.getCurrentInstance().addMessage("loginForm:username",
-					new FacesMessage("Non existing user"));
+			facesContext.addMessage("loginForm:username", new FacesMessage(
+					"Cannot enter empry username"));
 		} else {
-			// customer = customerManager.findCustomer(credentials
-			// .getUsername(), ((PasswordCredential) credentials
-			// .getCredential()).getValue());
-
-			String saltPart = customer.getPassword().split("\\$")[0];
-			Integer salt = Integer.parseInt(saltPart, 16);
-			
-			String password = Security.sha2(
-					((PasswordCredential) credentials.getCredential())
-							.getValue(), salt);
-
-			if (customer.getPassword().equals(password)) {
-				setStatus(AuthenticationStatus.SUCCESS);
-				setUser(customer);
-				System.err.println(customer.toString());
-				FacesContext.getCurrentInstance().addMessage(
-						"loginForm:loginButton",
-						new FacesMessage("Welcome, " + customer.getName()));
-
-			} else {
+			Customer customer = customerManager.isRegistred(credentials
+					.getUsername());
+			if (customer == null) {
 				setStatus(AuthenticationStatus.FAILURE);
-				FacesContext.getCurrentInstance().addMessage(
-						"loginForm:password",
-						new FacesMessage("Wrong Password"));
+				facesContext.addMessage("loginForm:username", new FacesMessage(
+						"Non existing user"));
 
+				// FacesContext.getCurrentInstance().addMessage("loginForm:username",
+				// new FacesMessage("Non existing user"));
+			} else {
+				// customer = customerManager.findCustomer(credentials
+				// .getUsername(), ((PasswordCredential) credentials
+				// .getCredential()).getValue());
+
+				String saltPart = customer.getPassword().split("\\$")[0];
+				Integer salt = Integer.parseInt(saltPart, 16);
+
+				String password = Security.sha2(
+						((PasswordCredential) credentials.getCredential())
+								.getValue(), salt);
+
+				if (customer.getPassword().equals(password)) {
+					setStatus(AuthenticationStatus.SUCCESS);
+					setUser(customer);
+					System.err.println(customer.toString());
+					FacesContext.getCurrentInstance().addMessage(
+							"loginForm:loginButton",
+							new FacesMessage("Welcome, " + customer.getName()));
+
+				} else {
+					setStatus(AuthenticationStatus.FAILURE);
+					FacesContext.getCurrentInstance().addMessage(
+							"loginForm:password",
+							new FacesMessage("Wrong Password"));
+
+				}
 			}
 		}
 	}
-
 	// public void logout() {
 	// setUser(null);
 	// System.err.println("this is called");

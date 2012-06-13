@@ -4,8 +4,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,9 +13,6 @@ import cz.fi.muni.pv243.eshop.service.CustomerManager;
 
 @Model
 public class CustomerController {
-	@Inject
-	private Authenticator authenticator;
-
 	@Inject
 	private FacesContext facesContext;
 
@@ -33,10 +28,16 @@ public class CustomerController {
 	}
 
 	public void register() throws Exception {
-		customerManager.addCustomer(newCustomer);
-		facesContext.addMessage(null, new FacesMessage(
-				FacesMessage.SEVERITY_INFO, "Added!", "Customer was added"));
-		initNewCustomer();
+		if (newCustomer.getPassword() == null) {
+			facesContext.addMessage("addForm:password", new FacesMessage(
+					"Cannot have empty password"));
+			initNewCustomer();
+		} else {
+			customerManager.addCustomer(newCustomer);
+			facesContext.addMessage("addForm:registerButton", new FacesMessage(
+					"Customer was added"));
+			initNewCustomer();
+		}
 	}
 
 	@PostConstruct
@@ -44,17 +45,18 @@ public class CustomerController {
 		newCustomer = new Customer();
 	}
 
-	public void validateUsername(FacesContext context, UIComponent toValidate,
-			Object value) {
-		String input = (String) value;
-
-		if (customerManager.isRegistred(input) != null) {
-			((UIInput) toValidate).setValid(false);
-
-			FacesMessage message = new FacesMessage(
-					"Customer with same email is already registred");
-			context.addMessage(toValidate.getClientId(context), message);
-		}
-	}
+	// public void validateUsername(FacesContext context, UIComponent
+	// toValidate,
+	// Object value) {
+	// String input = (String) value;
+	//
+	// if (customerManager.isRegistred(input) != null) {
+	// ((UIInput) toValidate).setValid(false);
+	//
+	// FacesMessage message = new FacesMessage(
+	// "Customer with same email is already registred");
+	// context.addMessage(toValidate.getClientId(context), message);
+	// }
+	// }
 
 }

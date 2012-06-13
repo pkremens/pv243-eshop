@@ -6,7 +6,7 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h1>Welcome to JBoss!</h1>
-
+		
 		<!-- 
 		<h:message  />
 		
@@ -37,12 +37,28 @@
 
 
 <h:outputLabel value="#{identity.user}"	rendered="#{identity.loggedIn}" />
+		
+		<h1>Add user</h1>
+		<h:form id="addForm">
+		<h:message for="registerButton" />
+		<h:panelGrid columns="3">
+				<h:outputLabel value="Email" for="email" />
+				<h:inputText id="email" value="#{newCustomer.email}" />
+				<h:message for="email" errorClass="invalid" />				
+				<h:outputLabel value="Name" for="name" />
+				<h:inputText id="name" value="#{newCustomer.name}" />
+				<h:message for="name" errorClass="invalid" />
+				<h:outputLabel value="Password" for="password" />
+				<h:inputSecret id="password" value="#{newCustomer.password}" />
+				<h:message for="password" errorClass="invalid" />
+			</h:panelGrid>
+			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
+		</h:form>
+		
 		<h1>Login</h1>
 		<h:form id="loginForm">
 		<h:message for="loginButton" />
-		
-			<h:panelGrid columns="3">
-			
+				<h:panelGrid columns="3">
 				<h:outputLabel value="Username" for="username" />
 				<h:inputText id="username" value="#{credentials.username}" />
 				<h:message for="username" errorClass="invalid" />
@@ -51,10 +67,8 @@
 				<h:message for="password" errorClass="invalid" />
 			</h:panelGrid>
 			<h:commandButton id="loginButton" action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
-
 			<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-			
 		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 

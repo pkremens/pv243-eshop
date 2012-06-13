@@ -2,9 +2,6 @@ package cz.fi.muni.pv243.eshop.model;
 
 import java.io.Serializable;
 
-
-
-import javax.enterprise.inject.Default;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -13,7 +10,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import org.picketlink.idm.api.User;
 
 @Entity
@@ -24,19 +20,20 @@ public class Customer implements User, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotNull
 	@NotEmpty
 	@Email
 	private String email;
 
-	@NotNull
+	// @NotNull
 	@Size(min = 1, max = 25)
 	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
 	private String name;
 
+	@NotEmpty
 	@NotNull
 	private String password;
-	
+
+	@NotEmpty
 	@NotNull
 	private String role;
 
@@ -87,7 +84,6 @@ public class Customer implements User, Serializable {
 		this.password = password;
 	}
 
-	
 	public String getRole() {
 		return role;
 	}
@@ -96,7 +92,6 @@ public class Customer implements User, Serializable {
 		this.role = role;
 	}
 
-		
 	@Override
 	public int hashCode() {
 		final int prime = 31;

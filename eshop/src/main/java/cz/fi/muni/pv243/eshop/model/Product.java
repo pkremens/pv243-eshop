@@ -20,7 +20,6 @@ public class Product implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@NotNull
 	@Size(min = 1, max = 25)
 	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
 	private String name;

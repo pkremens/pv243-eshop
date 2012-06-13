@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,10 +24,10 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Inject
 	private EntityManager customerDatabase;
 
-	private final Customer newCustomer = new Customer();
+	// private final Customer newCustomer = new Customer();
 
-	@Inject
-	private Event<Customer> customerEventSrc;
+	// @Inject
+	// private Event<Customer> customerEventSrc;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -41,7 +40,7 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
-	public void addCustomer(Customer customer){
+	public void addCustomer(Customer customer) {
 		try {
 			Random r = new Random(System.currentTimeMillis());
 			Integer salt = r.nextInt(Integer.MAX_VALUE - 10);
@@ -49,10 +48,10 @@ public class CustomerManagerImpl implements CustomerManager {
 		} catch (Exception e) {
 			System.err.println("Error creating hash of password");
 		}
-		
-		customerDatabase.persist(newCustomer);
+
+		customerDatabase.persist(customer);
 		logger.info("Adding " + customer.toString());
-		customerEventSrc.fire(customer);
+
 	}
 
 	@Override
@@ -90,4 +89,5 @@ public class CustomerManagerImpl implements CustomerManager {
 			return null;
 		}
 	}
+
 }

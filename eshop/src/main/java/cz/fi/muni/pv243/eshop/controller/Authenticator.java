@@ -29,10 +29,8 @@ public class Authenticator extends BaseAuthenticator {
 			System.out.println("Non-existing user"); // TODO nevypisuje message,
 														// protoze komunikujem
 														// pomoci identity
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(
-							"Non existing user, or passoword or both :)"));
+			FacesContext.getCurrentInstance().addMessage("loginForm:username",
+					new FacesMessage("Non existing user"));
 		} else {
 			Customer customer = customerManager.findCustomer(credentials
 					.getUsername(), ((PasswordCredential) credentials

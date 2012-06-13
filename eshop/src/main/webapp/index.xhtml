@@ -63,14 +63,14 @@
 			<img src="resources/gfx/dualbrand_as7eap.png" />
 		</div>
 
-		<h1>Users</h1>
+		<h1>Products</h1>
 		<h:dataTable value="#{ascProducts}" var="p">
 
 			<h:column>
 				<f:facet name="header">
                Product's id
             </f:facet>
-				<h:outputText binding="#{productInBasket.productId}" value="#{p.id}">
+				<h:outputText binding="#{productToBasket.productId}" value="#{p.id}">
 					<f:attribute name="productId" value="productId" />
 				</h:outputText>
 			</h:column>
@@ -90,7 +90,7 @@
 			<h:column>
 
 				<h:outputLabel for="quantity" value="quantity" />
-				<h:inputText id="quantity" value="#{productInBasket.quantity}"
+				<h:inputText id="quantity" value="#{productToBasket.quantity}"
 					validator="#{productController.validateNumberRange}" />
 				<h:message for="quantity" errorClass="invalid" />
 			</h:column>
@@ -102,6 +102,52 @@
 			</h:column>
 
 		</h:dataTable>
+		
+		
+		
+		<div>
+		<h1>Basket</h1>
+		<h:dataTable value="#{productsInBasket}" var="pInB">
+
+			<h:column>
+				<f:facet name="header">
+               Product's id
+            </f:facet>
+				<h:outputText binding="#{productUpdateBasket.productId}" value="#{pInB.product.id}">
+					<f:attribute name="productId" value="productId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               name
+            </f:facet>
+				<h:outputText value="#{pInB.product.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               price
+            </f:facet>
+				<h:outputText value="#{pInB.product.price}" />
+			</h:column>
+
+			<h:column>
+
+				<h:outputLabel for="quantity" value="quantity" />
+				<h:inputText id="quantity" value="#{productUpdateBasket.quantity}"
+					validator="#{productController.validateNumberRange}" />
+				<h:message for="quantity" errorClass="invalid" />
+			</h:column>
+			<h:column>
+				<h:form id="updateProductInBasket">
+					<h:commandButton id="updateProductInBasket" value="update"
+						action="#{basketController.updateProductInBasket}" />
+				</h:form>
+			</h:column>
+
+		</h:dataTable>
+		
+</div>		
+		
 		<h:form id="addProduct">
 			<h2>Adding product</h2>
 			<p>Enforces annotation-based constraints defined on the model

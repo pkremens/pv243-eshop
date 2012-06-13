@@ -56,7 +56,7 @@ public class ProductManagerImpl implements ProductManager {
 	public Product findProduct(long id) throws Exception {
 		@SuppressWarnings("unchecked")
 		List<Product> results = productDatabase
-				.createQuery("select u from Product p where p.id=:id")
+				.createQuery("select p from Product p where p.id=:id")
 				.setParameter("id", id).getResultList();
 		if (results.isEmpty()) {
 			return null;

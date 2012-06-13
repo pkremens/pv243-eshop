@@ -2,12 +2,13 @@ package cz.fi.muni.pv243.eshop.model;
 
 import java.io.Serializable;
 
+import javax.faces.component.html.HtmlOutputText;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Matous Jobanek
  */
-public class ProductInBasket implements Serializable {
+public class ProductToBasket implements Serializable {
 
 	/**
 	 * 
@@ -16,26 +17,25 @@ public class ProductInBasket implements Serializable {
 
 	@NotNull
 	private int quantity;
-
 	@NotNull
-	private Product product;
+	private HtmlOutputText productId;
 
 	/**
 	 * 
 	 */
-	public ProductInBasket() {
+	public ProductToBasket() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param quantity
-	 * @param product
+	 * @param productId
 	 */
-	public ProductInBasket(Product product, int quantity) {
+	public ProductToBasket(HtmlOutputText productId, int quantity) {
 		super();
 		this.quantity = quantity;
-		this.product = product;
+		this.productId = productId;
 	}
 
 	/**
@@ -54,18 +54,18 @@ public class ProductInBasket implements Serializable {
 	}
 
 	/**
-	 * @return the product
+	 * @return the productId
 	 */
-	public Product getProduct() {
-		return product;
+	public HtmlOutputText getProductId() {
+		return productId;
 	}
 
 	/**
-	 * @param product
-	 *            the product to set
+	 * @param productId
+	 *            the productId to set
 	 */
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(HtmlOutputText productId) {
+		this.productId = productId;
 	}
 
 	/*
@@ -77,7 +77,8 @@ public class ProductInBasket implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result
+				+ ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + quantity;
 		return result;
 	}
@@ -95,11 +96,11 @@ public class ProductInBasket implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductInBasket other = (ProductInBasket) obj;
-		if (product == null) {
-			if (other.product != null)
+		ProductToBasket other = (ProductToBasket) obj;
+		if (productId == null) {
+			if (other.productId != null)
 				return false;
-		} else if (!product.equals(other.product))
+		} else if (!productId.equals(other.productId))
 			return false;
 		if (quantity != other.quantity)
 			return false;

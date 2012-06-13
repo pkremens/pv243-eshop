@@ -16,9 +16,6 @@ import cz.fi.muni.pv243.eshop.service.CustomerManager;
 @Model
 public class CustomerController {
 	@Inject
-	private Authenticator authenticator;
-
-	@Inject
 	private FacesContext facesContext;
 
 	@Inject
@@ -34,7 +31,7 @@ public class CustomerController {
 
 	public void register() throws Exception {
 		customerManager.addCustomer(newCustomer);
-		facesContext.addMessage(null, new FacesMessage(
+		facesContext.addMessage("addForm:registerButton", new FacesMessage(
 				FacesMessage.SEVERITY_INFO, "Added!", "Customer was added"));
 		initNewCustomer();
 	}

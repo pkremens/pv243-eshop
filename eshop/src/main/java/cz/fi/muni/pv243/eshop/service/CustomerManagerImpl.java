@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,10 +26,10 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Inject
 	private EntityManager customerDatabase;
 
-	private final Customer newCustomer = new Customer();
+	// private final Customer newCustomer = new Customer();
 
-	@Inject
-	private Event<Customer> customerEventSrc;
+	// @Inject
+	// private Event<Customer> customerEventSrc;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -51,10 +50,10 @@ public class CustomerManagerImpl implements CustomerManager {
 		} catch (Exception e) {
 			System.err.println("Error creating hash of password");
 		}
-		
-		customerDatabase.persist(newCustomer);
+
+		customerDatabase.persist(customer);
 		logger.info("Adding " + customer.toString());
-		customerEventSrc.fire(customer);
+
 	}
 
 	@Override
@@ -93,19 +92,20 @@ public class CustomerManagerImpl implements CustomerManager {
 		}
 	}
 
+	@Override
 	public String sha2(String password, Integer salt) {
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		if (Integer.signum(salt) == -1)
 			salt *= -1;
 		else if (Integer.signum(salt) == 0)
 			salt = Integer.MAX_VALUE - 3;
-		
+
 		String hex = Integer.toHexString(salt);
 		sb.append(hex);
 		sb.append("$");
-		
+
 		try {
 			// compute digest
 			MessageDigest md = MessageDigest.getInstance("SHA-512");

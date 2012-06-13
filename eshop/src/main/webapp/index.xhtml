@@ -8,6 +8,7 @@
 		<h1>Welcome to JBoss!</h1>
 
 		<!-- 
+		<h:message  />
 		
 		<h:form id="loginForm">
 			<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
@@ -35,16 +36,17 @@
 
 
 
-<h:message  />
+<h:outputLabel value="#{identity.user}"	rendered="#{identity.loggedIn}" />
 		<h1>Login</h1>
 		<h:form id="loginForm">
+		<h:message for="loginButton" />
 		
-		<h:message id="loginMessage" for="loginForm" />
 			<h:panelGrid columns="3">
+			
 				<h:outputLabel value="Username" for="username" />
 				<h:inputText id="username" value="#{credentials.username}" />
-				<h:message for="username" />
-				<h:outputLabel value="Password" for="password" />
+				<h:message for="username" errorClass="invalid" />
+	  			<h:outputLabel value="Password" for="password" />
 				<h:inputSecret id="password" value="#{credentials.password}" />
 				<h:message for="password" errorClass="invalid" />
 			</h:panelGrid>
@@ -52,8 +54,7 @@
 
 			<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user}"
-				rendered="#{identity.loggedIn}" />
+			
 		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 

@@ -48,9 +48,13 @@
 				<h:outputLabel value="Name" for="name" />
 				<h:inputText id="name" value="#{newCustomer.name}" />
 				<h:message for="name" errorClass="invalid" />
+				<h:outputLabel value="Role" for="role" />
+				<h:inputSecret id="role" value="#{newCustomer.role}" />
+				<h:message for="role" errorClass="invalid" />
 				<h:outputLabel value="Password" for="password" />
 				<h:inputSecret id="password" value="#{newCustomer.password}" />
 				<h:message for="password" errorClass="invalid" />
+				
 			</h:panelGrid>
 			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
 		</h:form>

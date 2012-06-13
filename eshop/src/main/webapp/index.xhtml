@@ -41,15 +41,16 @@
 		<h1>Add user</h1>
 		<h:form id="addForm">
 		<h:message for="registerButton" />
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="3">
 				<h:outputLabel value="Email" for="email" />
 				<h:inputText id="email" value="#{newCustomer.email}" />
-								
+				<h:message for="email" errorClass="invalid" />				
 				<h:outputLabel value="Name" for="name" />
 				<h:inputText id="name" value="#{newCustomer.name}" />
-				
+				<h:message for="name" errorClass="invalid" />
 				<h:outputLabel value="Password" for="password" />
-				<h:inputSecret id="password" for="#{newCustomer.password}" />
+				<h:inputSecret id="password" value="#{newCustomer.password}" />
+				<h:message for="password" errorClass="invalid" />
 			</h:panelGrid>
 			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
 		</h:form>

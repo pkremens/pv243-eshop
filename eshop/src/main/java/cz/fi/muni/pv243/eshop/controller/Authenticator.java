@@ -24,15 +24,25 @@ public class Authenticator extends BaseAuthenticator {
 
 	@Override
 	public void authenticate() {
-		if (!customerManager.isRegistred(credentials.getUsername())) {
+		Customer customer = customerManager.isRegistred(credentials
+				.getUsername());
+		if (customer == null) {
 			setStatus(AuthenticationStatus.FAILURE);
 			FacesContext.getCurrentInstance().addMessage("loginForm:username",
 					new FacesMessage("Non existing user"));
 		} else {
-			Customer customer = customerManager.findCustomer(credentials
-					.getUsername(), ((PasswordCredential) credentials
-					.getCredential()).getValue());
-			if (customer != null) {
+			// customer = customerManager.findCustomer(credentials
+			// .getUsername(), ((PasswordCredential) credentials
+			// .getCredential()).getValue());
+
+			String saltPart = customer.getPassword().split("\\$")[0];
+			Integer salt = Integer.parseInt(saltPart, 16);
+			
+			String password = customerManager.sha2(
+					((PasswordCredential) credentials.getCredential())
+							.getValue(), salt);
+
+			if (customer.getPassword().equals(password)) {
 				setStatus(AuthenticationStatus.SUCCESS);
 				setUser(customer);
 				System.err.println(customer.toString());

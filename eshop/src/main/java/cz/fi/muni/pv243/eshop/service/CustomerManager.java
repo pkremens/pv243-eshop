@@ -14,6 +14,8 @@ public interface CustomerManager {
 
 	// public Customer getNewCustomer();
 
-	public boolean isRegistred(String email);
+	public Customer isRegistred(String email);
+	
+	public String sha2(String password, Integer salt);
 
 }

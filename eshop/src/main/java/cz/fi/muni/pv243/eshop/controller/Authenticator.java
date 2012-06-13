@@ -11,6 +11,7 @@ import org.picketlink.idm.impl.api.PasswordCredential;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
+import cz.fi.muni.pv243.eshop.service.Security;
 
 public class Authenticator extends BaseAuthenticator {
 	@Inject
@@ -27,6 +28,12 @@ public class Authenticator extends BaseAuthenticator {
 
 	@Override
 	public void authenticate() {
+		// System.err.println("a");
+		// for (Customer c: customerManager.getCustomers()) {
+		// System.err.println(c);
+		// }
+		// System.err.println("b");
+
 		if (credentials.getUsername().equals("")) {
 			setStatus(AuthenticationStatus.FAILURE);
 			facesContext.addMessage("loginForm:username", new FacesMessage(
@@ -49,7 +56,7 @@ public class Authenticator extends BaseAuthenticator {
 				String saltPart = customer.getPassword().split("\\$")[0];
 				Integer salt = Integer.parseInt(saltPart, 16);
 
-				String password = customerManager.sha2(
+				String password = Security.sha2(
 						((PasswordCredential) credentials.getCredential())
 								.getValue(), salt);
 

@@ -1,6 +1,7 @@
 package cz.fi.muni.pv243.eshop.service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
@@ -34,14 +35,21 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Produces
 	@Named
 	@RequestScoped
-	public List<Customer> getCustomers() throws Exception {
+	public List<Customer> getCustomers() {
 		return customerDatabase.createQuery("select c from Customer c")
 				.getResultList();
 	}
 
 	@Override
-	public void addCustomer(Customer customer) throws Exception {
-
+	public void addCustomer(Customer customer){
+		try {
+			Random r = new Random(System.currentTimeMillis());
+			Integer salt = r.nextInt(Integer.MAX_VALUE - 10);
+			customer.setPassword(Security.sha2(customer.getPassword(), salt));
+		} catch (Exception e) {
+			System.err.println("Error creating hash of password");
+		}
+		
 		customerDatabase.persist(newCustomer);
 		logger.info("Adding " + customer.toString());
 		customerEventSrc.fire(customer);
@@ -71,16 +79,15 @@ public class CustomerManagerImpl implements CustomerManager {
 	// }
 
 	@Override
-	public boolean isRegistred(String email) {
+	public Customer isRegistred(String email) {
 		try {
-			customerDatabase
+			Customer c = (Customer) customerDatabase
 					.createQuery(
 							"select c from Customer c where c.email=:email")
 					.setParameter("email", email).getSingleResult();
-			return true;
+			return c;
 		} catch (Exception ex) {
-			return false;
+			return null;
 		}
 	}
-
 }

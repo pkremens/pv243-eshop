@@ -11,6 +11,7 @@ import org.picketlink.idm.impl.api.PasswordCredential;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
+import cz.fi.muni.pv243.eshop.service.Security;
 
 public class Authenticator extends BaseAuthenticator {
 	@Inject
@@ -24,30 +25,43 @@ public class Authenticator extends BaseAuthenticator {
 
 	@Override
 	public void authenticate() {
-		if (!customerManager.isRegistred(credentials.getUsername())) {
+		
+//		System.err.println("a");
+//		for (Customer c: customerManager.getCustomers()) {
+//			System.err.println(c);
+//		}
+//		System.err.println("b");
+		
+		Customer customer = customerManager.isRegistred(credentials
+				.getUsername());
+		if (customer == null) {
 			setStatus(AuthenticationStatus.FAILURE);
-			System.out.println("Non-existing user"); // TODO nevypisuje message,
-														// protoze komunikujem
-														// pomoci identity
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(
-							"Non existing user, or passoword or both :)"));
+			FacesContext.getCurrentInstance().addMessage("loginForm:username",
+					new FacesMessage("Non existing user"));
 		} else {
-			Customer customer = customerManager.findCustomer(credentials
-					.getUsername(), ((PasswordCredential) credentials
-					.getCredential()).getValue());
+			// customer = customerManager.findCustomer(credentials
+			// .getUsername(), ((PasswordCredential) credentials
+			// .getCredential()).getValue());
 
-			if (customer != null) {
+			String saltPart = customer.getPassword().split("\\$")[0];
+			Integer salt = Integer.parseInt(saltPart, 16);
+			
+			String password = Security.sha2(
+					((PasswordCredential) credentials.getCredential())
+							.getValue(), salt);
+
+			if (customer.getPassword().equals(password)) {
 				setStatus(AuthenticationStatus.SUCCESS);
 				setUser(customer);
 				System.err.println(customer.toString());
-				FacesContext.getCurrentInstance().addMessage(null,
+				FacesContext.getCurrentInstance().addMessage(
+						"loginForm:loginButton",
 						new FacesMessage("Welcome, " + customer.getName()));
 
 			} else {
 				setStatus(AuthenticationStatus.FAILURE);
-				FacesContext.getCurrentInstance().addMessage(null,
+				FacesContext.getCurrentInstance().addMessage(
+						"loginForm:password",
 						new FacesMessage("Wrong Password"));
 
 			}

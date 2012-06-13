@@ -48,7 +48,7 @@ public class CustomerController {
 			Object value) {
 		String input = (String) value;
 
-		if (customerManager.isRegistred(input)) {
+		if (customerManager.isRegistred(input) != null) {
 			((UIInput) toValidate).setValid(false);
 
 			FacesMessage message = new FacesMessage(

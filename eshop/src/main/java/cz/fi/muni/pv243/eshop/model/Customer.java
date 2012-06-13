@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 
+import javax.enterprise.inject.Default;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -35,6 +36,9 @@ public class Customer implements User, Serializable {
 
 	@NotNull
 	private String password;
+	
+	@NotNull
+	private String role;
 
 	// TODO rights
 
@@ -83,22 +87,16 @@ public class Customer implements User, Serializable {
 		this.password = password;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "User [email=" + email + ", name=" + name + ", password="
-				+ password + "]";
+	
+	public String getRole() {
+		return role;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+		
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,14 +105,10 @@ public class Customer implements User, Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -139,7 +133,18 @@ public class Customer implements User, Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [email=" + email + ", name=" + name + ", password="
+				+ password + ", role=" + role + "]";
 	}
 
 	@Override

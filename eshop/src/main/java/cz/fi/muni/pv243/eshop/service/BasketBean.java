@@ -10,11 +10,17 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.annotation.ejb.Clustered;
+import org.jboss.ha.framework.interfaces.RoundRobin;
+
+//import org.jboss.annotation.ejb.Clustered;
+
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
 /**
  * @author Matous Jobanek
  */
+@Clustered
 @Stateful
 @SessionScoped
 @Named("basket")
@@ -23,11 +29,13 @@ public class BasketBean implements Basket {
 	@Inject
 	private ProductManager productManager;
 
-	private final HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
+	
+	private HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
 	
 	@Inject
 	private Logger log;
 
+	
 	@Override
 	@Named
 	public void addProduct(Long productId, int quantity) {

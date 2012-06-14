@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -14,8 +14,7 @@ import javax.persistence.EntityManager;
 import cz.fi.muni.pv243.eshop.model.Customer;
 
 @Named("userManager")
-@RequestScoped
-@Stateful
+@Stateless
 public class CustomerManagerImpl implements CustomerManager {
 
 	@Inject

@@ -4,22 +4,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="content">
-		<div id="loggedAs" align="right">
-			<h5>You are logged as 
+	<ui:define name="header_right">
+	<div id="loggedAs" align="right">
+			<h5> 
+			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
-			(
+			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
-			)	
+			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
 		</h5>
 		<h:form id="logoutForm">
 		<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
 		</h:form>
 		</div>
-		<h1>Welcome to eshop!</h1>
-		
+	</ui:define>
+	<ui:define name="content">
+		<h:link outcome="/login.xhtml">Login</h:link>
+		<br/>
 		<h:link outcome="/tables.xhtml">View tables</h:link>
+		<br/>
 		<h:link outcome="/test.xhtml">Test</h:link>
 		
 		<!-- 
@@ -87,20 +91,6 @@
 			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
 		</h:form>
 		
-		<h1>Login</h1>
-		<h:form id="loginForm">
-		<h:message for="loginButton" />
-				<h:panelGrid columns="3">
-				<h:outputLabel value="Username" for="username" />
-				<h:inputText id="username" value="#{credentials.username}" />
-				<h:message for="username" errorClass="invalid" />
-	  			<h:outputLabel value="Password" for="password" />
-				<h:inputSecret id="password" value="#{credentials.password}" />
-				<h:message for="password" errorClass="invalid" />
-			</h:panelGrid>
-			<h:commandButton id="loginButton" action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
-			
-		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 
 		<h:dataTable value="#{ascProducts}" var="p">

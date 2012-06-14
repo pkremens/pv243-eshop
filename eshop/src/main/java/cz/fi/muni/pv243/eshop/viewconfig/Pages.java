@@ -19,12 +19,14 @@ public interface Pages {
         INDEX,
 		
         @ViewPattern("/tables.xhtml")
-		@LoginView("/index.xhtml")
+		@LoginView("/login.xhtml")
 		@AccessDeniedView("/denied.xhtml")
 		@LoggedIn
 		@Admin
 		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
 		TABLES
+		
+		
 		
 		/*
 		@ViewPattern("/view.xhtml")

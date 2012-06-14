@@ -32,7 +32,7 @@ public class OrderManagerImpl implements OrderManager {
 	@Named
 	@RequestScoped
 	public List<Order> getOrders() {
-		return orderDatabase.createQuery("select o from Order o")
+		return orderDatabase.createQuery("select o from Orders o")
 				.getResultList();
 	}
 

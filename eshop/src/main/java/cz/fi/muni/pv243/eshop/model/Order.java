@@ -3,8 +3,10 @@ package cz.fi.muni.pv243.eshop.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Orders")
 public class Order {
 	@Id
 	@GeneratedValue

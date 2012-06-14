@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -50,11 +49,11 @@ public class OrderController implements Serializable {
 		System.out.println("ahoj");
 		System.out.println(identity.getUser().toString());
 		customer = customerManager.isRegistred(identity.getUser().toString());
-		newOrder.setCustomer(customer);
-		orderManager.addOrder(newOrder);
-		facesContext.addMessage(null, new FacesMessage(
-				FacesMessage.SEVERITY_INFO, "Added!", "Product was added"));
-		initNewOrder();
+		// newOrder.setCustomer(customer);
+		// orderManager.addOrder(newOrder);
+		// facesContext.addMessage(null, new FacesMessage(
+		// FacesMessage.SEVERITY_INFO, "Added!", "Product was added"));
+		// initNewOrder();
 
 		// orderManager.addOrder(newOrder);
 		// facesContext.addMessage(null, new FacesMessage(

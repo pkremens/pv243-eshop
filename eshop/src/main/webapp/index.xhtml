@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Welcome to JBoss!</h1>
+		<h1>Welcome to eshop!</h1>
 		<h:link outcome="/tables.xhtml">View tables</h:link>
 		
 		<!-- 
@@ -77,15 +77,6 @@
 		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 
-
-
-		<div>
-			<p>You have successfully deployed a Java EE 6 web application.</p>
-			<h3>Your application can run on:</h3>
-			<img src="resources/gfx/dualbrand_as7eap.png" />
-		</div>
-
-		<h1>Products</h1>
 		<h:dataTable value="#{ascProducts}" var="p">
 
 			<h:column>

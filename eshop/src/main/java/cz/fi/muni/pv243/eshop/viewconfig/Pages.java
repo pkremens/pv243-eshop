@@ -32,7 +32,14 @@ public interface Pages {
 		@LoggedIn
 		@Admin
 		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
-		ADMIN_PAGE
+		ADMIN_PAGE,
+		
+		@ViewPattern("/test.xhtml")
+		@LoginView("/login.xhtml")
+		@AccessDeniedView("/denied.xhtml")
+		@LoggedIn
+		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
+		TEST,
 		
 		/*
 		@ViewPattern("/view.xhtml")

@@ -20,7 +20,7 @@ public class CustomerController {
 
 	@Inject
 	private CustomerManager customerManager;
-	
+
 	@Inject
 	private Logger log;
 
@@ -39,11 +39,21 @@ public class CustomerController {
 			log.finest("Registration: empty password");
 			initNewCustomer();
 		} else {
-			customerManager.addCustomer(newCustomer);
-			log.info("Registration: adding new customer");
-			facesContext.addMessage("addForm:registerButton", new FacesMessage(
-					"Customer was added"));
-			initNewCustomer();
+			Customer customer = customerManager.isRegistred(newCustomer
+					.getEmail());
+			if (customer == null) {
+				customerManager.addCustomer(newCustomer);
+				log.info("Registration: adding new customer");
+				facesContext.addMessage("addForm:registerButton",
+						new FacesMessage("Customer was added"));
+				initNewCustomer();
+			} else {
+				log.info("Registration: trying to use already registred email");
+				facesContext.addMessage("addForm:registerButton",
+						new FacesMessage("User is already registered"));
+				initNewCustomer();
+			}
+
 		}
 	}
 

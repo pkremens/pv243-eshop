@@ -56,9 +56,7 @@ public class OrderListProducer {
 				.toString());
 		criteria.select(orders).orderBy(cb.asc(orders.get("id")));
 		Expression<Customer> customerExpression = orders.get("customer");
-		this.orders = em.createQuery(
-				criteria.where(cb.equal(customerExpression, customer)))
-				.getResultList();
-
+		this.orders = em.createQuery(criteria).getResultList();
+		// .where(cb.equal(customerExpression, customer))
 	}
 }

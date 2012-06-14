@@ -1,6 +1,7 @@
 package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -14,6 +15,7 @@ import org.jboss.seam.security.Identity;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.model.Orders;
+import cz.fi.muni.pv243.eshop.service.Basket;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
 
@@ -30,6 +32,9 @@ public class OrderController implements Serializable {
 
 	@Inject
 	private FacesContext facesContext;
+
+	@Inject
+	Basket basket;
 
 	@Inject
 	private CustomerManager customerManager;
@@ -55,6 +60,15 @@ public class OrderController implements Serializable {
 		facesContext.addMessage("testForm:testButton", new FacesMessage(
 				FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));
 		initNewOrder();
+	}
+
+	public void makeOrder() {
+		HashMap<Long, Integer> kosik = basket.getBasketContent();
+		for (Long key : kosik.keySet()) {
+			System.out.println(key);
+
+		}
+
 	}
 
 	@PostConstruct

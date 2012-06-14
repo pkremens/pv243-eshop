@@ -3,7 +3,6 @@ package cz.fi.muni.pv243.eshop.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
@@ -20,8 +19,7 @@ import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 @Named("basket")
 public class BasketBean implements Basket {
 
-	private final static Logger LOGGER = Logger.getLogger(BasketBean.class
-			.getPackage().toString());
+	
 
 	@Inject
 	private ProductManager productManager;

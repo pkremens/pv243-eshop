@@ -10,6 +10,7 @@ public class Order {
 	@GeneratedValue
 	private Long id;
 	private Customer customer;
+	private boolean open;
 
 	// private List<Product> products;
 
@@ -41,6 +42,21 @@ public class Order {
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	/**
+	 * @return the open
+	 */
+	public boolean isOpen() {
+		return open;
+	}
+
+	/**
+	 * @param open
+	 *            the open to set
+	 */
+	public void setOpen(boolean open) {
+		this.open = open;
 	}
 
 	// /**

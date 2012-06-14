@@ -63,6 +63,7 @@ public class OrderController implements Serializable {
 	}
 
 	public void makeOrder() {
+		System.out.println("Makeing order");
 		HashMap<Long, Integer> kosik = basket.getBasketContent();
 		for (Long key : kosik.keySet()) {
 			System.out.println(key);

@@ -5,22 +5,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="header_right">
-	<div id="loggedAs" align="right">
-			<h5> 
-			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
-		</h5>
-		<h:form id="logoutForm">
-		<h:commandButton id="logout" value="Logout"
-				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-		</h:form>
+		<div id="loggedAs" align="right">
+			<h5>
+				<h:outputLabel value="You are logged as"
+					rendered="#{identity.loggedIn}" />
+				<h:outputLabel value="#{identity.user.name}"
+					rendered="#{identity.loggedIn}" />
+				<h:outputLabel value="(" rendered="#{identity.loggedIn}" />
+				<h:outputLabel value="#{identity.user.role}"
+					rendered="#{identity.loggedIn}" />
+				<h:outputLabel value=")" rendered="#{identity.loggedIn}" />
+			</h5>
+			<h:form id="logoutForm">
+				<h:commandButton id="logout" value="Logout"
+					action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+			</h:form>
 		</div>
 	</ui:define>
 	<ui:define name="content">
-	<h1>Products</h1>
+		<h1>Products</h1>
 		<div id="name" onload="alert('Karel')"></div>
 		<h:dataTable value="#{ascProducts}" var="p">
 			<h:column>
@@ -86,7 +89,7 @@
 		            </f:facet>
 					<h:outputText value="#{pInB.product.price}" />
 				</h:column>
-				
+
 				<h:column>
 					<f:facet name="header">
 		               currentQuantity
@@ -103,9 +106,10 @@
 						<h:commandButton id="updateProductInBasket" value="update"
 							action="#{basketController.updateProductInBasket}" />
 					</h:form>
-					
+
 					<h:form id="removeProductInBasket">
-						<h:inputHidden  id="quantity" value="#{productUpdateBasket.quantity}"
+						<h:inputHidden id="quantity"
+							value="#{productUpdateBasket.quantity}"
 							validator="#{productController.validateNumberRange}" />
 						<h:commandButton id="removeProductInBasket" value="remove"
 							action="#{basketController.updateProductInBasket}" />
@@ -113,7 +117,10 @@
 				</h:column>
 
 			</h:dataTable>
-
+			<h:form id="makeOrder">
+				<h:commandButton id="makeOrder" value="Make Order"
+					action="#{orderController.makeOrder}" />
+			</h:form>
 		</div>
 		<h:link outcome="/index.xhtml">Back</h:link>
 	</ui:define>

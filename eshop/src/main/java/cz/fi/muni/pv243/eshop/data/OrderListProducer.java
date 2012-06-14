@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import cz.fi.muni.pv243.eshop.model.Order;
+import cz.fi.muni.pv243.eshop.model.Orders;
 import cz.fi.muni.pv243.eshop.model.Product;
 
 @RequestScoped
@@ -19,11 +19,11 @@ public class OrderListProducer {
 	@Inject
 	private EntityManager em;
 
-	private List<Order> orders;
+	private List<Orders> orders;
 
 	@Produces
 	@Named("customerOrders")
-	public List<Order> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
 
@@ -41,7 +41,7 @@ public class OrderListProducer {
 		// // criteria queries, a new
 		// // feature in JPA 2.0
 		// // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
-		// // TODO jen visible=true
+		// // TODO jen customer = identity.customer
 		// criteria.select(product).orderBy(cb.asc(product.get("id")));
 		// Expression<Boolean> isVisible = product.get("visible");
 		// orders = em.createQuery(criteria.where(cb.isTrue(isVisible)))

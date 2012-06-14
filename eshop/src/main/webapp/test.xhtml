@@ -18,6 +18,31 @@
 		<h:commandButton id="logout" value="Logout"
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
 	</h:form>
+	
+	
+	<h:dataTable value="#{customerOrders}" var="p">
+
+			<h:column>
+				<f:facet name="header">
+               Order's id
+            </f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               customer
+            </f:facet>
+				<h:outputText value="#{p.customer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               opened
+            </f:facet>
+				<h:outputText value="#{p.open}" />
+			</h:column>
+			
+		</h:dataTable>
+	
 <!-- 	
 	<h1>Orders</h1>
 		<h:dataTable value="#{orders}" var="p">

@@ -6,8 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Orders")
-public class Order {
+public class Orders {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -16,11 +15,11 @@ public class Order {
 
 	// private Tuple<Integer, Integer> tuple;
 
-	public Order() {
+	public Orders() {
 		super();
 	}
 
-	public Order(Customer customer) {
+	public Orders(Customer customer) {
 		this.customer = customer;
 		this.open = true;
 	}

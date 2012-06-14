@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="header_right">
+	<div id="loggedAs" align="right">
+			<h5> 
+			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
+		</h5>
+		<h:form id="logoutForm">
+		<h:commandButton id="logout" value="Logout"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+		</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="content">
+		<p align="center">
+			<h1>Admin PAGE</h1>
+		</p>
+		<h1>Add user</h1>
+		<h:form id="addForm">
+		<h:message for="registerButton" />
+		<h:panelGrid columns="3">
+				<h:outputLabel value="Email" for="email" />
+				<h:inputText id="email" value="#{newCustomer.email}" />
+				<h:message for="email" errorClass="invalid" />		
+						
+				<h:outputLabel value="Name" for="name" />
+				<h:inputText id="name" value="#{newCustomer.name}" />
+				<h:message for="name" errorClass="invalid" />
+								
+		<h:outputLabel value="Role" for="role" />
+		<h:panelGrid columns="1">
+				<h:column>
+					<h:selectOneMenu value="#{newCustomer.role}" id="role">
+					<f:selectItem itemValue="user" itemLabel="User"/>
+					<f:selectItem itemValue="seller" itemLabel="Seller"/>
+					<f:selectItem itemValue="admin" itemLabel="Administrator"/>
+					</h:selectOneMenu>
+			</h:column>
+			</h:panelGrid>
+		<h:message for="role" errorClass="invalid" />
+		
+				
+				
+				<h:outputLabel value="Password" for="password" />
+				<h:inputSecret id="password" value="#{newCustomer.password}" />
+				<h:message for="password" errorClass="invalid" />
+				
+			</h:panelGrid>
+			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
+		</h:form>
+		<h1>Products</h1>
+		<h:dataTable value="#{products}" var="p">
+			<h:column>
+				<f:facet name="header">
+               id
+            </f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               name
+            </f:facet>
+				<h:outputText value="#{p.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               price
+            </f:facet>
+				<h:outputText value="#{p.price}" />
+			</h:column>
+		</h:dataTable>
+		<br />
+		<h1>Users</h1>
+		<h:dataTable value="#{customers}" var="cust">
+			<h:column>
+				<f:facet name="header">
+               Email
+            </f:facet>
+				<h:outputText value="#{cust.email}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               Name
+            </f:facet>
+				<h:outputText value="#{cust.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               Part of hashed password
+            </f:facet>
+				<h:outputText value="#{cust.passwordSubstring}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               Role
+            </f:facet>
+				<h:outputText value="#{cust.role}" />
+			</h:column>
+		</h:dataTable>	
+		<h:link outcome="/index.xhtml">Back</h:link>
+	</ui:define>
+</ui:composition>

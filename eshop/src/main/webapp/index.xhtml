@@ -4,8 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="content">
-		<div id="loggedAs" align="right">
+	<ui:define name="header_right">
+	<div id="loggedAs" align="right">
 			<h5> 
 			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
@@ -18,8 +18,8 @@
 				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
 		</h:form>
 		</div>
-		<h1>Welcome to eshop!</h1>
-		
+	</ui:define>
+	<ui:define name="content">
 		<h:link outcome="/login.xhtml">Login</h:link>
 		<br/>
 		<h:link outcome="/tables.xhtml">View tables</h:link>

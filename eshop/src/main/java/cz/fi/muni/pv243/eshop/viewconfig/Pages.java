@@ -26,6 +26,8 @@ public interface Pages {
 		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
 		TABLES
 		
+		
+		
 		/*
 		@ViewPattern("/view.xhtml")
 		@UrlMapping(pattern="/view/#{id}/")

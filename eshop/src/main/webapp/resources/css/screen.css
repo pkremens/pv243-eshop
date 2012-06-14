@@ -8,6 +8,33 @@ body {
   color:#363636;
 }
 
+#logoutForm{
+}
+
+#header{
+	height: 55px;
+	width:	100%;
+	margin-bottom: 20px;
+}
+
+#header_left{
+	float: left;
+	width:	20%;
+	height: 100%;
+}
+
+#header_center{
+	float: left;
+	width:	49%;
+	height: 100%;
+}
+
+#header_right{
+	float: left;
+	width:	30%;
+	height: 100%;
+}
+
 #container {
   margin: 0 auto;
   padding: 0 20px 10px 20px;
@@ -89,7 +116,6 @@ span.invalid {
   color: red;
 }
 form {
-  padding: 1em;
   font: 80%/1 sans-serif;
   width: 375px;
 }

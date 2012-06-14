@@ -1,5 +1,6 @@
 package cz.fi.muni.pv243.eshop.controller;
 
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ public class Authenticator extends BaseAuthenticator {
 	@Inject
 	EntityManager em;
 
-	@Inject
+	@Inject 
 	private FacesContext facesContext;
 
 	@Inject

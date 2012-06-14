@@ -19,7 +19,6 @@ import org.jboss.seam.security.Identity;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.model.Orders;
-import cz.fi.muni.pv243.eshop.service.CustomerManager;
 
 @RequestScoped
 public class OrderListProducer {
@@ -31,8 +30,6 @@ public class OrderListProducer {
 	@Inject
 	private Identity identity;
 
-	@Inject
-	private CustomerManager customerManager;
 
 	@Produces
 	@Named("customerOrders")
@@ -52,11 +49,13 @@ public class OrderListProducer {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Orders> criteria = cb.createQuery(Orders.class);
 		Root<Orders> orders = criteria.from(Orders.class);
-		Customer customer = customerManager.isRegistred(identity.getUser()
-				.toString());
+
+		Customer customer = (Customer) identity.getUser();
+
 		criteria.select(orders).orderBy(cb.asc(orders.get("id")));
 		Expression<Customer> customerExpression = orders.get("customer");
-		this.orders = em.createQuery(criteria).getResultList();
-		// .where(cb.equal(customerExpression, customer))
+		this.orders = em.createQuery(
+				criteria.where(cb.equal(customerExpression, customer)))
+				.getResultList();
 	}
 }

@@ -20,6 +20,7 @@
 		</div>
 	</ui:define>
 	<ui:define name="content">
+	<div id="log" >
 	<div id="login_page" >
 		<div id="info" align="left">
 			<h1>Login</h1>
@@ -45,11 +46,11 @@
 	</div>
 	<div id="register_page" >
 		<div id="info" align="left">
-			<h1>Register</h1>
-			<h2>Please insert data about yourself</h2>
+			<h1><h:outputLabel value="Register"	rendered="#{!identity.loggedIn}" /></h1>
+			<h2><h:outputLabel value="Please insert data about yourself"	rendered="#{!identity.loggedIn}" /></h2>
 		</div>
 		<div id="register_form" align="left">
-			<h:form id="addForm">
+			<h:form id="addForm" rendered="#{!identity.loggedIn}">
 			<h:message for="registerButton" />
 			<h:panelGrid columns="3">
 				<h:outputLabel value="Email" for="email" />
@@ -60,17 +61,6 @@
 				<h:inputText id="name" value="#{newCustomer.name}" />
 				<h:message for="name" errorClass="invalid" />
 								
-		<h:outputLabel value="Role" for="role" id="hidden_role"/>
-		<h:panelGrid columns="1">
-				<h:column>
-					<h:selectOneMenu value="#{newCustomer.role}" id="role">
-					<f:selectItem itemValue="user" itemLabel="User"/>
-					<f:selectItem itemValue="seller" itemLabel="Seller"/>
-					<f:selectItem itemValue="admin" itemLabel="Administrator"/>
-					</h:selectOneMenu>
-			</h:column>
-			</h:panelGrid>
-		<h:message for="role" errorClass="invalid" />
 		
 				
 				
@@ -80,8 +70,20 @@
 				
 			</h:panelGrid>
 			<h:commandButton id="registerButton" action="#{customerController.register}" value="Register" />
+			<h:outputLabel value="Role" for="role" style="visibility:hidden"/>
+		<h:panelGrid columns="1" style="visibility:hidden">
+				<h:column>
+					<h:selectOneMenu value="#{newCustomer.role}" id="role">
+					<f:selectItem itemValue="user" itemLabel="User"/>
+					<f:selectItem itemValue="seller" itemLabel="Seller"/>
+					<f:selectItem itemValue="admin" itemLabel="Administrator"/>
+					</h:selectOneMenu>
+			</h:column>
+			</h:panelGrid>
+		<h:message for="role" errorClass="invalid" style="visibility:hidden" />
 		</h:form>
 		</div>
+	</div>
 	</div>
 	</ui:define>
 </ui:composition>

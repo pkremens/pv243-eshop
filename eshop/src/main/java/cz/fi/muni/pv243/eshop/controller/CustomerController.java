@@ -1,5 +1,7 @@
 package cz.fi.muni.pv243.eshop.controller;
 
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
@@ -18,6 +20,9 @@ public class CustomerController {
 
 	@Inject
 	private CustomerManager customerManager;
+	
+	@Inject
+	private Logger log;
 
 	private Customer newCustomer;
 
@@ -31,9 +36,11 @@ public class CustomerController {
 		if (newCustomer.getPassword() == null) {
 			facesContext.addMessage("addForm:password", new FacesMessage(
 					"Cannot have empty password"));
+			log.finest("Registration: empty password");
 			initNewCustomer();
 		} else {
 			customerManager.addCustomer(newCustomer);
+			log.info("Registration: adding new customer");
 			facesContext.addMessage("addForm:registerButton", new FacesMessage(
 					"Customer was added"));
 			initNewCustomer();
@@ -44,19 +51,5 @@ public class CustomerController {
 	public void initNewCustomer() {
 		newCustomer = new Customer();
 	}
-
-	// public void validateUsername(FacesContext context, UIComponent
-	// toValidate,
-	// Object value) {
-	// String input = (String) value;
-	//
-	// if (customerManager.isRegistred(input) != null) {
-	// ((UIInput) toValidate).setValid(false);
-	//
-	// FacesMessage message = new FacesMessage(
-	// "Customer with same email is already registred");
-	// context.addMessage(toValidate.getClientId(context), message);
-	// }
-	// }
 
 }

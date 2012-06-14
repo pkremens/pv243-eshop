@@ -1,17 +1,13 @@
 package cz.fi.muni.pv243.eshop.controller;
 
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
-import javax.enterprise.event.Event;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 
 import cz.fi.muni.pv243.eshop.model.Member;
 import cz.fi.muni.pv243.eshop.service.MemberRegistration;

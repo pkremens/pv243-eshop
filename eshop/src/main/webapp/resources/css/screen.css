@@ -13,10 +13,7 @@ body {
 
 
 #register_page{
-	margin-left: 10px;
-	border-style: solid;
-	border-color: grey;
-	border-radius: 5px;
+	margin-left: 30px;
 	width: 45%;
 	float: left;
 }
@@ -25,10 +22,12 @@ body {
 	visibility:hidden;
 }
 
+#log{
+	margin-left:20px;
+	
+}
+
 #login_page{
-	border-style: solid;
-	border-color: grey;
-	border-radius: 5px;
 	width: 45%;
 	float: left;
 }

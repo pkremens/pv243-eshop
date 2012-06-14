@@ -1,11 +1,14 @@
 package cz.fi.muni.pv243.eshop.service;
 
-import cz.fi.muni.pv243.eshop.model.Order;
+import java.util.List;
+
+import cz.fi.muni.pv243.eshop.model.Orders;
 
 public interface OrderManager {
 
-	// public List<Order> getOrders();
+	List<Orders> getOrders();
 
-	public void addOrder(Order order);
+	void addOrder(Orders orders);
+
 
 }

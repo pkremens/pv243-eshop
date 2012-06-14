@@ -12,7 +12,7 @@ import javax.inject.Named;
 import org.jboss.seam.security.Identity;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
-import cz.fi.muni.pv243.eshop.model.Order;
+import cz.fi.muni.pv243.eshop.model.Orders;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
 
@@ -36,11 +36,11 @@ public class OrderController implements Serializable {
 	private OrderManager orderManager;
 
 	private Customer customer;
-	private Order newOrder;
+	private Orders newOrder;
 
 	@Produces
 	@Named
-	public Order getNewOrder() {
+	public Orders getNewOrder() {
 		return newOrder;
 	}
 
@@ -64,7 +64,7 @@ public class OrderController implements Serializable {
 	@PostConstruct
 	public void initNewOrder() {
 
-		newOrder = new Order();
+		newOrder = new Orders();
 	}
 
 }

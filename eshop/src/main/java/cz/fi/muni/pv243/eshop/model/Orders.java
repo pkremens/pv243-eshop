@@ -3,11 +3,9 @@ package cz.fi.muni.pv243.eshop.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Orders")
-public class Order {
+public class Orders {
 
 	@Id
 	@GeneratedValue
@@ -17,11 +15,11 @@ public class Order {
 
 	// private Tuple<Integer, Integer> tuple;
 
-	public Order() {
+	public Orders() {
 		super();
 	}
 
-	public Order(Customer customer) {
+	public Orders(Customer customer) {
 		this.customer = customer;
 		this.open = true;
 	}

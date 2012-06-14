@@ -1,12 +1,9 @@
 package cz.fi.muni.pv243.eshop.service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -26,15 +23,14 @@ public class OrderManagerImpl implements OrderManager {
 	@Inject
 	private Event<Order> orderEventSrc;
 
-	@Override
-	@SuppressWarnings("unchecked")
-	@Produces
-	@Named
-	@RequestScoped
-	public List<Order> getOrders() {
-		return orderDatabase.createQuery("select o from Orders o")
-				.getResultList();
-	}
+	// @Override
+	// @SuppressWarnings("unchecked")
+	// @Produces
+	// @Named
+	// @RequestScoped
+	// public List<Order> getOrders() {
+	// return null;
+	// }
 
 	@Override
 	public void addOrder(Order order) {

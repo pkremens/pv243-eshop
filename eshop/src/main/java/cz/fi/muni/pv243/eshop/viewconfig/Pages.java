@@ -19,7 +19,7 @@ public interface Pages {
         INDEX,
 		
         @ViewPattern("/tables.xhtml")
-		@LoginView("/index.xhtml")
+		@LoginView("/login.xhtml")
 		@AccessDeniedView("/denied.xhtml")
 		@LoggedIn
 		@Admin

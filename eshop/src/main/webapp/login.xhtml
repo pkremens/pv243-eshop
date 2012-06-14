@@ -5,7 +5,33 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Login page</h1>
+	<div id="loggedAs" align="right">
+			<h5> 
+			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
+		</h5>
+		<h:form id="logoutForm">
+		<h:commandButton id="logout" value="Logout"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+		</h:form>
+		</div>
+		<h1>Login</h1>
+		<h:form id="loginForm">
+		<h:message for="loginButton" />
+				<h:panelGrid columns="3">
+				<h:outputLabel value="Username" for="username" />
+				<h:inputText id="username" value="#{credentials.username}" />
+				<h:message for="username" errorClass="invalid" />
+	  			<h:outputLabel value="Password" for="password" />
+				<h:inputSecret id="password" value="#{credentials.password}" />
+				<h:message for="password" errorClass="invalid" />
+			</h:panelGrid>
+			<h:commandButton id="loginButton" action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
+			
+		</h:form>
 		<h:link outcome="/index.xhtml">Back</h:link>
 	</ui:define>
 </ui:composition>

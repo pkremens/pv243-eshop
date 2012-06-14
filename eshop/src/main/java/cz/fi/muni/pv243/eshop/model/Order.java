@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Orders")
 public class Order {
+
 	@Id
 	@GeneratedValue
 	private Long id;

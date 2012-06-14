@@ -32,7 +32,6 @@ public class OrderController implements Serializable {
 
 	@Inject
 	private CustomerManager customerManager;
-
 	@Inject
 	private OrderManager orderManager;
 
@@ -49,6 +48,7 @@ public class OrderController implements Serializable {
 		System.out.println("ahoj");
 		System.out.println(identity.getUser().toString());
 		customer = customerManager.isRegistred(identity.getUser().toString());
+		orderManager.addOrder(newOrder);
 		// newOrder.setCustomer(customer);
 		// orderManager.addOrder(newOrder);
 		// facesContext.addMessage(null, new FacesMessage(

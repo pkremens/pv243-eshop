@@ -24,11 +24,6 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Inject
 	private EntityManager customerDatabase;
 
-	// private final Customer newCustomer = new Customer();
-
-	// @Inject
-	// private Event<Customer> customerEventSrc;
-
 	@Override
 	@SuppressWarnings("unchecked")
 	@Produces

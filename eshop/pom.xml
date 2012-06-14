@@ -181,17 +181,6 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-
-      <dependency>
-         <groupId>org.jboss.solder</groupId>
-         <artifactId>solder-impl</artifactId>
-      </dependency> 
- 
-      <dependency>
-         <groupId>org.jboss.solder</groupId>
-         <artifactId>solder-tooling</artifactId>
-         <scope>provided</scope>
-      </dependency> 
        
       <dependency>
       	 <groupId>org.jboss.seam.faces</groupId>
@@ -199,24 +188,9 @@
       </dependency>
       
       <dependency>
-      	 <groupId>org.jboss.seam.international</groupId>
-      	 <artifactId>seam-international</artifactId>
-      </dependency>     
-            
-      <dependency>
-      	<groupId>org.jboss.seam.persistence</groupId>
-      	<artifactId>seam-persistence</artifactId>
-      </dependency>
-      
-      <dependency>
         <groupId>org.jboss.seam.security</groupId>
         <artifactId>seam-security</artifactId>
         <scope>compile</scope>
-      </dependency>
-      
-      <dependency>
-         <groupId>com.ocpsoft</groupId>
-         <artifactId>prettyfaces-jsf2</artifactId>
       </dependency>
 
 

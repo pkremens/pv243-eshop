@@ -12,6 +12,17 @@ public class Order {
 	private Customer customer;
 	private boolean open;
 
+	// private Tuple<Integer, Integer> tuple;
+
+	public Order() {
+		super();
+	}
+
+	public Order(Customer customer) {
+		this.customer = customer;
+		this.open = true;
+	}
+
 	// private List<Product> products;
 
 	/**

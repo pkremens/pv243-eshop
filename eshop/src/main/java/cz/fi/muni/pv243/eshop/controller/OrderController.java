@@ -49,6 +49,8 @@ public class OrderController implements Serializable {
 		System.out.println("ahoj");
 		System.out.println(identity.getUser().toString());
 		customer = customerManager.isRegistred(identity.getUser().toString());
+		newOrder.setCustomer(customer);
+
 		orderManager.addOrder(newOrder);
 		facesContext.addMessage("testForm:testButton", new FacesMessage(
 				FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));

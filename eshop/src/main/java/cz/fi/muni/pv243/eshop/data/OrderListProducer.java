@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 
 import org.jboss.seam.security.Identity;
@@ -42,12 +41,14 @@ public class OrderListProducer {
 	}
 
 	public void onOrderListChanged(
-			@Observes(notifyObserver = Reception.IF_EXISTS) final Order order) {
+			@Observes(notifyObserver = Reception.IF_EXISTS) final Orders orders) {
+		System.out.println("Observing");
 		retrieveAllCustomersOrders();
 	}
 
 	@PostConstruct
 	public void retrieveAllCustomersOrders() {
+		System.out.println("retrieve all customers?");
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Orders> criteria = cb.createQuery(Orders.class);
 		Root<Orders> orders = criteria.from(Orders.class);

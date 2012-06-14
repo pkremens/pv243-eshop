@@ -5,13 +5,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-
+	
 	<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
 	<h:outputLabel value="Loged out"	rendered="#{!identity.loggedIn}" />
 	<h:link outcome="/index.xhtml">Home</h:link>
 	
 	<h:form id="testForm">
 	<h:commandButton id="testButton" action="#{orderController.register}" value="Test" />
+	<h:message for="testButton" errorClass="invalid" />
 	</h:form>
 	
 	<h:form id="logoutForm">

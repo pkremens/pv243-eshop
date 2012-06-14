@@ -47,10 +47,10 @@ public class OrderController implements Serializable {
 
 	public void register() throws Exception {
 		System.out.println("ahoj");
-		System.out.println(identity.getUser().toString());
-		customer = customerManager.isRegistred(identity.getUser().toString());
+		System.out.println(identity.getUser());
+		customer = (Customer) identity.getUser();
 		newOrder.setCustomer(customer);
-
+		System.out.println(newOrder);
 		orderManager.addOrder(newOrder);
 		facesContext.addMessage("testForm:testButton", new FacesMessage(
 				FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));

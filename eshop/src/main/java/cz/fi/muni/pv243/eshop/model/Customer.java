@@ -37,6 +37,10 @@ public class Customer implements User, Serializable {
 	@NotNull
 	private String role;
 
+	public String getPasswordSubstring() {
+		return password.substring(0, 10);
+	}
+
 	// TODO rights
 
 	/**
@@ -139,7 +143,7 @@ public class Customer implements User, Serializable {
 	@Override
 	public String toString() {
 		return "Customer [email=" + email + ", name=" + name + ", password="
-				+ password + ", role=" + role + "]";
+				+ getPasswordSubstring() + ", role=" + role + "]";
 	}
 
 	@Override

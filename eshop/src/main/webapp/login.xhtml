@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="header_right">
+	<h:outputScript library="js" name="login.js" />
 	<div id="loggedAs" align="right">
 			<h5> 
 			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />

@@ -41,8 +41,8 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public void addProduct(Product product) throws Exception {
-		logger.info("Adding " + product.toString());
 		productDatabase.persist(product);
+		logger.info("Adding " + product.toString());
 		productEventSrc.fire(product);
 	}
 

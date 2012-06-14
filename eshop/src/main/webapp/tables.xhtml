@@ -30,29 +30,29 @@
 			</h:column>
 		</h:dataTable>
 		<br />
-		<h1>Products</h1>
+		<h1>Customers</h1>
 		<h:dataTable value="#{customers}" var="cust">
 			<h:column>
 				<f:facet name="header">
-               Customer's email
+               Email
             </f:facet>
 				<h:outputText value="#{cust.email}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-               Customer's name
+               Name
             </f:facet>
 				<h:outputText value="#{cust.name}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-               Customer's password
+               Part of hashed password
             </f:facet>
-				<h:outputText value="#{cust.password}" />
+				<h:outputText value="#{cust.passwordSubstring}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-               Customer's role
+               Role
             </f:facet>
 				<h:outputText value="#{cust.role}" />
 			</h:column>

@@ -55,20 +55,22 @@ public class BasketController implements Serializable {
 	@PostConstruct
 	public void initNewProduct() {
 		productInBasket = new ProductInBasket();
-		productToBasket = new ProductToBasket();
+		productToBasket = new ProductToBasket(null, 1);
 		productUpdateBasket = new ProductUpdateBasket();
 	}
 
 	public void addProductToBasket() throws Exception {
 		basket.addProduct(
 				Long.parseLong(productToBasket.getProductId().getValue()
-						.toString()), productInBasket.getQuantity());
+						.toString()), productToBasket.getQuantity());
+		productToBasket = new ProductToBasket(null, 1);
 	}
 
 	public void updateProductInBasket() throws Exception {
 		basket.updateProduct(
-				Long.parseLong(productToBasket.getProductId().getValue()
-						.toString()), productUpdateBasket.getQuantity());
+				Long.parseLong(productUpdateBasket.getProductId().getValue().toString()), 
+						
+						productUpdateBasket.getQuantity());
 	}
 
 	@Produces

@@ -7,24 +7,7 @@
 <h:head></h:head> 
 
 <body>
-	<f:view>
-		<h:form id="select">
-			<h:panelGrid columns="1">
-				<h:column>
-					<h:outputText value="Select a Name : "/>
-					<h:selectOneMenu value="#{selectOneBean.name}">
-					<f:selectItem itemValue="SteveJobs" ItemLabel="SteveJobs"/>
-					<f:selectItem itemValue="Sergey Brin" ItemLabel="Sergey Brin"/>
-					<f:selectItem itemValue="Larry Page" ItemLabel="Larry Page"/>
-					<f:selectItem itemValue="Dell" ItemLabel="Dell"/>
-					<f:selectItem itemValue="Mark Anderson" ItemLabel="Mark Anderson"/>
-				</h:selectOneMenu>
-			</h:column>
-			<h:column>
-				<h:commandButton value="Submit" action="#{selectOneBean.submit}"/>
-			</h:column>
-		</h:panelGrid>
-	</h:form>
-</f:view>
+	<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+	<h:outputLabel value="Loged out"	rendered="#{!identity.loggedIn}" />
 </body>
 </html>

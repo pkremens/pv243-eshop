@@ -10,9 +10,9 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Order;
 
 import cz.fi.muni.pv243.eshop.model.Orders;
-import cz.fi.muni.pv243.eshop.model.Product;
 
 @RequestScoped
 public class OrderListProducer {
@@ -27,8 +27,8 @@ public class OrderListProducer {
 		return orders;
 	}
 
-	public void onProductListChanged(
-			@Observes(notifyObserver = Reception.IF_EXISTS) final Product product) {
+	public void onOrderListChanged(
+			@Observes(notifyObserver = Reception.IF_EXISTS) final Order order) {
 		retrieveAllCustomersOrders();
 	}
 

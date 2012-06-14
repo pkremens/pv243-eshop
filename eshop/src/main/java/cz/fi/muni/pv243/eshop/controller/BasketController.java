@@ -71,6 +71,7 @@ public class BasketController implements Serializable {
 				Long.parseLong(productUpdateBasket.getProductId().getValue().toString()), 
 						
 						productUpdateBasket.getQuantity());
+		productUpdateBasket = new ProductUpdateBasket(null, 0);
 	}
 
 	@Produces

@@ -1,6 +1,7 @@
 package cz.fi.muni.pv243.eshop.viewconfig;
 
 import org.jboss.seam.faces.event.PhaseIdType;
+import org.jboss.seam.faces.security.AccessDeniedView;
 import org.jboss.seam.faces.security.LoginView;
 import org.jboss.seam.faces.security.RestrictAtPhase;
 import org.jboss.seam.faces.view.config.ViewConfig;
@@ -19,6 +20,7 @@ public interface Pages {
 		
         @ViewPattern("/tables.xhtml")
 		@LoginView("/index.xhtml")
+		@AccessDeniedView("/denied.xhtml")
 		@LoggedIn
 		@Admin
 		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})

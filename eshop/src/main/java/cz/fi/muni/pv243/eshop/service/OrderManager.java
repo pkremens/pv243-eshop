@@ -10,5 +10,4 @@ public interface OrderManager {
 
 	void addOrder(Orders orders);
 
-
 }

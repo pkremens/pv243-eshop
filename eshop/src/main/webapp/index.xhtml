@@ -5,7 +5,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
+		<div id="loggedAs" align="right">
+			<h5>You are logged as 
+			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+			(
+			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
+			)	
+		</h5>
+		<h:form id="logoutForm">
+		<h:commandButton id="logout" value="Logout"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+		</h:form>
+		</div>
 		<h1>Welcome to eshop!</h1>
+		
 		<h:link outcome="/tables.xhtml">View tables</h:link>
 		
 		<!-- 
@@ -37,8 +50,8 @@
 
 
 
-<h:outputLabel value="#{identity.user}"	rendered="#{identity.loggedIn}" />
-		
+
+	
 		<h1>Add user</h1>
 		<h:form id="addForm">
 		<h:message for="registerButton" />
@@ -72,8 +85,7 @@
 				<h:message for="password" errorClass="invalid" />
 			</h:panelGrid>
 			<h:commandButton id="loginButton" action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
-			<h:commandButton id="logout" value="Logout"
-				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+			
 		</h:form>
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 

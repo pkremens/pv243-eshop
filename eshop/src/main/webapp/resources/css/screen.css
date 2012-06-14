@@ -24,8 +24,10 @@ body {
 }
 #content {
   float: left;
-  width: 500px;
   margin: 20px;
+}
+#LoggedAs{
+	
 }
 #aside {
   font-size: 0.9em;
@@ -88,14 +90,9 @@ form {
   padding: 1em;
   font: 80%/1 sans-serif;
   width: 375px;
-  border: 1px solid #D5D5D5;
 }
 label {
-  float: left;
   width: 15%;
-  margin-left: 20px;
-  margin-right: 0.5em;
-  padding-top: 0.2em;
   text-align: right;
   font-weight: bold;
   color:#363636;

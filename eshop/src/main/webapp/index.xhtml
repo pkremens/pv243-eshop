@@ -20,163 +20,19 @@
 		</div>
 	</ui:define>
 	<ui:define name="content">
+	
 		<h:link outcome="/login.xhtml">Login</h:link>
 		<br/>
-		<h:link outcome="/tables.xhtml">View tables</h:link>
+		<h:link outcome="/tables.xhtml">View tables (admin only)</h:link>
 		<br/>
 		<h:link outcome="/test.xhtml">Test</h:link>
-		
-		<!-- 
-		<h:message  />
-		
-		<h:form id="loginForm">
-			<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
-				<h:outputLabel for="email" value="Email: " />
-				<h:inputText id="email" value="#{credentials.password}" />
-				<h:message for="email" errorClass="invalid" />
-
-				<h:outputLabel for="password" value="Password: " />
-				<h:inputSecret id="password" value="#{credentials.password}" />
-				<h:message for="password" errorClass="invalid" />
-
-			</h:panelGrid>
-			<h:commandButton id="login" value="Login" action="#{login.login}"
-				rendered="#{!login.loggedIn}" />
-			<h:commandButton id="logout" value="Logout" action="#{login.logout}"
-				rendered="#{login.loggedIn}" />
-			<h:commandButton id="action1" value="Action1"
-				action="#{login.logout}" rendered="#{login.loggedIn}" />
-			<h:commandButton id="action2" value="Action2"
-				action="#{login.logout}" rendered="#{login.loggedIn}" />
-			<h:commandButton id="action3" value="Action3"
-				action="#{login.logout}" rendered="#{login.loggedIn}" />
-		</h:form>
- -->
-
-
-
-
+		<br/>
+		<h:link outcome="/admin_page.xhtml">Admin_page (admin only)</h:link>
+		<br/>
+		<h:link outcome="/catalog.xhtml">Catalog</h:link>
 	
-		<h1>Add user</h1>
-		<h:form id="addForm">
-		<h:message for="registerButton" />
-		<h:panelGrid columns="3">
-				<h:outputLabel value="Email" for="email" />
-				<h:inputText id="email" value="#{newCustomer.email}" />
-				<h:message for="email" errorClass="invalid" />		
-						
-				<h:outputLabel value="Name" for="name" />
-				<h:inputText id="name" value="#{newCustomer.name}" />
-				<h:message for="name" errorClass="invalid" />
-								
-		<h:outputLabel value="Role" for="role" />
-		<h:panelGrid columns="1">
-				<h:column>
-					<h:selectOneMenu value="#{newCustomer.role}" id="role">
-					<f:selectItem itemValue="user" itemLabel="User"/>
-					<f:selectItem itemValue="seller" itemLabel="Seller"/>
-					<f:selectItem itemValue="admin" itemLabel="Administrator"/>
-					</h:selectOneMenu>
-			</h:column>
-			</h:panelGrid>
-		<h:message for="role" errorClass="invalid" />
-		
-				
-				
-				<h:outputLabel value="Password" for="password" />
-				<h:inputSecret id="password" value="#{newCustomer.password}" />
-				<h:message for="password" errorClass="invalid" />
-				
-			</h:panelGrid>
-			<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
-		</h:form>
-		
 		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
 
-		<h:dataTable value="#{ascProducts}" var="p">
-
-			<h:column>
-				<f:facet name="header">
-               Product's id
-            </f:facet>
-				<h:outputText binding="#{productToBasket.productId}" value="#{p.id}">
-					<f:attribute name="productId" value="productId" />
-				</h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-               name
-            </f:facet>
-				<h:outputText value="#{p.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-               price
-            </f:facet>
-				<h:outputText value="#{p.price}" />
-			</h:column>
-
-			<h:column>
-
-				<h:outputLabel for="quantity" value="quantity" />
-				<h:inputText id="quantity" value="#{productToBasket.quantity}"
-					validator="#{productController.validateNumberRange}" />
-				<h:message for="quantity" errorClass="invalid" />
-			</h:column>
-			<h:column>
-				<h:form id="addProductInBasket">
-					<h:commandButton id="addProductToBasket" value="add"
-						action="#{basketController.addProductToBasket}" />
-				</h:form>
-			</h:column>
-
-		</h:dataTable>
-		
-		
-		
-		<div>
-		<h1>Basket</h1>
-		<h:dataTable value="#{productsInBasket}" var="pInB">
-
-			<h:column>
-				<f:facet name="header">
-               Product's id
-            </f:facet>
-				<h:outputText binding="#{productUpdateBasket.productId}" value="#{pInB.product.id}">
-					<f:attribute name="productId" value="productId" />
-				</h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-               name
-            </f:facet>
-				<h:outputText value="#{pInB.product.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-               price
-            </f:facet>
-				<h:outputText value="#{pInB.product.price}" />
-			</h:column>
-
-			<h:column>
-
-				<h:outputLabel for="quantity" value="quantity" />
-				<h:inputText id="quantity" value="#{productUpdateBasket.quantity}"
-					validator="#{productController.validateNumberRange}" />
-				<h:message for="quantity" errorClass="invalid" />
-			</h:column>
-			<h:column>
-				<h:form id="updateProductInBasket">
-					<h:commandButton id="updateProductInBasket" value="update"
-						action="#{basketController.updateProductInBasket}" />
-				</h:form>
-			</h:column>
-
-		</h:dataTable>
-		
-</div>		
-		
 		<h:form id="addProduct">
 			<h2>Adding product</h2>
 			<p>Enforces annotation-based constraints defined on the model
@@ -211,7 +67,7 @@
 
 
 		<h:form id="reg">
-			<h2>Member Registration</h2>
+			<h1>Member Registration</h1>
 			<p>Enforces annotation-based constraints defined on the model
 				class.</p>
 			<h:panelGrid columns="3" columnClasses="titleCell">

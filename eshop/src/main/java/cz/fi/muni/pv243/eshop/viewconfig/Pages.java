@@ -24,9 +24,15 @@ public interface Pages {
 		@LoggedIn
 		@Admin
 		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
-		TABLES
+		TABLES,
 		
-		
+		@ViewPattern("/admin_page.xhtml")
+		@LoginView("/login.xhtml")
+		@AccessDeniedView("/denied.xhtml")
+		@LoggedIn
+		@Admin
+		@RestrictAtPhase({PhaseIdType.RESTORE_VIEW, PhaseIdType.INVOKE_APPLICATION})
+		ADMIN_PAGE
 		
 		/*
 		@ViewPattern("/view.xhtml")

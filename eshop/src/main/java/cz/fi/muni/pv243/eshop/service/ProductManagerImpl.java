@@ -27,7 +27,6 @@ public class ProductManagerImpl implements ProductManager {
 	@Inject
 	private Event<Product> productEventSrc;
 
-	// private final Product newProduct = new Product();
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -46,12 +45,6 @@ public class ProductManagerImpl implements ProductManager {
 		productEventSrc.fire(product);
 	}
 
-	// public void register(Product product) throws Exception {
-	// logger.info("Adding " + product.getName());
-	// productDatabase.persist(product);
-	// productEventSrc.fire(product);
-	// }
-
 	@Override
 	public Product findProduct(long id) throws Exception {
 		@SuppressWarnings("unchecked")
@@ -67,13 +60,5 @@ public class ProductManagerImpl implements ProductManager {
 			return results.get(0);
 		}
 	}
-
-	// @Override
-	// @Produces
-	// @RequestScoped
-	// @Named
-	// public Product getNewProduct() {
-	// return newProduct;
-	// }
 
 }

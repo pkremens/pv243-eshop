@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,11 +47,20 @@ public class OrderController implements Serializable {
 
 	private Customer customer;
 	private Orders newOrder;
+	private HtmlOutputText orderId;
+
+	private Orders orders;
 
 	@Produces
 	@Named
 	public Orders getNewOrder() {
 		return newOrder;
+	}
+
+	@Produces
+	@Named
+	public HtmlOutputText getOrderId() {
+		return orderId;
 	}
 
 	// TODO delete, it's only a dummy method!
@@ -89,6 +99,17 @@ public class OrderController implements Serializable {
 			initNewOrder();
 
 		}
+	}
+
+	public void getOrderDetail() {
+		long parsedId = Long.parseLong(orderId.getValue().toString());
+		orders = orderManager.getOrderDetails(parsedId);
+	}
+
+	@Produces
+	@Named("renderOrderDetail")
+	public Orders renderOrderDetail() throws Exception {
+		return orders;
 	}
 
 	@PostConstruct

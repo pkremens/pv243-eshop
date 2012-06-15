@@ -1,10 +1,10 @@
 package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -54,7 +54,7 @@ public class OrderController implements Serializable {
 	private Orders newOrder;
 	private HtmlOutputText orderId;
 
-	private Orders orders;
+	private static Orders orders;
 
 	@Produces
 	@Named
@@ -91,7 +91,7 @@ public class OrderController implements Serializable {
 											// the form and then register
 			newOrder.setCreationDate(Calendar.getInstance().getTime());
 
-			Set<OrderLine> lines = new HashSet<OrderLine>();
+			List<OrderLine> lines = new ArrayList<OrderLine>();
 			Map<Long, Integer> toOrder = basket.getBasketContent();
 			logger.info("customer " + customer.toLog()
 					+ " is ordering following products:");
@@ -126,6 +126,15 @@ public class OrderController implements Serializable {
 	@PostConstruct
 	public void initNewOrder() {
 		newOrder = new Orders();
+		orderId = new HtmlOutputText();
+	}
+
+	/**
+	 * @param orderId
+	 *            the orderId to set
+	 */
+	public void setOrderId(HtmlOutputText orderId) {
+		this.orderId = orderId;
 	}
 
 }

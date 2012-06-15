@@ -2,7 +2,7 @@ package cz.fi.muni.pv243.eshop.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class Orders implements Serializable {
 	private Customer customer;
 	private boolean open;
 	@OneToMany(cascade = { CascadeType.ALL })
-	private Set<OrderLine> orderLines;
+	private List<OrderLine> orderLines;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 	private Long totalPrice;
@@ -123,7 +123,7 @@ public class Orders implements Serializable {
 	/**
 	 * @return the orderLines
 	 */
-	public Set<OrderLine> getOrderLines() {
+	public List<OrderLine> getOrderLines() {
 		return orderLines;
 	}
 
@@ -131,7 +131,7 @@ public class Orders implements Serializable {
 	 * @param orderLines
 	 *            the orderLines to set
 	 */
-	public void setOrderLines(Set<OrderLine> orderLines) {
+	public void setOrderLines(List<OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}
 
@@ -152,6 +152,8 @@ public class Orders implements Serializable {
 		result = prime * result + (open ? 1231 : 1237);
 		result = prime * result
 				+ ((orderLines == null) ? 0 : orderLines.hashCode());
+		result = prime * result
+				+ ((totalPrice == null) ? 0 : totalPrice.hashCode());
 		return result;
 	}
 
@@ -191,19 +193,12 @@ public class Orders implements Serializable {
 				return false;
 		} else if (!orderLines.equals(other.orderLines))
 			return false;
+		if (totalPrice == null) {
+			if (other.totalPrice != null)
+				return false;
+		} else if (!totalPrice.equals(other.totalPrice))
+			return false;
 		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Orders [id=" + id + ", customer=" + customer + ", open=" + open
-				+ ", creationDate=" + creationDate + ", totalPrice="
-				+ totalPrice + "]";
 	}
 
 }

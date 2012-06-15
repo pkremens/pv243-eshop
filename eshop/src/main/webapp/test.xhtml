@@ -33,8 +33,8 @@
 				<f:facet name="header">
                Order's id
             </f:facet>
-				<h:outputText binding="#{productToBasket.productId}" value="#{p.id}">
-					<f:attribute name="productId" value="productId" />
+				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
+					<f:attribute name="orderId" value="orderId" />
 				</h:outputText>
 
 			</h:column>
@@ -74,30 +74,47 @@
 
 		</h:dataTable>
 
-		<!-- 	
-	<h1>Orders</h1>
-		<h:dataTable value="#{orders}" var="p">
+		<h1>Orders</h1>
+		<h:dataTable value="#{renderOrderDetail.orderLines}" var="o">
 			<h:column>
 				<f:facet name="header">
-               id
+               product's id
             </f:facet>
-				<h:outputText value="#{p.id}" />
+				<h:outputText value="#{o.product.id}" />
 			</h:column>
+			
 			<h:column>
 				<f:facet name="header">
-               name
+               product's name
             </f:facet>
-				<h:outputText value="#{p.name}" />
+				<h:outputText value="#{o.product.name}" />
 			</h:column>
+			
+			
 			<h:column>
 				<f:facet name="header">
-               price
+               product's price per one
             </f:facet>
-				<h:outputText value="#{p.price}" />
+				<h:outputText value="#{o.product.price}" />
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+               quantity
+            </f:facet>
+				<h:outputText value="#{o.quantity}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+               total price
+            </f:facet>
+				<h:outputText value="#{o.product.price * o.quantity}" />
+			</h:column>
+					
+			
 		</h:dataTable>
 		<br />
- -->
  	<h:link outcome="/index.xhtml">Back</h:link>
 	</ui:define>
 </ui:composition>

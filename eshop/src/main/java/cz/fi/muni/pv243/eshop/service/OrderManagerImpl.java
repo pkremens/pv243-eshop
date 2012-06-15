@@ -52,8 +52,13 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Orders getOrderDetails(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO remove verbose
+		System.out.println("id to be found: " + id);
+		Orders orders = (Orders) orderDatabase
+				.createQuery("select o from Orders o where o.id=:id")
+				.setParameter("id", id).getSingleResult();
+		System.out.println("Passed Order: " + orders.toString());
+		return orders;
 	}
 
 }

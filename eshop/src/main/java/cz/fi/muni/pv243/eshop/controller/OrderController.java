@@ -16,8 +16,8 @@ import javax.inject.Named;
 import org.jboss.seam.security.Identity;
 
 import cz.fi.muni.pv243.eshop.model.Customer;
+import cz.fi.muni.pv243.eshop.model.OrderLine;
 import cz.fi.muni.pv243.eshop.model.Orders;
-import cz.fi.muni.pv243.eshop.model.Product;
 import cz.fi.muni.pv243.eshop.service.Basket;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
@@ -75,15 +75,16 @@ public class OrderController implements Serializable {
 			System.out.println("Making order");
 			customer = (Customer) identity.getUser();
 			newOrder.setCustomer(customer);
-			Set<Product> products = new HashSet<Product>();
-
+			Set<OrderLine> lines = new HashSet<OrderLine>();
 			HashMap<Long, Integer> toOrder = basket.getBasketContent();
 			for (Long key : toOrder.keySet()) {
-				products.add(productManager.findProduct(key));
+				lines.add(new OrderLine(productManager.findProduct(key),
+						toOrder.get(key)));
 				System.out.println(productManager.findProduct(key));
+				System.out.println(toOrder.get(key));
 			}
-
-			newOrder.setProducts(products);
+			// TODO Logg a event
+			newOrder.setOrderLines(lines);
 			orderManager.addOrder(newOrder);
 			initNewOrder();
 

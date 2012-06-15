@@ -43,14 +43,10 @@ public class ProductListProducer {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
 		Root<Product> product = criteria.from(Product.class);
-		// Swap criteria statements if you would like to try out type-safe
-		// criteria queries, a new
-		// feature in JPA 2.0
-		// criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
-		// TODO jen visible=true
 		criteria.select(product).orderBy(cb.asc(product.get("id")));
 		Expression<Boolean> isVisible = product.get("visible");
-		products = em.createQuery(criteria.where(cb.isTrue(isVisible))).getResultList();
+		products = em.createQuery(criteria.where(cb.isTrue(isVisible)))
+				.getResultList();
 
 	}
 }

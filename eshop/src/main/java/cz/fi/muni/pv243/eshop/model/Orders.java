@@ -1,7 +1,9 @@
 package cz.fi.muni.pv243.eshop.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,16 +11,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Orders {
+public class Orders implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;
 	@OneToOne
 	private Customer customer;
 	private boolean open;
-	@OneToMany
-	private Set<Product> products;
+	@OneToMany(cascade = { CascadeType.ALL })
+	private Set<OrderLine> orderLines;
 
 	// private Tuple<Integer, Integer> tuple;
 
@@ -79,18 +85,18 @@ public class Orders {
 	}
 
 	/**
-	 * @return the products
+	 * @return the orderLines
 	 */
-	public Set<Product> getProducts() {
-		return products;
+	public Set<OrderLine> getOrderLines() {
+		return orderLines;
 	}
 
 	/**
-	 * @param products
-	 *            the products to set
+	 * @param orderLines
+	 *            the orderLines to set
 	 */
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setOrderLines(Set<OrderLine> orderLines) {
+		this.orderLines = orderLines;
 	}
 
 	// /**

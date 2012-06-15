@@ -31,41 +31,10 @@
 		<br/>
 		<h:link outcome="/catalog.xhtml">Catalog</h:link>
 	
-		<!-- <h:link outcome="/users.xhtml">View users</h:link> -->
-
-		<h:form id="addProduct">
-			<h2>Adding product</h2>
-			<p>Enforces annotation-based constraints defined on the model
-				class.</p>
-			<h:panelGrid columns="3" columnClasses="titleCell"
-				rendered="#{identity.loggedIn}">
-				<h:outputLabel for="name" value="Name:" />
-				<h:inputText id="name" value="#{newProduct.name}" />
-				<h:message for="name" errorClass="invalid" />
-
-				<h:outputLabel for="visible" value="Visible:" />
-				<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
-				<h:message for="visible" errorClass="invalid" />
-
-				<h:outputLabel for="price" value="Price:" />
-				<h:inputText id="price" value="#{newProduct.price}"
-					validator="#{productController.validateNumberRange}" />
-				<h:message for="price" errorClass="invalid" />
-
-			</h:panelGrid>
-
-			<p>
-				<h:panelGrid columns="2">
-					<h:commandButton id="register"
-						action="#{productController.register}" value="Register"
-						styleClass="register" rendered="#{identity.loggedIn}" />
-					<h:messages styleClass="messages" errorClass="invalid"
-						infoClass="valid" warnClass="warning" globalOnly="true" />
-				</h:panelGrid>
-			</p>
-		</h:form>
-
-
+		<!-- 
+		Members registration, default form
+		 -->
+		
 		<h:form id="reg">
 			<h1>Member Registration</h1>
 			<p>Enforces annotation-based constraints defined on the model
@@ -94,6 +63,9 @@
 				</h:panelGrid>
 			</p>
 		</h:form>
+			
+			
+		<!-- 
 		<h2>Members</h2>
 		<h:panelGroup rendered="#{empty members}">
 			<em>No registered members.</em>
@@ -125,5 +97,6 @@
 					href="#{request.contextPath}/rest/members">/rest/members</a>
 			</f:facet>
 		</h:dataTable>
+		-->
 	</ui:define>
 </ui:composition>

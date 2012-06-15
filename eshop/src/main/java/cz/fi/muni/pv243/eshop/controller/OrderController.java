@@ -1,8 +1,8 @@
 package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +19,6 @@ import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.model.OrderLine;
 import cz.fi.muni.pv243.eshop.model.Orders;
 import cz.fi.muni.pv243.eshop.service.Basket;
-import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
 import cz.fi.muni.pv243.eshop.service.ProductManager;
 
@@ -40,8 +39,6 @@ public class OrderController implements Serializable {
 	@Inject
 	Basket basket;
 
-	@Inject
-	private CustomerManager customerManager;
 	@Inject
 	private OrderManager orderManager;
 	@Inject
@@ -75,8 +72,10 @@ public class OrderController implements Serializable {
 			System.out.println("Making order");
 			customer = (Customer) identity.getUser();
 			newOrder.setCustomer(customer);
+
 			Set<OrderLine> lines = new HashSet<OrderLine>();
-			HashMap<Long, Integer> toOrder = basket.getBasketContent();
+			Map<Long, Integer> toOrder = basket.getBasketContent();
+
 			for (Long key : toOrder.keySet()) {
 				lines.add(new OrderLine(productManager.findProduct(key),
 						toOrder.get(key)));
@@ -86,6 +85,7 @@ public class OrderController implements Serializable {
 			// TODO Logg a event
 			newOrder.setOrderLines(lines);
 			orderManager.addOrder(newOrder);
+			basket.initNewBasket();
 			initNewOrder();
 
 		}

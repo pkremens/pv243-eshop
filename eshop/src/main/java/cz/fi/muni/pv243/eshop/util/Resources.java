@@ -1,5 +1,6 @@
 package cz.fi.muni.pv243.eshop.util;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -18,8 +19,12 @@ import javax.persistence.PersistenceContext;
  * private EntityManager em;
  * </pre>
  */
-public class Resources {
-   // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
+public class Resources implements Serializable {
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2013017526777741872L;
+// use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
    @SuppressWarnings("unused")
    @Produces
    @PersistenceContext

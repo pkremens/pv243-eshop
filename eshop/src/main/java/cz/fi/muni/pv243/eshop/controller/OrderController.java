@@ -1,7 +1,7 @@
 package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +19,6 @@ import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.model.Orders;
 import cz.fi.muni.pv243.eshop.model.Product;
 import cz.fi.muni.pv243.eshop.service.Basket;
-import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
 import cz.fi.muni.pv243.eshop.service.ProductManager;
 
@@ -40,8 +39,7 @@ public class OrderController implements Serializable {
 	@Inject
 	Basket basket;
 
-	@Inject
-	private CustomerManager customerManager;
+
 	@Inject
 	private OrderManager orderManager;
 	@Inject
@@ -77,7 +75,7 @@ public class OrderController implements Serializable {
 			newOrder.setCustomer(customer);
 			Set<Product> products = new HashSet<Product>();
 
-			HashMap<Long, Integer> toOrder = basket.getBasketContent();
+			Map<Long, Integer> toOrder = basket.getBasketContent();
 			for (Long key : toOrder.keySet()) {
 				products.add(productManager.findProduct(key));
 				System.out.println(productManager.findProduct(key));

@@ -1,8 +1,9 @@
 package cz.fi.muni.pv243.eshop.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
@@ -10,7 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.annotation.ejb.Clustered;
+import org.jboss.ejb3.annotation.Clustered;
 
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
@@ -26,7 +27,7 @@ public class BasketBean implements Basket {
 	@Inject
 	private ProductManager productManager;
 
-	private final HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
+	private final Map<Long, Integer> basket = new ConcurrentHashMap<Long, Integer>();
 
 	@Inject
 	private Logger log;
@@ -54,7 +55,7 @@ public class BasketBean implements Basket {
 	}
 
 	@Override
-	public HashMap<Long, Integer> getBasketContent() {
+	public Map<Long, Integer> getBasketContent() {
 		return basket;
 	}
 

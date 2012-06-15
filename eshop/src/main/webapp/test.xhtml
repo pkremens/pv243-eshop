@@ -29,6 +29,12 @@
             </f:facet>
 				<h:outputText value="#{p.id}" />
 			</h:column>
+						<h:column>
+				<f:facet name="date">
+               date
+            </f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">
                customer
@@ -40,6 +46,12 @@
                opened
             </f:facet>
 				<h:outputText value="#{p.open}" />
+			</h:column>
+						<h:column>
+				<f:facet name="header">
+               total
+            </f:facet>
+				<h:outputText value="#{p.totalPrice}" />
 			</h:column>
 			
 		</h:dataTable>

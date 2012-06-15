@@ -10,7 +10,7 @@ public interface ProductManager {
 
 	public void addProduct(Product product) throws Exception;
 
-	public Product findProduct(long id) throws Exception;
+	public Product findProduct(long id);
 
 	// public Product getNewProduct();
 

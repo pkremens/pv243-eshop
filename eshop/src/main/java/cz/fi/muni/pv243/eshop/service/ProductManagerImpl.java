@@ -46,7 +46,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public Product findProduct(long id) throws Exception {
+	public Product findProduct(long id) {
 		@SuppressWarnings("unchecked")
 		List<Product> results = productDatabase
 				.createQuery("select p from Product p where p.id=:id")

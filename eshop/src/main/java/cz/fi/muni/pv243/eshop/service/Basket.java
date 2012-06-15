@@ -3,7 +3,6 @@ package cz.fi.muni.pv243.eshop.service;
 import java.util.HashMap;
 import java.util.List;
 
-
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
 /**
@@ -12,7 +11,6 @@ import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
 public interface Basket {
 
-	
 	void addProduct(Long productId, int quantity);
 
 	HashMap<Long, Integer> getBasketContent();
@@ -20,4 +18,6 @@ public interface Basket {
 	void updateProduct(long productId, int newQuantity);
 
 	List<ProductInBasket> getAllMessages() throws Exception;
+
+	boolean isEmpty();
 }

@@ -11,9 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.annotation.ejb.Clustered;
-import org.jboss.ha.framework.interfaces.RoundRobin;
-
-//import org.jboss.annotation.ejb.Clustered;
 
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 
@@ -29,13 +26,11 @@ public class BasketBean implements Basket {
 	@Inject
 	private ProductManager productManager;
 
-	
-	private HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
-	
+	private final HashMap<Long, Integer> basket = new HashMap<Long, Integer>();
+
 	@Inject
 	private Logger log;
 
-	
 	@Override
 	@Named
 	public void addProduct(Long productId, int quantity) {
@@ -91,4 +86,10 @@ public class BasketBean implements Basket {
 
 		return products;
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return basket.isEmpty();
+	}
+
 }

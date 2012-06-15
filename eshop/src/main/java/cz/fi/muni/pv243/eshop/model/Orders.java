@@ -1,8 +1,11 @@
 package cz.fi.muni.pv243.eshop.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -14,6 +17,8 @@ public class Orders {
 	@OneToOne
 	private Customer customer;
 	private boolean open;
+	@OneToMany
+	private Set<Product> products;
 
 	// private Tuple<Integer, Integer> tuple;
 
@@ -37,7 +42,7 @@ public class Orders {
 
 	/**
 	 * @param id
-	 *            the id to set
+	 *            the id to setboolean emptyBasket
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -71,6 +76,21 @@ public class Orders {
 	 */
 	public void setOpen(boolean open) {
 		this.open = open;
+	}
+
+	/**
+	 * @return the products
+	 */
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	/**
+	 * @param products
+	 *            the products to set
+	 */
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 	// /**

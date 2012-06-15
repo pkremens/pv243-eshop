@@ -118,8 +118,7 @@
 
 			</h:dataTable>
 			<h:form id="makeOrder">
-				<h:commandButton id="makeOrder" value="Make Order"
-					action="#{orderController.makeOrder}" />
+				<h:commandButton id="makeOrder" value="Make Order" action="#{orderController.makeOrder}" rendered="#{identity.loggedIn}" />
 			</h:form>
 		</div>
 		<h:link outcome="/index.xhtml">Back</h:link>

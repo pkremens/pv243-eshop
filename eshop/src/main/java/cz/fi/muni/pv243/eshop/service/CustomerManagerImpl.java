@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,6 +23,9 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	@Inject
 	private EntityManager customerDatabase;
+
+	@Inject
+	private Event<Customer> customerEventSrc;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -45,6 +49,7 @@ public class CustomerManagerImpl implements CustomerManager {
 
 		customerDatabase.persist(customer);
 		logger.info("Adding " + customer.toString());
+		customerEventSrc.fire(customer);
 
 	}
 

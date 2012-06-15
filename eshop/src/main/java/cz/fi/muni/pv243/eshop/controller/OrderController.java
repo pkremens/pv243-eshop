@@ -45,16 +45,19 @@ public class OrderController implements Serializable {
 
 	@Inject
 	private OrderManager orderManager;
+
 	@Inject
 	private ProductManager productManager;
+
 	@Inject
 	private transient Logger logger;
 
 	private Customer customer;
+
 	private Orders newOrder;
 	private HtmlOutputText orderId;
 
-	private static Orders orders;
+	private Orders orders;
 
 	@Produces
 	@Named

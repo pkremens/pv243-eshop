@@ -17,8 +17,10 @@ public class OrderLine implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Product product;
+
 	private int quantity;
 
 	public OrderLine() {

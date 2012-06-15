@@ -30,7 +30,6 @@ public class OrderListProducer {
 	@Inject
 	private Identity identity;
 
-
 	@Produces
 	@Named("customerOrders")
 	public List<Orders> getOrders() {

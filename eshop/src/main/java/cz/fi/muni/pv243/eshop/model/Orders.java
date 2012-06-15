@@ -1,6 +1,7 @@
 package cz.fi.muni.pv243.eshop.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Orders implements Serializable {
@@ -25,11 +28,44 @@ public class Orders implements Serializable {
 	private boolean open;
 	@OneToMany(cascade = { CascadeType.ALL })
 	private Set<OrderLine> orderLines;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+	private Long totalPrice;
 
 	// private Tuple<Integer, Integer> tuple;
 
 	public Orders() {
 		super();
+	}
+
+	/**
+	 * @return the totalPrice
+	 */
+	public Long getTotalPrice() {
+		return totalPrice;
+	}
+
+	/**
+	 * @param totalPrice
+	 *            the totalPrice to set
+	 */
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate
+	 *            the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public Orders(Customer customer) {
@@ -99,19 +135,75 @@ public class Orders implements Serializable {
 		this.orderLines = orderLines;
 	}
 
-	// /**
-	// * @return the products
-	// */
-	// public List<Product> getProducts() {
-	// return products;
-	// }
-	//
-	// /**
-	// * @param products
-	// * the products to set
-	// */
-	// public void setProducts(List<Product> products) {
-	// this.products = products;
-	// }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result
+				+ ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (open ? 1231 : 1237);
+		result = prime * result
+				+ ((orderLines == null) ? 0 : orderLines.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Orders other = (Orders) obj;
+		if (creationDate == null) {
+			if (other.creationDate != null)
+				return false;
+		} else if (!creationDate.equals(other.creationDate))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (open != other.open)
+			return false;
+		if (orderLines == null) {
+			if (other.orderLines != null)
+				return false;
+		} else if (!orderLines.equals(other.orderLines))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", customer=" + customer + ", open=" + open
+				+ ", creationDate=" + creationDate + ", totalPrice="
+				+ totalPrice + "]";
+	}
 
 }

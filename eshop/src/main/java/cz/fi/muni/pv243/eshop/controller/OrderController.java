@@ -1,9 +1,11 @@
 package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -19,6 +21,7 @@ import org.jboss.seam.security.Identity;
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.model.OrderLine;
 import cz.fi.muni.pv243.eshop.model.Orders;
+import cz.fi.muni.pv243.eshop.model.Product;
 import cz.fi.muni.pv243.eshop.service.Basket;
 import cz.fi.muni.pv243.eshop.service.OrderManager;
 import cz.fi.muni.pv243.eshop.service.ProductManager;
@@ -44,6 +47,8 @@ public class OrderController implements Serializable {
 	private OrderManager orderManager;
 	@Inject
 	private ProductManager productManager;
+	@Inject
+	private transient Logger logger;
 
 	private Customer customer;
 	private Orders newOrder;
@@ -81,18 +86,24 @@ public class OrderController implements Serializable {
 
 			System.out.println("Making order");
 			customer = (Customer) identity.getUser();
-			newOrder.setCustomer(customer);
+			newOrder.setOpen(true);
+			newOrder.setCustomer(customer); // set here to allow customer fill
+											// the form and then register
+			newOrder.setCreationDate(Calendar.getInstance().getTime());
 
 			Set<OrderLine> lines = new HashSet<OrderLine>();
 			Map<Long, Integer> toOrder = basket.getBasketContent();
-
+			logger.info("customer " + customer.toLog()
+					+ " is ordering following products:");
+			Long price = 0L;
 			for (Long key : toOrder.keySet()) {
-				lines.add(new OrderLine(productManager.findProduct(key),
-						toOrder.get(key)));
-				System.out.println(productManager.findProduct(key));
-				System.out.println(toOrder.get(key));
+				Product productToAdd = productManager.findProduct(key);
+				int quantity = toOrder.get(key);
+				lines.add(new OrderLine(productToAdd, quantity));
+				logger.info(productToAdd.toString() + " quantity: " + quantity);
+				price += (productToAdd.getPrice() * quantity);
 			}
-			// TODO Logg a event
+			newOrder.setTotalPrice(price);
 			newOrder.setOrderLines(lines);
 			orderManager.addOrder(newOrder);
 			basket.initNewBasket();

@@ -4,23 +4,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="header_right">
+	<div id="loggedAs" align="right">
+			<h5> 
+			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
+		</h5>
+		<h:form id="logoutForm">
+		<h:commandButton id="logout" value="Logout"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+		</h:form>
+		</div>
+	</ui:define>
 	<ui:define name="content">
 	
 	<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
 	<h:outputLabel value="Loged out"	rendered="#{!identity.loggedIn}" />
-	<h:link outcome="/index.xhtml">Home</h:link>
 	
 	<h:form id="testForm">
 	<h:commandButton id="testButton" action="#{orderController.register}" value="Test" />
 	<h:message for="testButton" errorClass="invalid" />
 	</h:form>
-	
-	<h:form id="logoutForm">
-		<h:commandButton id="logout" value="Logout"
-				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-	</h:form>
-	
-	
 	<h:dataTable value="#{customerOrders}" var="p">
 
 			<h:column>
@@ -68,5 +75,6 @@
 		</h:dataTable>
 		<br />
  -->
+ 	<h:link outcome="/index.xhtml">Back</h:link>
 	</ui:define>
 </ui:composition>

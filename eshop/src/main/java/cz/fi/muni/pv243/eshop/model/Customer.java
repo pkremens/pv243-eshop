@@ -142,6 +142,10 @@ public class Customer implements User, Serializable {
 
 	@Override
 	public String toString() {
+		return "email: " + email + " name: " + name;
+	}
+
+	public String toLog() {
 		return "Customer [email=" + email + ", name=" + name + ", password="
 				+ getPasswordSubstring() + ", role=" + role + "]";
 	}

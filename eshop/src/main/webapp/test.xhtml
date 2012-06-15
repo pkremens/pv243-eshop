@@ -38,6 +38,12 @@
 				</h:outputText>
 
 			</h:column>
+						<h:column>
+				<f:facet name="date">
+               date
+            </f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">
                customer
@@ -50,6 +56,14 @@
             </f:facet>
 				<h:outputText value="#{p.open}" />
 			</h:column>
+
+						<h:column>
+				<f:facet name="header">
+               total
+            </f:facet>
+				<h:outputText value="#{p.totalPrice}" />
+			</h:column>
+
 			<h:column>
 			<h:form id="addProductInBasket">
 
@@ -57,6 +71,7 @@
 					action="#{orderController.getOrderDetail}" />
 			</h:form>
 </h:column>
+
 		</h:dataTable>
 
 		<!-- 	

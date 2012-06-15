@@ -1,8 +1,16 @@
 Application eshop
 
-how to deploy it to the cluster
+how to deploy the application
+1. import (existing maven) project to jboss developer studio
+2. you can either run application using studio tools or 
+   export WAR archive and place it to "standalone/deployments" dir in jboss-as-7.1.1 root and then 
+   run <jboss>/bin/standalone.[bat|sh], deployment should be automatic
+3. application is mapped to "<host>/eshop/index.jsf" url
+
+
+how to test failover in the cluster
 1. copy eshop.war do the standalone/deployments directory in server location
-2. start 2 independent servers with standalone-ha.xml config file
-3. try application on localhost:8080 - login, add some product to basket...
+2. start 2 independent (running on different ports with different names) servers with standalone-ha.xml config file
+3. use application on localhost:8080 - login, add some product to basket...
 4. kill server running on 8080 port
-5. open application on localhost:8180 - you are loged in and your basket has correct values
+5. open application on localhost:8180 - you are loged in and your basket contains correct products

@@ -13,6 +13,47 @@ body {
 	width: 200px;
 }
 
+#users{
+	border-bottom-style: solid;
+	float:left;
+	width:100%;
+	margin-bottom: 20px;
+}
+
+#add_user{
+	float:left;
+	widht:50%;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#active_users{
+	float:left;
+	widht:50%;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#products{
+	border-bottom-style: solid;
+	float:left;
+	width:100%;
+	margin-bottom: 20px;
+}
+
+#add_product{
+	float:left;
+	widht:50%;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#active_products{
+	float:left;
+	widht:50%;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
 
 #register_page{
 	margin-left: 30px;

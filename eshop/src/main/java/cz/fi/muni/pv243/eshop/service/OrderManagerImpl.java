@@ -26,15 +26,15 @@ public class OrderManagerImpl implements OrderManager {
 	@Inject
 	private Event<Orders> orderEventSrc;
 
-	 @Override
-	 @SuppressWarnings("unchecked")
-	 @Produces
-	 @Named
-	 @RequestScoped
-	 public List<Orders> getOrders() {
-		 return orderDatabase.createQuery("select u from Orders u")
-					.getResultList();
-	 }
+	@Override
+	@SuppressWarnings("unchecked")
+	@Produces
+	@Named
+	@RequestScoped
+	public List<Orders> getOrders() {
+		return orderDatabase.createQuery("select u from Orders u")
+				.getResultList();
+	}
 
 	@Override
 	public void addOrder(Orders orders) {
@@ -42,6 +42,18 @@ public class OrderManagerImpl implements OrderManager {
 		logger.info("Adding " + orders.toString());
 		orderEventSrc.fire(orders);
 
+	}
+
+	@Override
+	public List<Orders> getCustomerOrders(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Orders getOrderDetails(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

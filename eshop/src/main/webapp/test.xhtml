@@ -29,12 +29,14 @@
 	<h:message for="testButton" errorClass="invalid" />
 	</h:form>
 	<h:dataTable value="#{customerOrders}" var="p">
-
 			<h:column>
 				<f:facet name="header">
                Order's id
             </f:facet>
-				<h:outputText value="#{p.id}" />
+				<h:outputText binding="#{productToBasket.productId}" value="#{p.id}">
+					<f:attribute name="productId" value="productId" />
+				</h:outputText>
+
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -48,10 +50,16 @@
             </f:facet>
 				<h:outputText value="#{p.open}" />
 			</h:column>
-			
+			<h:column>
+			<h:form id="addProductInBasket">
+
+				<h:commandButton id="getOrderDetail" value="getOrderDetail"
+					action="#{orderController.getOrderDetail}" />
+			</h:form>
+</h:column>
 		</h:dataTable>
-	
-<!-- 	
+
+		<!-- 	
 	<h1>Orders</h1>
 		<h:dataTable value="#{orders}" var="p">
 			<h:column>

@@ -1,4 +1,8 @@
-README
-README
-README
-README
+Application eshop
+
+how to deploy it to the cluster
+1. copy eshop.war do the standalone/deployments directory in server location
+2. start 2 independent servers with standalone-ha.xml config file
+3. try application on localhost:8080 - login, add some product to basket...
+4. kill server running on 8080 port
+5. open application on localhost:8180 - you are loged in and your basket has correct values

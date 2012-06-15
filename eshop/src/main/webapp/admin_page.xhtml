@@ -53,7 +53,10 @@
 		</div>
 		<div id="active_users">
 			<h1>Users</h1>
-			<h:dataTable value="#{ascCustomers}" var="cust">
+			<h:panelGroup rendered="#{empty ascCustomers}">
+				<em>No users</em>
+			</h:panelGroup>
+			<h:dataTable value="#{ascCustomers}" var="cust" rendered="#{not empty ascCustomers}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
                			Email
@@ -106,22 +109,25 @@
 		</div>
 		<div id="active_products">
 			<h1>Products</h1>
-			<h:dataTable value="#{ascProducts}" var="p">
+			<h:panelGroup rendered="#{empty ascProducts}">
+				<em>No products</em>
+			</h:panelGroup>
+			<h:dataTable value="#{ascProducts}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
-               			id
+               			ID
             		</f:facet>
 					<h:outputText value="#{p.id}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-               			name
+               			Name
             		</f:facet>
 					<h:outputText value="#{p.name}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-               			price
+               			Price
            			</f:facet>
 					<h:outputText value="#{p.price}" />
 				</h:column>

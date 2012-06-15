@@ -26,13 +26,16 @@ public class OrderManagerImpl implements OrderManager {
 	@Inject
 	private Event<Orders> orderEventSrc;
 
+	@Inject
+	private CustomerManager customerManager;
+
 	@Override
 	@SuppressWarnings("unchecked")
 	@Produces
 	@Named
 	@RequestScoped
 	public List<Orders> getOrders() {
-		return orderDatabase.createQuery("select u from Orders u")
+		return orderDatabase.createQuery("select o from Orders o")
 				.getResultList();
 	}
 
@@ -46,19 +49,21 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public List<Orders> getCustomerOrders(String email) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// TODO not tested!!!
+		List<Orders> results = orderDatabase
+				.createQuery(
+						"select o from Orders o where o.customer=:customer")
+				.setParameter("customer", customerManager.isRegistred(email))
+				.getResultList();
+		return results;
 	}
 
 	@Override
 	public Orders getOrderDetails(Long id) {
-		// TODO remove verbose
-		System.out.println("id to be found: " + id);
-		Orders orders = (Orders) orderDatabase
+		return (Orders) orderDatabase
 				.createQuery("select o from Orders o where o.id=:id")
 				.setParameter("id", id).getSingleResult();
-		System.out.println("Passed Order: " + orders.toString());
-		return orders;
 	}
 
 }

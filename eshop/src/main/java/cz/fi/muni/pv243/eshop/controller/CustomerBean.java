@@ -26,6 +26,13 @@ public class CustomerBean implements Serializable {
 	private CustomerManager customerManager;
 
 	private static List<Customer> customerList;
+	@Inject
+	private Logger log;
+
+	private Customer newCustomer;
+
+	@Inject
+	private FacesContext facesContext;
 
 	public List<Customer> getCustomerList() {
 		return customerList;
@@ -36,14 +43,6 @@ public class CustomerBean implements Serializable {
 		customerManager.update(customer);
 	}
 
-	@Inject
-	private Logger log;
-
-	private Customer newCustomer;
-
-	@Inject
-	private FacesContext facesContext;
-
 	public void onCustomerListChanged(
 			@SuppressWarnings("cdi-observer") @Observes(notifyObserver = Reception.IF_EXISTS) final Customer customer) {
 		retrieveAllCustomers();
@@ -51,9 +50,7 @@ public class CustomerBean implements Serializable {
 
 	@PostConstruct
 	public void retrieveAllCustomers() {
-
 		customerList = customerManager.getCustomers();
-
 		initNewCustomer();
 
 	}

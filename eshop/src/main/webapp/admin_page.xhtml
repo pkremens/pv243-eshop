@@ -107,12 +107,12 @@
 					<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
 					<h:message for="visible" errorClass="invalid" />
 					<h:outputLabel for="price" value="Price:" />
-					<h:inputText id="price" value="#{newProduct.price}" validator="#{productController.validateNumberRange}" />
+					<h:inputText id="price" value="#{newProduct.price}" validator="#{productsBean.validateNumberRange}" />
 					<h:message for="price" errorClass="invalid" />
 				</h:panelGrid>
 				<p>
 				<h:panelGrid columns="2">
-					<h:commandButton id="register" action="#{productController.register}" value="Register" styleClass="register" rendered="#{identity.loggedIn}" />
+					<h:commandButton id="register" action="#{productsBean.register}" value="Register" styleClass="register" rendered="#{identity.loggedIn}" />
 					<h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>
 				</p>
@@ -122,11 +122,11 @@
 			<h1>Products</h1>
 			<h:messages />
 			<h:form id="product">
-			<h:panelGroup rendered="#{empty ascProducts}">
+			<h:panelGroup rendered="#{empty productsBean.productList}">
 				<em>No products</em>
 			</h:panelGroup>
 			
-			<h:dataTable id="productTable" value="#{productsBean.productList}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
+			<h:dataTable id="productTable" value="#{productsBean.productList}" var="p" rendered="#{not empty productsBean.productList}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
                			ID

@@ -48,16 +48,16 @@
 					<h:inputSecret id="password" value="#{newCustomer.password}" />
 					<h:message for="password" errorClass="invalid" />
 				</h:panelGrid>
-				<h:commandButton id="registerButton" action="#{customerController.register}" value="Add User" />
+				<h:commandButton id="registerButton" action="#{customersBean.register}" value="Add User" />
 			</h:form>
 		</div>
 		<div id="active_users">
 			<h1>Users</h1>
 			<h:form id="addCustomer">
-			<h:panelGroup rendered="#{empty ascCustomers}">
+			<h:panelGroup rendered="#{empty customersBean.customerList}">
 				<em>No users</em>
 			</h:panelGroup>
-			<h:dataTable value="#{customersBean.customerList}" var="cust" rendered="#{not empty ascCustomers}" styleClass="simpletablestyle">
+			<h:dataTable value="#{customersBean.customerList}" var="cust" rendered="#{not empty customersBean.customerList}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
                			Email

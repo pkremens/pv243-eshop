@@ -53,10 +53,11 @@
 		</div>
 		<div id="active_users">
 			<h1>Users</h1>
+			<h:form id="addCustomer">
 			<h:panelGroup rendered="#{empty ascCustomers}">
 				<em>No users</em>
 			</h:panelGroup>
-			<h:dataTable value="#{ascCustomers}" var="cust" rendered="#{not empty ascCustomers}" styleClass="simpletablestyle">
+			<h:dataTable value="#{customersBean.customerList}" var="cust" rendered="#{not empty ascCustomers}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
                			Email
@@ -76,19 +77,22 @@
 					<h:outputText value="#{cust.passwordSubstring}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
+				<f:facet name="header">
    			            Role
           			</f:facet>
-					<h:outputText value="#{cust.role}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-   			            Update
-          			</f:facet>
+						<h:selectOneMenu value="#{cust.role}" id="role">
+						<f:selectItem itemValue="user" itemLabel="User"/>
+						<f:selectItem itemValue="seller" itemLabel="Seller"/>
+						<f:selectItem itemValue="admin" itemLabel="Administrator"/>
+						</h:selectOneMenu>
+					</h:column>
+							<h:column>
+					<f:facet name="header">Update</f:facet>
           			<h:commandButton action="#{customersBean.updateAction(cust)}" value="Update" />
 					
 				</h:column>
 			</h:dataTable>	
+			</h:form>
 		</div>
 	</div>
 	<div id="products">

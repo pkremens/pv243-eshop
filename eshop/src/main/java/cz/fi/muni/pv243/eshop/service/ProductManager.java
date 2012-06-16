@@ -6,12 +6,12 @@ import cz.fi.muni.pv243.eshop.model.Product;
 
 public interface ProductManager {
 
-	public List<Product> getProducts();
+	List<Product> getProducts();
 
-	public void addProduct(Product product) throws Exception;
+	void addProduct(Product product) throws Exception;
 
-	public Product findProduct(long id);
+	Product findProduct(long id);
 
-	// public Product getNewProduct();
+	void update(Product product);
 
 }

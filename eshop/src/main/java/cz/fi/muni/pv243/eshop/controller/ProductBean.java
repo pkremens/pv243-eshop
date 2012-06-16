@@ -25,13 +25,9 @@ public class ProductBean implements Serializable {
 		return productList;
 	}
 
-	public String saveAction() {
-
-		// get all existing value but set "editable" to false
-		for (Product product : productList) {
-			product.setEditable(false);
-		}
-		// return to current page
+	public String saveAction(Product product) {
+		product.setEditable(false);
+		productManager.update(product);
 		return null;
 
 	}

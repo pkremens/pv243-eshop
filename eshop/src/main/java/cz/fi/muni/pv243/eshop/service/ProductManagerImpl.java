@@ -66,4 +66,11 @@ public class ProductManagerImpl implements ProductManager {
 		}
 	}
 
+	@Override
+	public void update(Product product) {
+		logger.info("updating " + product.toString());
+		productDatabase.merge(product);
+
+	}
+
 }

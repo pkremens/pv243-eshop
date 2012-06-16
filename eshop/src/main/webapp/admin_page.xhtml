@@ -139,7 +139,7 @@
  
     		
     		<h:commandLink value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
-    		<h:commandLink value="Save" action="#{productsBean.saveAction()}" rendered="#{p.editable}" />
+    		<h:commandLink value="Save" action="#{productsBean.saveAction(p)}" rendered="#{p.editable}" />
  
     	     </h:column>
 			</h:dataTable>

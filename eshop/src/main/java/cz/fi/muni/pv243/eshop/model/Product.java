@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	private Long id;
 
 	@Size(min = 1, max = 25)
-	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
+	@Pattern(regexp = "[A-Za-z0-9 ]*", message = "must contain only letters ,spaces and numbers")
 	private String name;
 
 	@NotNull

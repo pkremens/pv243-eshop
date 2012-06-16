@@ -13,5 +13,7 @@ public interface OrderManager {
 	// List<Orders> getCustomerOrders(String email);
 
 	Orders getOrderDetails(Long id);
+	
+	void closeOrder(Long id);
 
 }

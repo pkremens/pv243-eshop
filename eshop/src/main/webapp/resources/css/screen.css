@@ -13,6 +13,10 @@ body {
 	width: 200px;
 }
 
+#goToBasket{
+	float: right;
+}
+
 #users{
 	border-bottom-style: solid;
 	float:left;

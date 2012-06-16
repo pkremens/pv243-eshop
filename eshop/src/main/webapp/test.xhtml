@@ -7,6 +7,7 @@
 	<ui:define name="header_right">
 	<div id="loggedAs" align="right">
 			<h5> 
+			<h:link outcome="/login.xhtml" rendered="#{!identity.loggedIn}">Login/Register</h:link>
 			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />

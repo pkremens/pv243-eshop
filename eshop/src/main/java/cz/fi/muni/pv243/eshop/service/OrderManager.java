@@ -11,5 +11,7 @@ public interface OrderManager {
 	void addOrder(Orders orders);
 
 	Orders getOrderDetails(Long id);
+	
+	void closeOrder(Long id);
 
 }

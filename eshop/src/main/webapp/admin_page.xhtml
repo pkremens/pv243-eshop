@@ -170,7 +170,7 @@
 	<br />
 	
 	
-	
+	<h1>All orders</h1>
 	<h:dataTable value="#{orders}" var="p">
 			<h:column>
 				<f:facet name="header">
@@ -213,11 +213,16 @@
 				<h:commandButton id="getOrderDetail" value="getOrderDetail"
 					action="#{orderController.getOrderDetail}" />
 			</h:form>
+			<h:form id="closeOrder">
+
+				<h:commandButton id="closeOrderButton" value="Close order"
+					action="#{orderController.closeOrder}" />
+			</h:form>
 </h:column>
 
 		</h:dataTable>
 	
-		<h1>Orders</h1>
+		<h1>Order details</h1>
 		<h:dataTable value="#{renderOrderDetail.orderLines}" var="o">
 			<h:column>
 				<f:facet name="header">

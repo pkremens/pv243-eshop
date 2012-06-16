@@ -81,6 +81,13 @@
           			</f:facet>
 					<h:outputText value="#{cust.role}" />
 				</h:column>
+				<h:column>
+					<f:facet name="header">
+   			            Update
+          			</f:facet>
+          			<h:commandButton action="#{customersBean.updateAction(cust)}" value="Update" />
+					
+				</h:column>
 			</h:dataTable>	
 		</div>
 	</div>

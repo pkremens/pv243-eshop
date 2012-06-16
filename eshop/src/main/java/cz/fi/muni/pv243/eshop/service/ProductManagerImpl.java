@@ -57,6 +57,7 @@ public class ProductManagerImpl implements ProductManager {
 				.createQuery("select p from Product p where p.id=:id")
 				.setParameter("id", id).getResultList();
 		if (results.isEmpty()) {
+			logger.info("Product with " + id + " was not fount");
 			return null;
 		} else if (results.size() > 1) {
 			throw new IllegalStateException(

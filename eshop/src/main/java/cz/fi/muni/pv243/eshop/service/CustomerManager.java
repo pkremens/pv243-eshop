@@ -6,14 +6,14 @@ import cz.fi.muni.pv243.eshop.model.Customer;
 
 public interface CustomerManager {
 
-	public List<Customer> getCustomers();
+	List<Customer> getCustomers();
 
-	public void addCustomer(Customer customer);
+	void addCustomer(Customer customer);
 
-	public Customer findCustomer(String username, String passwordCredential);
+	Customer findCustomer(String username, String passwordCredential);
 
-	// public Customer getNewCustomer();
+	void update(Customer customer);
 
-	public Customer isRegistred(String email);
+	Customer isRegistred(String email);
 
 }

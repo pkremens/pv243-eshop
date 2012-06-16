@@ -25,17 +25,13 @@ public class ProductBean implements Serializable {
 		return productList;
 	}
 
-	public String saveAction(Product product) {
+	public void saveAction(Product product) {
 		product.setEditable(false);
 		productManager.update(product);
-		return null;
-
 	}
 
-	public String editAction(Product product) {
-
+	public void editAction(Product product) {
 		product.setEditable(true);
-		return null;
 	}
 
 	@PostConstruct

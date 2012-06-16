@@ -33,13 +33,6 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Named
 	@RequestScoped
 	public List<Customer> getCustomers() {
-		// TODO FOR DEBUGG REASONS ONLY, DELETE!!!
-		List<Customer> cus = customerDatabase.createQuery(
-				"select c from Customer c").getResultList();
-		for (Customer customer : cus) {
-			System.out.println(cus);
-		}
-
 		return customerDatabase.createQuery("select c from Customer c")
 				.getResultList();
 	}
@@ -75,14 +68,6 @@ public class CustomerManagerImpl implements CustomerManager {
 		}
 	}
 
-	// @Override
-	// @Produces
-	// @RequestScoped
-	// @Named
-	// public Customer getNewCustomer() {
-	// return newCustomer;
-	// }
-
 	@Override
 	public Customer isRegistred(String email) {
 		try {
@@ -94,6 +79,13 @@ public class CustomerManagerImpl implements CustomerManager {
 		} catch (Exception ex) {
 			return null;
 		}
+	}
+
+	@Override
+	public void update(Customer customer) {
+		logger.info("updating " + customer.toString());
+		customerDatabase.merge(customer);
+
 	}
 
 }

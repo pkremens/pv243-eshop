@@ -18,7 +18,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import cz.fi.muni.pv243.eshop.controller.CustomerController;
+import cz.fi.muni.pv243.eshop.controller.CustomerBean;
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 import cz.fi.muni.pv243.eshop.service.CustomerManagerImpl;
@@ -35,7 +35,7 @@ public class CustomerControllerTest {
 		System.err.println("test");
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(CustomerController.class, CustomerManager.class,
+				.addClasses(CustomerBean.class, CustomerManager.class,
 						CustomerManagerImpl.class, Customer.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -46,7 +46,7 @@ public class CustomerControllerTest {
 	}
 
 	@Inject
-	CustomerController customerController;
+	CustomerBean customerController;
 
 	@Inject
 	Logger log;

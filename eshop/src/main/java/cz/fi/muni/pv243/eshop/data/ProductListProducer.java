@@ -1,6 +1,8 @@
 package cz.fi.muni.pv243.eshop.data;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -23,6 +25,8 @@ public class ProductListProducer {
 	private EntityManager em;
 
 	private List<Product> products;
+	@Inject
+	private Logger log;
 
 	// @Named provides access the return value via the EL variable name
 	// "products" in the UI (e.g.,
@@ -40,13 +44,18 @@ public class ProductListProducer {
 
 	@PostConstruct
 	public void retrieveAllProductsOrderedByName() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
-		Root<Product> product = criteria.from(Product.class);
-		criteria.select(product).orderBy(cb.asc(product.get("id")));
-		Expression<Boolean> isVisible = product.get("visible");
-		products = em.createQuery(criteria.where(cb.isTrue(isVisible)))
-				.getResultList();
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
+			Root<Product> product = criteria.from(Product.class);
+			criteria.select(product).orderBy(cb.asc(product.get("id")));
+			Expression<Boolean> isVisible = product.get("visible");
+			products = em.createQuery(criteria.where(cb.isTrue(isVisible)))
+					.getResultList();
+		} catch (Exception ex) {
+			log.info(ex.getMessage());
+			products = new ArrayList<Product>();
+		}
 
 	}
 }

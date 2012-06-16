@@ -68,9 +68,10 @@ public class BasketController implements Serializable {
 
 	public void updateProductInBasket() throws Exception {
 		basket.updateProduct(
-				Long.parseLong(productUpdateBasket.getProductId().getValue().toString()), 
-						
-						productUpdateBasket.getQuantity());
+				Long.parseLong(productUpdateBasket.getProductId().getValue()
+						.toString()),
+
+				productUpdateBasket.getQuantity());
 		productUpdateBasket = new ProductUpdateBasket(null, 0);
 	}
 
@@ -78,6 +79,10 @@ public class BasketController implements Serializable {
 	@Named("productsInBasket")
 	public List<ProductInBasket> getProducts() throws Exception {
 		return basket.getAllMessages();
+	}
+
+	public boolean isBasketEmpty() {
+		return basket.isEmpty();
 	}
 
 }

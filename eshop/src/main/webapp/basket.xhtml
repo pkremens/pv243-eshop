@@ -82,6 +82,7 @@
 				</h:column>
 
 			</h:dataTable>
+			<h:outputLabel value="Login to make an order" rendered="#{!identity.loggedIn}" />
 			<h:form id="makeOrder">
 				<h:commandButton id="makeOrder" value="Make Order" action="#{orderController.makeOrder}" rendered="#{identity.loggedIn}" />
 			</h:form>

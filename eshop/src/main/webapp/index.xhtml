@@ -28,7 +28,6 @@
 	</div>
 	</ui:define>
 	<ui:define name="content">
-	
 	<div id="menu" align="left">
 			<div id="orders" align="right">
 				<h:link outcome="/test.xhtml">
@@ -45,15 +44,12 @@
        			</h:link>
 			</div>
 	</div>
-	
-	
-	
 		<div id="catalog" align="center">
 			<h1>Products</h1>
-			<h:dataTable value="#{ascProducts}" var="p" styleClass="simpletablestyle">
-				<h:panelGroup rendered="#{empty ascCustomers}">
-					<em>No products</em>
-				</h:panelGroup>
+			<h:panelGroup rendered="#{empty productsBean.productList}">
+				<em>No products</em>
+			</h:panelGroup>
+			<h:dataTable value="#{ascProducts}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header" >
    			            Product's id
@@ -79,10 +75,10 @@
     			           Quantity
         		    </f:facet>
 					<h:form id="addProductInBasket">
-							<h:outputLabel for="quantity" value="quantity" />
-							<h:inputText id="quantity" value="#{productToBasket.quantity}" validator="#{productController.validateNumberRange}" />
-							<h:message for="quantity" errorClass="invalid" />
-							<h:commandButton id="addProductToBasket" value="Add to basket" action="#{basketController.addProductToBasket}" />
+						<h:outputLabel for="quantity" value="quantity" />
+						<h:inputText id="quantity" value="#{productToBasket.quantity}" validator="#{productsBean.validateNumberRange}" />
+						<h:message for="quantity" errorClass="invalid" />
+						<h:commandButton id="addProductToBasket" value="Add to basket" action="#{basketController.addProductToBasket}" />
 					</h:form>
 				</h:column>
 			</h:dataTable>

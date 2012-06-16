@@ -36,7 +36,6 @@ public class BasketBean implements Basket {
 	@Named
 	public void addProduct(Long productId, int quantity) {
 
-		System.err.println(productId + " " + quantity);
 		if (quantity > 0) {
 			if (basket.containsKey(productId)) {
 				int currentQuantity = basket.get(productId);
@@ -46,9 +45,6 @@ public class BasketBean implements Basket {
 				basket.put(productId, quantity);
 			}
 
-			for (Long key : basket.keySet()) {
-				System.err.println("key: " + key);
-			}
 		} else {
 			log.info("adding 0 products");
 		}
@@ -75,12 +71,9 @@ public class BasketBean implements Basket {
 		List<ProductInBasket> products = new ArrayList<ProductInBasket>();
 
 		for (long productId : basket.keySet()) {
-			// HtmlOutputText htmlOutputText = new HtmlOutputText();
-			// htmlOutputText.setValue(productId);
 			ProductInBasket productInBasket = new ProductInBasket(
 					productManager.findProduct(productId),
 					basket.get(productId));
-			// productInBasket.setProduct();
 			products.add(productInBasket);
 
 		}

@@ -67,37 +67,22 @@
 		</div>
 		<div id="register_form" align="left">
 			<h:form id="addForm" rendered="#{!identity.loggedIn}">
-			<h:message for="registerButton" />
-			<h:panelGrid columns="3">
-				<h:outputLabel value="Email" for="email" />
-				<h:inputText id="email" value="#{newCustomer.email}" />
-				<h:message for="email" errorClass="invalid" />		
-						
-				<h:outputLabel value="Name" for="name" />
-				<h:inputText id="name" value="#{newCustomer.name}" />
-				<h:message for="name" errorClass="invalid" />
-								
-		
-				
-				
-				<h:outputLabel value="Password" for="password" />
-				<h:inputSecret id="password" value="#{newCustomer.password}" />
-				<h:message for="password" errorClass="invalid" />
-				
-			</h:panelGrid>
-			<h:commandButton id="registerButton" action="#{customerController.register}" value="Register" />
-			<h:outputLabel value="Role" for="role" style="visibility:hidden"/>
-		<h:panelGrid columns="1" style="visibility:hidden">
-				<h:column>
-					<h:selectOneMenu value="#{newCustomer.role}" id="role">
-					<f:selectItem itemValue="user" itemLabel="User"/>
-					<f:selectItem itemValue="seller" itemLabel="Seller"/>
-					<f:selectItem itemValue="admin" itemLabel="Administrator"/>
-					</h:selectOneMenu>
-			</h:column>
-			</h:panelGrid>
-		<h:message for="role" errorClass="invalid" style="visibility:hidden" />
-		</h:form>
+				<h:message for="registerButton" />
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Email" for="email" />
+					<h:inputText id="email" value="#{newCustomer.email}" />
+					<h:message for="email" errorClass="invalid" />		
+			
+					<h:outputLabel value="Name" for="name" />
+					<h:inputText id="name" value="#{newCustomer.name}" />
+					<h:message for="name" errorClass="invalid" />
+			
+					<h:outputLabel value="Password" for="password" />
+					<h:inputSecret id="password" value="#{newCustomer.password}" />
+					<h:message for="password" errorClass="invalid" />
+				</h:panelGrid>
+				<h:commandButton id="registerButton" action="#{customersBean.register}" value="Register" />
+			</h:form>
 		</div>
 	</div>
 	</div>

@@ -26,9 +26,6 @@ public class OrderManagerImpl implements OrderManager {
 	@Inject
 	private Event<Orders> orderEventSrc;
 
-	@Inject
-	private CustomerManager customerManager;
-
 	@Override
 	@SuppressWarnings("unchecked")
 	@Produces

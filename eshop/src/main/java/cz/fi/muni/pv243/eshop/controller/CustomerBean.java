@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.seam.security.Identity;
+
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 
@@ -29,6 +31,9 @@ public class CustomerBean implements Serializable {
 	@Inject
 	private Logger log;
 
+	@Inject
+	private Identity identity;
+	
 	private Customer newCustomer;
 
 	@Inject
@@ -62,6 +67,11 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void register() throws Exception {
+		System.err.println(newCustomer);
+		if (!identity.isLoggedIn()) { 
+			newCustomer.setRole("user"); 
+		}
+		
 		if (newCustomer.getPassword() == null) {
 			facesContext.addMessage("addForm:password", new FacesMessage(
 					"Cannot have empty password"));

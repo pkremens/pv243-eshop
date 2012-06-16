@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.component.html.HtmlOutputText;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -35,9 +34,6 @@ public class OrderController implements Serializable {
 
 	@Inject
 	private Identity identity;
-
-	@Inject
-	private FacesContext facesContext;
 
 	@Inject
 	Basket basket;

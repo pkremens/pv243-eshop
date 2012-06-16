@@ -2,7 +2,6 @@ package cz.fi.muni.pv243.eshop.controller;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
@@ -28,8 +27,6 @@ public class ProductBean implements Serializable {
 	private ProductManager productManager;
 
 	private static List<Product> productList;
-	@Inject
-	private Logger log;
 
 	private Product newProduct;
 

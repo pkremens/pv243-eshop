@@ -48,6 +48,12 @@ public class ProductController implements Serializable {
 		initNewProduct();
 	}
 
+	public String editAction(Product product) {
+
+		product.setEditable(!product.isEditable());
+		return null;
+	}
+
 	@PostConstruct
 	public void initNewProduct() {
 		newProduct = new Product();

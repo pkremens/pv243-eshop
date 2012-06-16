@@ -109,6 +109,7 @@
 		</div>
 		<div id="active_products">
 			<h1>Products</h1>
+			<h:form id="product">
 			<h:panelGroup rendered="#{empty ascProducts}">
 				<em>No products</em>
 			</h:panelGroup>
@@ -123,7 +124,8 @@
 					<f:facet name="header">
                			Name
             		</f:facet>
-					<h:outputText value="#{p.name}" />
+					<h:outputText value="#{p.name}" rendered="#{!p.editable}" />
+					<h:inputText value="#{p.name}" rendered="#{p.editable}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
@@ -131,7 +133,16 @@
            			</f:facet>
 					<h:outputText value="#{p.price}" />
 				</h:column>
+				<h:column>
+ 
+    		<f:facet name="header">Action</f:facet>
+ 
+    		<h:commandLink value="Edit" action="#{p.switchEditable}" 
+                                       rendered="#{! p.editable}" />
+ 
+    	     </h:column>
 			</h:dataTable>
+			</h:form>
 		</div>
 	</div>
 	<br />

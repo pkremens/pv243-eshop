@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -27,6 +28,31 @@ public class Product implements Serializable {
 	@NotNull
 	private int price;
 	private boolean visible;
+	@Transient
+	private boolean editable;
+
+	public Product() {
+		editable = false;
+	}
+
+	/**
+	 * @return the isEditable
+	 */
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void switchEditable() {
+		editable = !editable;
+	}
+
+	/**
+	 * @param isEditable
+	 *            the isEditable to set
+	 */
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
 
 	/**
 	 * @return the id

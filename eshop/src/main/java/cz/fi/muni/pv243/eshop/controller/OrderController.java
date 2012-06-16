@@ -70,19 +70,6 @@ public class OrderController implements Serializable {
 		return orderId;
 	}
 
-	// // TODO delete, it's only a dummy method!
-	// public void register() throws Exception {
-	// System.out.println("ahoj");
-	// System.out.println(identity.getUser());
-	// customer = (Customer) identity.getUser();
-	// newOrder.setCustomer(customer);
-	// System.out.println(newOrder);
-	// orderManager.addOrder(newOrder);
-	// facesContext.addMessage("testForm:testButton", new FacesMessage(
-	// FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));
-	// initNewOrder();
-	// }
-
 	public void makeOrder() {
 		if (!basket.isEmpty()) {
 
@@ -117,6 +104,12 @@ public class OrderController implements Serializable {
 	public void getOrderDetail() {
 		long parsedId = Long.parseLong(orderId.getValue().toString());
 		orders = orderManager.getOrderDetails(parsedId);
+	}
+	
+	
+	public void closeOrder() {
+		long parsedId = Long.parseLong(orderId.getValue().toString());
+		orderManager.closeOrder(parsedId);
 	}
 
 	@Produces

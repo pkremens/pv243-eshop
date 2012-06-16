@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="content">
+	<div id="active_orders" align="center">
+		<div id="all_orders">
+			<h1>All orders</h1>
+			<h:dataTable value="#{orders}" var="p" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">
+               		Order's id
+            	</f:facet>
+				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
+					<f:attribute name="orderId" value="orderId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="date">
+	               Time
+            	</f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Customer
+            	</f:facet>
+				<h:outputText value="#{p.customer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Opened
+            	</f:facet>
+				<h:outputText value="#{p.open}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Total
+            	</f:facet>
+				<h:outputText value="#{p.totalPrice}" />
+			</h:column>
+			<h:column>
+				<h:form id="showOrderDetails">
+					<h:commandButton id="getOrderDetail" value="Order Detail"	action="#{orderController.getOrderDetail}" />
+				</h:form>
+			</h:column>
+			<h:column>
+				<h:form id="closeOrder">
+					<h:commandButton id="closeOrderButton" value="Close order" action="#{orderController.closeOrder}" />
+				</h:form>
+			</h:column>
+			</h:dataTable>
+		</div>
+		
+		<div id="order_detail">
+			<h1>Order details</h1>
+			<h:dataTable value="#{renderOrderDetail.orderLines}" var="o" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+   			            Product's id
+         		    </f:facet>
+					<h:outputText value="#{o.product.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's name
+            		</f:facet>
+					<h:outputText value="#{o.product.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's price per one
+           			</f:facet>
+					<h:outputText value="#{o.product.price}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Quantity
+            		</f:facet>
+					<h:outputText value="#{o.quantity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Total price
+            		</f:facet>
+					<h:outputText value="#{o.product.price * o.quantity}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>	
+</ui:define>
+</ui:composition>

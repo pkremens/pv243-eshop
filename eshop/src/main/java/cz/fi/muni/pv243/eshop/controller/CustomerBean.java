@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.seam.security.Identity;
+
 import cz.fi.muni.pv243.eshop.model.Customer;
 import cz.fi.muni.pv243.eshop.service.CustomerManager;
 
@@ -26,6 +28,16 @@ public class CustomerBean implements Serializable {
 	private CustomerManager customerManager;
 
 	private static List<Customer> customerList;
+	@Inject
+	private Logger log;
+
+	@Inject
+	private Identity identity;
+	
+	private Customer newCustomer;
+
+	@Inject
+	private FacesContext facesContext;
 
 	public List<Customer> getCustomerList() {
 		return customerList;
@@ -36,14 +48,6 @@ public class CustomerBean implements Serializable {
 		customerManager.update(customer);
 	}
 
-	@Inject
-	private Logger log;
-
-	private Customer newCustomer;
-
-	@Inject
-	private FacesContext facesContext;
-
 	public void onCustomerListChanged(
 			@SuppressWarnings("cdi-observer") @Observes(notifyObserver = Reception.IF_EXISTS) final Customer customer) {
 		retrieveAllCustomers();
@@ -51,9 +55,7 @@ public class CustomerBean implements Serializable {
 
 	@PostConstruct
 	public void retrieveAllCustomers() {
-
 		customerList = customerManager.getCustomers();
-
 		initNewCustomer();
 
 	}
@@ -65,6 +67,11 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void register() throws Exception {
+		System.err.println(newCustomer);
+		if (!identity.isLoggedIn()) { 
+			newCustomer.setRole("user"); 
+		}
+		
 		if (newCustomer.getPassword() == null) {
 			facesContext.addMessage("addForm:password", new FacesMessage(
 					"Cannot have empty password"));
@@ -75,7 +82,8 @@ public class CustomerBean implements Serializable {
 					.getEmail());
 			if (customer == null) {
 				customerManager.addCustomer(newCustomer);
-				log.info("Registration: adding new customer");
+				log.info("Registration: adding new customer "
+						+ newCustomer.toString());
 				facesContext.addMessage("addForm:registerButton",
 						new FacesMessage("Customer was added"));
 				initNewCustomer();

@@ -26,7 +26,7 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void updateAction(Customer customer) {
-
+		System.out.println("update");
 		customerManager.update(customer);
 
 	}

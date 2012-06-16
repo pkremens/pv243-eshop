@@ -33,7 +33,8 @@ public class CustomerManagerImpl implements CustomerManager {
 	@Named
 	@RequestScoped
 	public List<Customer> getCustomers() {
-		return customerDatabase.createQuery("select c from Customer c")
+		return customerDatabase.createQuery(
+				"select c from Customer c ORDER BY c.email ASC")
 				.getResultList();
 	}
 
@@ -83,7 +84,8 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	@Override
 	public void update(Customer customer) {
-		logger.info("updating " + customer.toString());
+		logger.info("updating " + customer.toString() + " to role: "
+				+ customer.getRole());
 		customerDatabase.merge(customer);
 
 	}

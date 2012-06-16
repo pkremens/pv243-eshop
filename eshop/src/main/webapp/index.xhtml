@@ -30,14 +30,14 @@
 	<ui:define name="content">
 	<div id="menu" align="left">
 			<div id="orders" align="right">
-				<h:link outcome="/test.xhtml">
+				<h:link outcome="/orders.xhtml">
    		     	  		<h:graphicImage value="/resources/gfx/order.jpg" width="64" height="64" alt="Basket logo" />
        		 	  		<br/>
         		  		<h:outputLabel value="My orders"/>
       	 		</h:link>
 			</div>
 			<div id="basket">
-				<h:link outcome="/basket.xhtml">
+				<h:link outcome="/basket.xhtml" rendered="#{!basketController.isBasketEmpty}">
        		 	  		<h:graphicImage value="/resources/gfx/basket.png" width="64" height="64" alt="Basket logo" />
         		  		<br/>
         		  		<h:outputLabel value="My basket"/>
@@ -72,13 +72,13 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-    			           Quantity
+    			        Quantity
         		    </f:facet>
 					<h:form id="addProductInBasket">
 						<h:outputLabel for="quantity" value="quantity" />
 						<h:inputText id="quantity" value="#{productToBasket.quantity}" validator="#{productsBean.validateNumberRange}" />
 						<h:message for="quantity" errorClass="invalid" />
-						<h:commandButton id="addProductToBasket" value="Add to basket" action="#{basketController.addProductToBasket}" />
+						<h:commandButton id="addProductToBasket" value="add" action="#{basketController.addProductToBasket}" />
 					</h:form>
 				</h:column>
 			</h:dataTable>

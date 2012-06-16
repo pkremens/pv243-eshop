@@ -66,7 +66,7 @@
 					<h:form id="updateProductInBasket">
 						<h:outputLabel for="quantity" value="quantity" />
 						<h:inputText id="quantity" value="#{productUpdateBasket.quantity}"
-							validator="#{productController.validateNumberRange}" />
+							validator="#{productsBean.validateNumberRange}" />
 						<h:message for="quantity" errorClass="invalid" />
 						<h:commandButton id="updateProductInBasket" value="update"
 							action="#{basketController.updateProductInBasket}" />
@@ -75,7 +75,7 @@
 					<h:form id="removeProductInBasket">
 						<h:inputHidden id="quantity"
 							value="#{productUpdateBasket.quantity}"
-							validator="#{productController.validateNumberRange}" />
+							/>
 						<h:commandButton id="removeProductInBasket" value="remove"
 							action="#{basketController.updateProductInBasket}" />
 					</h:form>

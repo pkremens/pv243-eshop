@@ -85,6 +85,18 @@ public class ProductBean implements Serializable {
 		}
 	}
 
+	public void validateNumberRangeInBasket(FacesContext context,
+			UIComponent toValidate, Object value) {
+		int input = (Integer) value;
+
+		if (input < 1 || input > 10000) {
+			((UIInput) toValidate).setValid(false);
+
+			FacesMessage message = new FacesMessage("Invalid number");
+			context.addMessage(toValidate.getClientId(context), message);
+		}
+	}
+
 	public void initNewProduct() {
 		newProduct = new Product();
 	}

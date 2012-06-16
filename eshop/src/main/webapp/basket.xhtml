@@ -6,14 +6,22 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="header_right">
 		<div id="loggedAs" align="right">
-			<h5>
-				<h:link outcome="/login.xhtml" rendered="#{!identity.loggedIn}">Login/Register</h:link>
-				<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
-				<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
-				<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
-				<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
-				<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
-			</h5>
+			<h5> 
+			<h:link outcome="/login.xhtml" rendered="#{!identity.loggedIn}">
+				Login/Register
+				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
+			</h:link>
+			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
+			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
+			<br/>
+			<h:link outcome="/admin_page.xhtml" rendered="#{identity.user.role=='admin'}">
+				Admin page
+				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
+			</h:link>
+		</h5>
 			<h:form id="logoutForm">
 				<h:commandButton id="logout" value="Logout"
 					action="#{identity.logout}" rendered="#{identity.loggedIn}" />

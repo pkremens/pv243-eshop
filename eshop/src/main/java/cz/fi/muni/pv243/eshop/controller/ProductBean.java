@@ -77,7 +77,7 @@ public class ProductBean implements Serializable {
 			UIComponent toValidate, Object value) {
 		int input = (Integer) value;
 
-		if (input < 0 || input > 10000) {
+		if (input < 1 || input > 10000) {
 			((UIInput) toValidate).setValid(false);
 
 			FacesMessage message = new FacesMessage("Invalid number");

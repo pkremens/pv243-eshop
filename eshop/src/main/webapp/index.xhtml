@@ -37,7 +37,12 @@
 	
 		<div id="catalog">
 			<h1>Products</h1>
-			<h:dataTable value="#{ascProducts}" var="p">
+			<h:panelGroup rendered="#{empty productsBean.productList}">
+				<em>No products</em>
+			</h:panelGroup>
+			
+			
+			<h:dataTable value="#{ascProducts}" var="p" rendered="#{not empty ascProducts}">
 				<h:column>
 					<f:facet name="header">
    			            Product's id

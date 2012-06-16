@@ -72,7 +72,8 @@ public class CustomerBean implements Serializable {
 					.getEmail());
 			if (customer == null) {
 				customerManager.addCustomer(newCustomer);
-				log.info("Registration: adding new customer");
+				log.info("Registration: adding new customer "
+						+ newCustomer.toString());
 				facesContext.addMessage("addForm:registerButton",
 						new FacesMessage("Customer was added"));
 				initNewCustomer();

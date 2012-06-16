@@ -49,18 +49,6 @@ public class OrderManagerImpl implements OrderManager {
 
 	}
 
-	// @Override
-	// public List<Orders> getCustomerOrders(String email) {
-	//
-	// // TODO not tested!!!
-	// List<Orders> results = orderDatabase
-	// .createQuery(
-	// "select o from Orders o where o.customer=:customer")
-	// .setParameter("customer", customerManager.isRegistred(email))
-	// .getResultList();
-	// return results;
-	// }
-
 	@Override
 	public Orders getOrderDetails(Long id) {
 		return (Orders) orderDatabase

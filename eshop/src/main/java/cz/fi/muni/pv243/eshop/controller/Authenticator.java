@@ -55,9 +55,6 @@ public class Authenticator extends BaseAuthenticator {
 					setStatus(AuthenticationStatus.SUCCESS);
 					setUser(customer);
 					log.finest("Authentication: " + customer.toString());
-					// FacesContext.getCurrentInstance().addMessage(
-					// "loginForm:loginButton",
-					// new FacesMessage("Welcome, " + customer.getName()));
 
 				} else {
 					setStatus(AuthenticationStatus.FAILURE);

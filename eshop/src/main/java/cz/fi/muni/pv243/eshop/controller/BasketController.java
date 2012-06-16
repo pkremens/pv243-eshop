@@ -82,7 +82,6 @@ public class BasketController implements Serializable {
 	}
 
 	public boolean isBasketEmpty() {
-		System.out.println(basket.isEmpty());
 		return basket.isEmpty();
 	}
 

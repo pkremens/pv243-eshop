@@ -71,12 +71,9 @@ public class BasketBean implements Basket {
 		List<ProductInBasket> products = new ArrayList<ProductInBasket>();
 
 		for (long productId : basket.keySet()) {
-			// HtmlOutputText htmlOutputText = new HtmlOutputText();
-			// htmlOutputText.setValue(productId);
 			ProductInBasket productInBasket = new ProductInBasket(
 					productManager.findProduct(productId),
 					basket.get(productId));
-			// productInBasket.setProduct();
 			products.add(productInBasket);
 
 		}

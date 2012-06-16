@@ -10,8 +10,6 @@ public interface OrderManager {
 
 	void addOrder(Orders orders);
 
-	// List<Orders> getCustomerOrders(String email);
-
 	Orders getOrderDetails(Long id);
 
 }

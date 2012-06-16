@@ -71,23 +71,23 @@ public class OrderController implements Serializable {
 		return orderId;
 	}
 
-	// TODO delete, it's only a dummy method!
-	public void register() throws Exception {
-		System.out.println("ahoj");
-		System.out.println(identity.getUser());
-		customer = (Customer) identity.getUser();
-		newOrder.setCustomer(customer);
-		System.out.println(newOrder);
-		orderManager.addOrder(newOrder);
-		facesContext.addMessage("testForm:testButton", new FacesMessage(
-				FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));
-		initNewOrder();
-	}
+//	// TODO delete, it's only a dummy method!
+//	public void register() throws Exception {
+//		System.out.println("ahoj");
+//		System.out.println(identity.getUser());
+//		customer = (Customer) identity.getUser();
+//		newOrder.setCustomer(customer);
+//		System.out.println(newOrder);
+//		orderManager.addOrder(newOrder);
+//		facesContext.addMessage("testForm:testButton", new FacesMessage(
+//				FacesMessage.SEVERITY_INFO, "Added!", "Order was added"));
+//		initNewOrder();
+//	}
 
 	public void makeOrder() {
 		if (!basket.isEmpty()) {
 
-			System.out.println("Making order");
+			logger.fine("Making new order");
 			customer = (Customer) identity.getUser();
 			newOrder.setOpen(true);
 			newOrder.setCustomer(customer); // set here to allow customer fill

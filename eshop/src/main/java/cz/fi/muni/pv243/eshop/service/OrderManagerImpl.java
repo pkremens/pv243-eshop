@@ -35,7 +35,9 @@ public class OrderManagerImpl implements OrderManager {
 	@Named
 	@RequestScoped
 	public List<Orders> getOrders() {
-		return orderDatabase.createQuery("select o from Orders o")
+		return orderDatabase
+				.createQuery(
+						"SELECT o FROM Orders o ORDER BY o.customer,o.creationDate ASC")
 				.getResultList();
 	}
 
@@ -47,22 +49,22 @@ public class OrderManagerImpl implements OrderManager {
 
 	}
 
-	@Override
-	public List<Orders> getCustomerOrders(String email) {
-
-		// TODO not tested!!!
-		List<Orders> results = orderDatabase
-				.createQuery(
-						"select o from Orders o where o.customer=:customer")
-				.setParameter("customer", customerManager.isRegistred(email))
-				.getResultList();
-		return results;
-	}
+	// @Override
+	// public List<Orders> getCustomerOrders(String email) {
+	//
+	// // TODO not tested!!!
+	// List<Orders> results = orderDatabase
+	// .createQuery(
+	// "select o from Orders o where o.customer=:customer")
+	// .setParameter("customer", customerManager.isRegistred(email))
+	// .getResultList();
+	// return results;
+	// }
 
 	@Override
 	public Orders getOrderDetails(Long id) {
 		return (Orders) orderDatabase
-				.createQuery("select o from Orders o where o.id=:id")
+				.createQuery("SELECT o FROM Orders o WHERE o.id=:id")
 				.setParameter("id", id).getSingleResult();
 	}
 

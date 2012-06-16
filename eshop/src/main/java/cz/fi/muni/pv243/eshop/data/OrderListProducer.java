@@ -44,7 +44,7 @@ public class OrderListProducer {
 
 	@PostConstruct
 	public void retrieveAllCustomersOrders() {
-		System.out.println("retrieve all customers?");
+		// System.out.println("retrieve all customers?");
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Orders> criteria = cb.createQuery(Orders.class);
 		Root<Orders> orders = criteria.from(Orders.class);

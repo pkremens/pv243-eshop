@@ -99,7 +99,7 @@
 				</h:panelGrid>
 				<p>
 				<h:panelGrid columns="2">
-					<h:commandButton id="register" action="#{productsBean.register}" value="Register" styleClass="register" rendered="#{identity.loggedIn}" />
+					<h:commandButton id="register" action="#{productsBean.register}" value="Add Product" styleClass="register" rendered="#{identity.loggedIn}" />
 					<h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>
 				</p>
@@ -131,8 +131,6 @@
                			Price
            			</f:facet>
 					<h:outputText value="#{p.price}"/>
-					
-					
 				</h:column>
 				<h:column>
 					<f:facet name="header">

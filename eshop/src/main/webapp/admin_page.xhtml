@@ -113,7 +113,7 @@
 			<h:panelGroup rendered="#{empty ascProducts}">
 				<em>No products</em>
 			</h:panelGroup>
-			<h:dataTable value="#{ascProducts}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
+			<h:dataTable value="#{productsBean.productList}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
                			ID
@@ -137,8 +137,9 @@
  
     		<f:facet name="header">Action</f:facet>
  
-    		<h:commandLink value="Edit" action="#{p.switchEditable}" 
-                                       rendered="#{! p.editable}" />
+    		
+    		<h:commandLink value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
+    		<h:commandLink value="Save" action="#{productsBean.saveAction()}" rendered="#{p.editable}" />
  
     	     </h:column>
 			</h:dataTable>

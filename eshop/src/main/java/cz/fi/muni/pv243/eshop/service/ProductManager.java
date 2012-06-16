@@ -6,7 +6,7 @@ import cz.fi.muni.pv243.eshop.model.Product;
 
 public interface ProductManager {
 
-	public List<Product> getProducts() throws Exception;
+	public List<Product> getProducts();
 
 	public void addProduct(Product product) throws Exception;
 

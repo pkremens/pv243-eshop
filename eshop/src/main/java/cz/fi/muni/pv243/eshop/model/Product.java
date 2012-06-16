@@ -35,6 +35,16 @@ public class Product implements Serializable {
 		editable = false;
 	}
 
+	public Product(Long id, String name, int price, boolean visible,
+			boolean editable) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.visible = visible;
+		this.editable = editable;
+	}
+
 	/**
 	 * @return the isEditable
 	 */

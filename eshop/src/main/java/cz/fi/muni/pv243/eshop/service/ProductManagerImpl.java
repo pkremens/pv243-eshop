@@ -27,15 +27,20 @@ public class ProductManagerImpl implements ProductManager {
 	@Inject
 	private Event<Product> productEventSrc;
 
-
 	@Override
 	@SuppressWarnings("unchecked")
 	@Produces
 	@Named
 	@RequestScoped
-	public List<Product> getProducts() throws Exception {
-		return productDatabase.createQuery("select u from Product u")
-				.getResultList();
+	public List<Product> getProducts() {
+		List<Product> products;
+		try {
+			products = productDatabase.createQuery("select u from Product u")
+					.getResultList();
+		} catch (Exception e) {
+			products = null;
+		}
+		return products;
 	}
 
 	@Override

@@ -4,32 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="header_right">
-	<div id="loggedAs" align="right">
-			<h5> 
-			<h:link outcome="/login.xhtml" rendered="#{!identity.loggedIn}">
-				Login/Register
-				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
-			</h:link>
-			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
-			<br/>
-			<h:link outcome="/admin_page.xhtml" rendered="#{identity.user.role=='admin'}">
-				Admin page
-				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
-			</h:link>
-		</h5>
-		<h:form id="logoutForm">
-		<h:commandButton id="logout" value="Logout"
-				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-		</h:form>
-		</div>
-	</ui:define>
 	
-	<ui:define name="content">
+<ui:define name="content">
 	<div id="users">
 		<div id="add_user">
 			<h1>Add user</h1>
@@ -95,15 +71,17 @@
 						<f:selectItem itemValue="admin" itemLabel="Administrator"/>
 						</h:selectOneMenu>
 					</h:column>
-							<h:column>
-					<f:facet name="header">Update</f:facet>
+				<h:column>
+					<f:facet name="header">
+						Update
+					</f:facet>
           			<h:commandButton action="#{customersBean.updateAction(cust)}" value="Update" />
-					
 				</h:column>
 			</h:dataTable>	
 			</h:form>
 		</div>
 	</div>
+	
 	<div id="products">
 		<div id="add_product">
 			<h1>Add product</h1>
@@ -134,7 +112,6 @@
 			<h:panelGroup rendered="#{empty productsBean.productList}">
 				<em>No products</em>
 			</h:panelGroup>
-			
 			<h:dataTable id="productTable" value="#{productsBean.productList}" var="p" rendered="#{not empty productsBean.productList}" styleClass="simpletablestyle">
 				<h:column>
 					<f:facet name="header">
@@ -164,121 +141,100 @@
 					<h:selectBooleanCheckbox disabled="#{!p.editable}" value="#{p.visible}" />
 				</h:column>
 				<h:column>
- 
-    		<f:facet name="header">Action</f:facet>
- 
-    		
-    		<h:commandButton value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
-    		<h:commandButton id="saveButton" value="Save" action="#{productsBean.saveAction(p)}" rendered="#{p.editable}" />
- 
-    	     </h:column>
+		    		<f:facet name="header">
+		    			Action
+		    		</f:facet>
+		    		<h:commandButton value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
+    				<h:commandButton id="saveButton" value="Save" action="#{productsBean.saveAction(p)}" rendered="#{p.editable}" />
+	    	     </h:column>
 			</h:dataTable>
 			</h:form>
 		</div>
 	</div>
-	<br />
 	
-	
-	<h1>All orders</h1>
-	<h:dataTable value="#{orders}" var="p">
+	<div id="active_orders" align="center">
+		<div id="all_orders">
+			<h1>All orders</h1>
+			<h:dataTable value="#{orders}" var="p" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">
-               Order's id
-            </f:facet>
+               		Order's id
+            	</f:facet>
 				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
 					<f:attribute name="orderId" value="orderId" />
 				</h:outputText>
-
 			</h:column>
-						<h:column>
+			<h:column>
 				<f:facet name="date">
-               date
-            </f:facet>
+	               Time
+            	</f:facet>
 				<h:outputText value="#{p.creationDate}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-               customer
-            </f:facet>
+               		Customer
+            	</f:facet>
 				<h:outputText value="#{p.customer}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-               opened
-            </f:facet>
+               		Opened
+            	</f:facet>
 				<h:outputText value="#{p.open}" />
 			</h:column>
-
-						<h:column>
+			<h:column>
 				<f:facet name="header">
-               total
-            </f:facet>
+               		Total
+            	</f:facet>
 				<h:outputText value="#{p.totalPrice}" />
 			</h:column>
-
 			<h:column>
-			<h:form id="showOrderDetails">
-
-				<h:commandButton id="getOrderDetail" value="getOrderDetail"
-					action="#{orderController.getOrderDetail}" />
-			</h:form>
-			<h:form id="closeOrder">
-
-				<h:commandButton id="closeOrderButton" value="Close order"
-					action="#{orderController.closeOrder}" />
-			</h:form>
-</h:column>
-
-		</h:dataTable>
-	
-		<h1>Order details</h1>
-		<h:dataTable value="#{renderOrderDetail.orderLines}" var="o">
-			<h:column>
-				<f:facet name="header">
-               product's id
-            </f:facet>
-				<h:outputText value="#{o.product.id}" />
+				<h:form id="showOrderDetails">
+					<h:commandButton id="getOrderDetail" value="Order Detail"	action="#{orderController.getOrderDetail}" />
+				</h:form>
 			</h:column>
-			
 			<h:column>
-				<f:facet name="header">
-               product's name
-            </f:facet>
-				<h:outputText value="#{o.product.name}" />
+				<h:form id="closeOrder">
+					<h:commandButton id="closeOrderButton" value="Close order" action="#{orderController.closeOrder}" />
+				</h:form>
 			</h:column>
-			
-			
-			<h:column>
-				<f:facet name="header">
-               product's price per one
-            </f:facet>
-				<h:outputText value="#{o.product.price}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">
-               quantity
-            </f:facet>
-				<h:outputText value="#{o.quantity}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">
-               total price
-            </f:facet>
-				<h:outputText value="#{o.product.price * o.quantity}" />
-			</h:column>
-					
-			
-		</h:dataTable>
-		<br />
-	
-	
-	
-	
-	
-	
-	
-	<h:link outcome="/index.xhtml">Back</h:link>
+			</h:dataTable>
+		</div>
+		<div id="order_detail">
+			<h1>Order details</h1>
+			<h:dataTable value="#{renderOrderDetail.orderLines}" var="o" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+   			            Product's id
+         		    </f:facet>
+					<h:outputText value="#{o.product.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's name
+            		</f:facet>
+					<h:outputText value="#{o.product.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's price per one
+           			</f:facet>
+					<h:outputText value="#{o.product.price}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Quantity
+            		</f:facet>
+					<h:outputText value="#{o.quantity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Total price
+            		</f:facet>
+					<h:outputText value="#{o.product.price * o.quantity}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>	
 </ui:define>
 </ui:composition>

@@ -4,48 +4,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="header_right">
-	<div id="loggedAs" align="right">
-		<h5> 
-			<h:link outcome="/login.xhtml" rendered="#{!identity.loggedIn}">
-				Login/Register
-				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
-			</h:link>
-			<h:outputLabel value="You are logged as"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="("	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{identity.user.role}"	rendered="#{identity.loggedIn}" />
-			<h:outputLabel value=")"	rendered="#{identity.loggedIn}" />
-			<br/>
-			<h:link outcome="/admin_page.xhtml" rendered="#{identity.user.role=='admin'}">
-				Admin page
-				<h:graphicImage value="/resources/gfx/auth.jpg" width="17" height="17" />
-			</h:link>
-		</h5>
-		<h:form id="logoutForm">
-		<h:commandButton id="logout" value="Logout"
-				action="#{identity.logout}" rendered="#{identity.loggedIn}" />
-		</h:form>
-		</div>
-	</ui:define>
-	<ui:define name="content">
+	
+<ui:define name="content">
+
 	<div id="log" >
 		<h1 align="center">
 			<h:outputLabel value="You have been logged as"	rendered="#{identity.loggedIn}" />
 			<h:outputLabel value="#{identity.user.name}"	rendered="#{identity.loggedIn}" />
 		</h1>
-		<div id="back_button" align="center">
-			<h:link outcome="/index.xhtml" rendered="#{identity.loggedIn}">Back to main page</h:link>
-		</div>
+	</div>
+	
 	<div id="login_page" >
-		<div id="info" align="left">
-			<h1><h:outputLabel value="Login"	rendered="#{!identity.loggedIn}" /></h1>
-			<h2><h:outputLabel value="Please insert your credentials"	rendered="#{!identity.loggedIn}" /></h2>
-		</div>
-		<div id="login_form" align="left">
-			<h:form id="loginForm" rendered="#{!identity.loggedIn}">
+		<h1><h:outputLabel value="Login"	rendered="#{!identity.loggedIn}" /></h1>
+		<h2><h:outputLabel value="Please insert your credentials"	rendered="#{!identity.loggedIn}" /></h2>
+		<h:form id="loginForm" rendered="#{!identity.loggedIn}">
 			<h:message for="loginButton" />
-				<h:panelGrid columns="3">
+			<h:panelGrid columns="3">
 				<h:outputLabel value="Username" for="username" />
 				<h:inputText id="username" value="#{credentials.username}" />
 				<h:message for="username" errorClass="invalid" />
@@ -54,37 +28,27 @@
 				<h:message for="password" errorClass="invalid" />
 			</h:panelGrid>
 			<h:commandButton id="loginButton" action="#{identity.login}" value="Login" rendered="#{!identity.loggedIn}" />
-			</h:form>
-		</div>
-		<div id="back_button" align="left">
-			<h:link outcome="/index.xhtml" rendered="#{!identity.loggedIn}">Back</h:link>
-		</div>
+		</h:form>
 	</div>
+	
 	<div id="register_page" >
-		<div id="info" align="left">
-			<h1><h:outputLabel value="Register"	rendered="#{!identity.loggedIn}" /></h1>
-			<h2><h:outputLabel value="Please insert data about yourself"	rendered="#{!identity.loggedIn}" /></h2>
-		</div>
-		<div id="register_form" align="left">
-			<h:form id="addForm" rendered="#{!identity.loggedIn}">
-				<h:message for="registerButton" />
-				<h:panelGrid columns="3">
-					<h:outputLabel value="Email" for="email" />
-					<h:inputText id="email" value="#{newCustomer.email}" />
-					<h:message for="email" errorClass="invalid" />		
-			
-					<h:outputLabel value="Name" for="name" />
-					<h:inputText id="name" value="#{newCustomer.name}" />
-					<h:message for="name" errorClass="invalid" />
-			
-					<h:outputLabel value="Password" for="password" />
-					<h:inputSecret id="password" value="#{newCustomer.password}" />
-					<h:message for="password" errorClass="invalid" />
-				</h:panelGrid>
-				<h:commandButton id="registerButton" action="#{customersBean.register}" value="Register" />
-			</h:form>
-		</div>
+		<h1><h:outputLabel value="Register"	rendered="#{!identity.loggedIn}" /></h1>
+		<h2><h:outputLabel value="Please insert data about yourself"	rendered="#{!identity.loggedIn}" /></h2>
+		<h:form id="addForm" rendered="#{!identity.loggedIn}">
+			<h:message for="registerButton" />
+			<h:panelGrid columns="3">
+				<h:outputLabel value="Email" for="email" />
+				<h:inputText id="email" value="#{newCustomer.email}" />
+				<h:message for="email" errorClass="invalid" />		
+				<h:outputLabel value="Name" for="name" />
+				<h:inputText id="name" value="#{newCustomer.name}" />
+				<h:message for="name" errorClass="invalid" />
+				<h:outputLabel value="Password" for="password" />
+				<h:inputSecret id="password" value="#{newCustomer.password}" />
+				<h:message for="password" errorClass="invalid" />
+			</h:panelGrid>
+			<h:commandButton id="registerButton" action="#{customersBean.register}" value="Register" />
+		</h:form>
 	</div>
-	</div>
-	</ui:define>
+</ui:define>
 </ui:composition>

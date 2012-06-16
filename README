@@ -1,6 +1,7 @@
-Application eshop
+Application eshop (version from date 6/16/2012)
 
-how to deploy the application
+How to deploy the application:
+
 1. import (existing maven) project to jboss developer studio
 2. you can either run application using studio tools or 
    export WAR archive and place it to "standalone/deployments" dir in jboss-as-7.1.1 root and then 
@@ -8,9 +9,30 @@ how to deploy the application
 3. application is mapped to "<host>/eshop/index.jsf" url
 
 
-how to test failover in the cluster
+How to test failover in the cluster:
+
 1. copy eshop.war do the standalone/deployments directory in server location
 2. start 2 independent (running on different ports with different names) servers with standalone-ha.xml config file
 3. use application on localhost:8080 - login, add some product to basket...
 4. kill server running on 8080 port
 5. open application on localhost:8180 - you are loged in and your basket contains correct products
+
+
+Actual version you can download from:
+
+https://github.com/pkremens/pv243-eshop
+
+Online version you can find here (maybe not actual version):
+http://pv243-eshop1.rhcloud.com/index.jsf
+
+For entering to authenticated part of web please use these credentials:
+
+	Role USER:	
+		you can register yourself as customer
+		or use username "abc@abc.cz" password "abc"
+
+	Role SELLER:
+		use username "seller@abc.cz" password "abc"
+
+	Role ADMIN:
+		use username "admin@abc.cz" password "abc" 

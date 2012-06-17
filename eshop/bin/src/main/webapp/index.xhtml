@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="content">
+	<div id="menu" align="left">
+		<div id="orders" align="right">
+			<h:link outcome="/orders.xhtml">
+   	     	  		<h:graphicImage value="/resources/gfx/order.jpg" width="64" height="64" alt="Basket logo" />
+    	 	  		<br/>
+       		  		<h:outputLabel value="My orders"/>
+     		</h:link>
+		</div>
+		<div id="basket">
+			<h:link outcome="/basket.xhtml" rendered="#{!basketController.isBasketEmpty}">
+       	  		<h:graphicImage value="/resources/gfx/basket.png" width="64" height="64" alt="Basket logo" />
+          		<br/>
+          		<h:outputLabel value="My basket"/>
+       		</h:link>
+		</div>
+	</div>
+	<div id="catalog" align="center">
+		<h1>Products</h1>
+		<h:panelGroup rendered="#{empty productsBean.productList}">
+			<em>No products</em>
+		</h:panelGroup>
+		<h:dataTable value="#{ascProducts}" var="p" rendered="#{not empty ascProducts}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header" >
+   		            Product's id
+           		</f:facet>
+				<h:outputText binding="#{productToBasket.productId}" value="#{p.id}">
+					<f:attribute name="productId" value="productId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+      				Name
+      		   	</f:facet>
+				<h:outputText value="#{p.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+    		    	Price
+       		    </f:facet>
+				<h:outputText value="#{p.price}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+    		        Quantity
+       		    </f:facet>
+				<h:form id="addProductInBasket">
+					<h:outputLabel for="quantity" value="quantity" />
+					<h:inputText id="quantity" value="#{productToBasket.quantity}" validator="#{productsBean.validateNumberRange}" />
+					<h:message for="quantity" errorClass="invalid" />
+					<h:commandButton id="addProductToBasket" value="add" action="#{basketController.addProductToBasket}" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</div>
+</ui:define>
+</ui:composition>

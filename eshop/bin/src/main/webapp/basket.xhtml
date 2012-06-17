@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="content">
+	<div id="basket_page" align="center">
+		<h1>Basket</h1>
+		<h:dataTable value="#{productsInBasket}" var="pInB" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">
+    	        	Product's id
+        	    </f:facet>
+				<h:outputText binding="#{productUpdateBasket.productId}" value="#{pInB.product.id}">
+					<f:attribute name="productId" value="productId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+            		Name
+            	</f:facet>
+				<h:outputText value="#{pInB.product.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+		        	Price
+		        </f:facet>
+				<h:outputText value="#{pInB.product.price}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Current Quantity
+		        </f:facet>
+				<h:outputText value="#{pInB.quantity}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					New Quantity
+		        </f:facet>
+				<h:form id="updateProductInBasket">
+					<h:inputText id="quantity" value="#{productUpdateBasket.quantity}" validator="#{productsBean.validateNumberRange}" />
+					<h:message for="quantity" errorClass="invalid" />
+					<h:commandButton id="updateProductInBasket" value="Update" action="#{basketController.updateProductInBasket}" />
+				</h:form>
+			</h:column>
+			<h:column>	
+				<f:facet name="header">
+					Remove product
+		        </f:facet>
+				<h:form id="removeProductInBasket">
+					<h:inputHidden id="quantity" value="#{productUpdateBasket.quantity}"/>
+					<h:commandButton id="removeProductInBasket" value="Remove" action="#{basketController.updateProductInBasket}" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		<br/>
+		<h:outputLabel value="Login to make an order" rendered="#{!identity.loggedIn}" />
+		<h:form id="makeOrder">
+			<h:commandButton id="makeOrder" value="Make Order" action="#{orderController.makeOrder}" rendered="#{identity.loggedIn}" />
+		</h:form>
+	</div>
+</ui:define>
+</ui:composition>

@@ -181,14 +181,6 @@
 		</dependency>
 
 		<dependency>
-            <groupId>org.jboss.arquillian</groupId>
-            <artifactId>arquillian-bom</artifactId>
-            <version>1.0.1.Final</version>
-            <scope>import</scope>
-            <type>pom</type>	
-        </dependency>
-
-		<dependency>
 			<groupId>org.jboss.seam.faces</groupId>
 			<artifactId>seam-faces</artifactId>
 		</dependency>
@@ -271,7 +263,6 @@
 		</plugins>
 	</build>
 
-
 	<profiles>
 		<profile>
 			<!-- The default profile skips all tests, though you can tune it to run 
@@ -293,34 +284,33 @@
 		</profile>
 
 		<profile>
+			<!-- An optional Arquillian testing profile that executes tests in your 
+				JBoss AS instance -->
+			<!-- This profile will start a new JBoss AS instance, and execute the 
+				test, shutting it down when done -->
+			<!-- Run with: mvn clean test -Parq-jbossas-managed -->
+			<id>arq-jbossas-managed</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<artifactId>jboss-as-arquillian-container-managed</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
 			<!-- An optional Arquillian testing profile that executes tests in a remote 
 				JBoss AS instance -->
-			<!-- Run with: mvn test -Parquillian-jbossas-remote -->
-	
-		    <id>arquillian-jbossas-remote</id>
-			<activation>
-          		     <activeByDefault>true</activeByDefault>
-           	   </activation>
-		    <dependencies>
-			<dependency>
-			    <groupId>org.jboss.spec</groupId>
-			    <artifactId>jboss-javaee-6.0</artifactId>
-			    <version>1.0.0.Final</version>
-			    <type>pom</type>
-			    <scope>provided</scope>
-			</dependency>
-			<dependency>
-			    <groupId>org.jboss.as</groupId>
-			    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-			    <version>7.1.1.Final</version>
-			    <scope>test</scope>
-			</dependency>
-			<dependency>
-			    <groupId>org.jboss.arquillian.protocol</groupId>
-			    <artifactId>arquillian-protocol-servlet</artifactId>
-			    <scope>test</scope>
-			</dependency>
-		    </dependencies>
+			<!-- Run with: mvn clean test -Parq-jbossas-remote -->
+			<id>arq-jbossas-remote</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<artifactId>jboss-as-arquillian-container-remote</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
 		</profile>
 
 		<profile>

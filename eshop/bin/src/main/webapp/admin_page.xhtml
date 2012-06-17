@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	
+<ui:define name="content">
+	<div id="users">
+		<div id="add_user">
+			<h1>Add user</h1>
+			<h:form id="addForm">
+				<h:message for="registerButton" />
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Email" for="email" />
+					<h:inputText id="email" value="#{newCustomer.email}" />
+					<h:message for="email" errorClass="invalid" />		
+					<h:outputLabel value="Name" for="name" />
+					<h:inputText id="name" value="#{newCustomer.name}" />
+					<h:message for="name" errorClass="invalid" />
+				<h:outputLabel value="Role" for="role" />
+				<h:panelGrid columns="1">
+					<h:column>
+						<h:selectOneMenu value="#{newCustomer.role}" id="role">
+						<f:selectItem itemValue="user" itemLabel="User"/>
+						<f:selectItem itemValue="seller" itemLabel="Seller"/>
+						<f:selectItem itemValue="admin" itemLabel="Administrator"/>
+						</h:selectOneMenu>
+					</h:column>
+				</h:panelGrid>
+				<h:message for="role" errorClass="invalid" />
+					<h:outputLabel value="Password" for="password" />
+					<h:inputSecret id="password" value="#{newCustomer.password}" />
+					<h:message for="password" errorClass="invalid" />
+				</h:panelGrid>
+				<h:commandButton id="registerButton" action="#{customersBean.register}" value="Add User" />
+			</h:form>
+		</div>
+		<div id="active_users">
+			<h1>Users</h1>
+			<h:form id="addCustomer">
+			<h:panelGroup rendered="#{empty customersBean.customerList}">
+				<em>No users</em>
+			</h:panelGroup>
+			<h:dataTable value="#{customersBean.customerList}" var="cust" rendered="#{not empty customersBean.customerList}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+               			Email
+            		</f:facet>
+					<h:outputText value="#{cust.email}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Name
+            		</f:facet>
+					<h:outputText value="#{cust.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+   			            Part of hashed password
+          			</f:facet>
+					<h:outputText value="#{cust.passwordSubstring}" />
+				</h:column>
+				<h:column>
+				<f:facet name="header">
+   			            Role
+          			</f:facet>
+						<h:selectOneMenu value="#{cust.role}" id="role">
+						<f:selectItem itemValue="user" itemLabel="User"/>
+						<f:selectItem itemValue="seller" itemLabel="Seller"/>
+						<f:selectItem itemValue="admin" itemLabel="Administrator"/>
+						</h:selectOneMenu>
+					</h:column>
+				<h:column>
+					<f:facet name="header">
+						Update
+					</f:facet>
+          			<h:commandButton action="#{customersBean.updateAction(cust)}" value="Update" />
+				</h:column>
+			</h:dataTable>	
+			</h:form>
+		</div>
+	</div>
+	
+	<div id="products">
+		<div id="add_product">
+			<h1>Add product</h1>
+			<h:form id="addProduct">
+				<h:panelGrid columns="3" columnClasses="titleCell" rendered="#{identity.loggedIn}">
+					<h:outputLabel for="name" value="Name:" />
+					<h:inputText id="name" value="#{newProduct.name}" />
+					<h:message for="name" errorClass="invalid" />
+					<h:outputLabel for="visible" value="Visible:" />
+					<h:selectBooleanCheckbox id="visible" value="#{newProduct.visible}"></h:selectBooleanCheckbox>
+					<h:message for="visible" errorClass="invalid" />
+					<h:outputLabel for="price" value="Price:" />
+					<h:inputText id="price" value="#{newProduct.price}" validator="#{productsBean.validateNumberRange}" />
+					<h:message for="price" errorClass="invalid" />
+				</h:panelGrid>
+				<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register" action="#{productsBean.register}" value="Add Product" styleClass="register" rendered="#{identity.loggedIn}" />
+					<h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+				</p>
+			</h:form>
+		</div>
+		<div id="active_products">
+			<h1>Products</h1>
+			<h:messages />
+			<h:form id="product">
+			<h:panelGroup rendered="#{empty productsBean.productList}">
+				<em>No products</em>
+			</h:panelGroup>
+			<h:dataTable id="productTable" value="#{productsBean.productList}" var="p" rendered="#{not empty productsBean.productList}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+               			ID
+            		</f:facet>
+					<h:outputText value="#{p.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Name
+            		</f:facet>
+					<h:outputText value="#{p.name}" rendered="#{!p.editable}" />
+					<h:inputText value="#{p.name}" size="12" rendered="#{p.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Price
+           			</f:facet>
+					<h:outputText value="#{p.price}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Visible
+           			</f:facet>
+					<h:selectBooleanCheckbox disabled="#{!p.editable}" value="#{p.visible}" />
+				</h:column>
+				<h:column>
+		    		<f:facet name="header">
+		    			Action
+		    		</f:facet>
+		    		<h:commandButton value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
+    				<h:commandButton id="saveButton" value="Save" action="#{productsBean.saveAction(p)}" rendered="#{p.editable}" />
+	    	     </h:column>
+			</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+	
+	<div id="active_orders" align="center">
+		<div id="all_orders">
+			<h1>All orders</h1>
+			<h:dataTable value="#{orders}" var="p" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">
+               		Order's id
+            	</f:facet>
+				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
+					<f:attribute name="orderId" value="orderId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="date">
+	               Time
+            	</f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Customer
+            	</f:facet>
+				<h:outputText value="#{p.customer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Opened
+            	</f:facet>
+				<h:outputText value="#{p.open}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Total
+            	</f:facet>
+				<h:outputText value="#{p.totalPrice}" />
+			</h:column>
+			<h:column>
+				<h:form id="showOrderDetails">
+					<h:commandButton id="getOrderDetail" value="Order Detail"	action="#{orderController.getOrderDetail}" />
+				</h:form>
+			</h:column>
+			<h:column>
+				<h:form id="closeOrder">
+					<h:commandButton id="closeOrderButton" value="Close order" action="#{orderController.closeOrder}" />
+				</h:form>
+			</h:column>
+			</h:dataTable>
+		</div>
+		<div id="order_detail">
+			<h1>Order details</h1>
+			<h:dataTable value="#{renderOrderDetail.orderLines}" var="o" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+   			            Product's id
+         		    </f:facet>
+					<h:outputText value="#{o.product.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's name
+            		</f:facet>
+					<h:outputText value="#{o.product.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Product's price per one
+           			</f:facet>
+					<h:outputText value="#{o.product.price}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Quantity
+            		</f:facet>
+					<h:outputText value="#{o.quantity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Total price
+            		</f:facet>
+					<h:outputText value="#{o.product.price * o.quantity}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>	
+</ui:define>
+</ui:composition>

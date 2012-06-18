@@ -6,11 +6,11 @@
 	template="/WEB-INF/templates/default.xhtml">
 	
 <ui:define name="content">
-	<div id="active_orders" align="center">
-		<div id="all_orders">
-			<h1>Active orders</h1>
-			<h:dataTable value="#{activeOrders}" var="p" styleClass="simpletablestyle">
-			<h:column>
+	<div id="all_orders" align="center">
+		<div id="active_orders">
+			<h1><h:outputLabel value="Active orders"	rendered="#{not empty activeOrders}" /></h1>
+			<h:dataTable value="#{allActiveOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty activeOrders}">
+			<h:column rendered="false"> <!-- Hidden binding, id is not shown in the page?!? -->
 				<f:facet name="header">
                		Order's id
             	</f:facet>
@@ -19,8 +19,14 @@
 				</h:outputText>
 			</h:column>
 			<h:column>
-				<f:facet name="date">
-	               Time
+				<f:facet name="header">
+   		     		Order's id
+        	    </f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>	
+			<h:column>
+				<f:facet name="header">
+	               Creation time
             	</f:facet>
 				<h:outputText value="#{p.creationDate}" />
 			</h:column>
@@ -50,6 +56,49 @@
 			<h:column>
 				<h:form id="closeOrder">
 					<h:commandButton id="closeOrderButton" value="Close order"  disabled="#{!p.open}"  action="#{orderController.closeOrder}" />
+				</h:form>
+			</h:column>
+			</h:dataTable>
+		</div>
+		
+		<div id="closed_orders">
+			<h1><h:outputLabel value="Closed orders"	rendered="#{not empty closedOrders}" /></h1>
+			<h:dataTable value="#{allClosedOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty closedOrders}">
+			<h:column>
+				<f:facet name="header">
+               		Order's id
+            	</f:facet>
+				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
+					<f:attribute name="orderId" value="orderId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+	               Creation time
+            	</f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Customer
+            	</f:facet>
+				<h:outputText value="#{p.customer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Opened
+            	</f:facet>
+            	<h:selectBooleanCheckbox disabled="true" value="#{p.open}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+               		Total
+            	</f:facet>
+				<h:outputText value="#{p.totalPrice}" />
+			</h:column>
+			<h:column>
+				<h:form id="showOrderDetails">
+					<h:commandButton id="getOrderDetail" value="Order Detail"	action="#{orderController.getOrderDetail}" />
 				</h:form>
 			</h:column>
 			</h:dataTable>

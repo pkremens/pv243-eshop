@@ -8,7 +8,7 @@
 <ui:define name="content">
 	<div id="active_orders" align="center">
 			<h:panelGroup rendered="#{empty customerActiveOrders}">
-				<em>Customer #{identity.user.name} has no active orders.</em>
+				<em>Customer #{identity.user.name} has no active orders.</em> 
 			</h:panelGroup>
 		<h1><h:outputLabel value="#{identity.user.name} active orders"	rendered="#{not empty customerActiveOrders}" /></h1>
 		<h:dataTable value="#{customerActiveOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty customerActiveOrders}">

@@ -62,7 +62,6 @@ public class OrderManagerImpl implements OrderManager {
 		orderDatabase.merge(orders);
 		logger.info("Closing " + orders.toString());
 		orderEventSrc.fire(orders);
-
 	}
 
 	@Override

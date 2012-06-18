@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -22,9 +22,7 @@ import cz.fi.muni.pv243.eshop.service.ProductManager;
 @SessionScoped
 public class ProductBean implements Serializable {
 
-	private static final long serialVersionUID = 1L; // TODO change annotation
-														// as told in server
-														// console
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private ProductManager productManager;
 

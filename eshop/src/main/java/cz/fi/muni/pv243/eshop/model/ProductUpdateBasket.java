@@ -25,7 +25,6 @@ public class ProductUpdateBasket implements Serializable {
 	 */
 	public ProductUpdateBasket() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

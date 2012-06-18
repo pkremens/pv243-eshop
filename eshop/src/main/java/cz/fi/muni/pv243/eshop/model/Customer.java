@@ -42,8 +42,6 @@ public class Customer implements User, Serializable {
 		return password.substring(0, 10);
 	}
 
-	// TODO rights
-
 	/**
 	 * @return the email
 	 */

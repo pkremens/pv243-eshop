@@ -8,8 +8,8 @@
 <ui:define name="content">
 	<div id="all_orders" align="center">
 		<div id="active_orders">
-			<h1><h:outputLabel value="Active orders"	rendered="#{not empty activeOrders}" /></h1>
-			<h:dataTable value="#{allActiveOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty activeOrders}">
+			<h1><h:outputLabel value="Active orders" /></h1>  <!-- Do NOT!!! add render="not empty allActiveOrders, if only one active order is closed, close table will appear, but will be empty -->
+			<h:dataTable value="#{allActiveOrders}" var="p" styleClass="simpletablestyle">
 			<h:column rendered="false"> <!-- Hidden binding, id is not shown in the page?!? -->
 				<f:facet name="header">
                		Order's id
@@ -62,8 +62,8 @@
 		</div>
 		
 		<div id="closed_orders">
-			<h1><h:outputLabel value="Closed orders"	rendered="#{not empty closedOrders}" /></h1>
-			<h:dataTable value="#{allClosedOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty closedOrders}">
+			<h1><h:outputLabel value="Closed orders"/></h1> <!-- Do NOT!!! add render="not empty allActiveOrders, if only one active order is closed, close table will appear, but will be empty -->
+			<h:dataTable value="#{allClosedOrders}" var="p" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">
                		Order's id

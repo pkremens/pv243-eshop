@@ -54,7 +54,7 @@ public class Authenticator extends BaseAuthenticator {
 				if (customer.getPassword().equals(password)) {
 					setStatus(AuthenticationStatus.SUCCESS);
 					setUser(customer);
-					log.finest("Authentication: " + customer.toString());
+					log.info("Authentication: " + customer.toString());
 
 				} else {
 					setStatus(AuthenticationStatus.FAILURE);

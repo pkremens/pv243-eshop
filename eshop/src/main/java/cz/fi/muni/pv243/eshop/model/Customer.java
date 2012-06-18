@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.picketlink.idm.api.User;
 
@@ -20,12 +19,10 @@ public class Customer implements User, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotEmpty
-	@Email
-	// TODO better validation
+	@Size(min = 1, max = 25)
+	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "not a valid email address")
 	private String email;
 
-	// @NotNull
 	@Size(min = 1, max = 25)
 	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
 	private String name;

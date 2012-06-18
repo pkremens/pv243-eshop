@@ -38,7 +38,7 @@ public class BasketController implements Serializable {
 	private ProductToBasket productToBasket;
 
 	private ProductUpdateBasket productUpdateBasket;
-	private static Long basketPrice;
+	private Long basketPrice;
 	@Inject
 	private ProductManager productManager;
 

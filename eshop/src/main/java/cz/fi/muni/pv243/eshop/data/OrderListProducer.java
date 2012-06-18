@@ -62,10 +62,6 @@ public class OrderListProducer {
 		List<Orders> allOrders = em.createQuery(
 				criteria.where(cb.equal(customerExpression, customer)))
 				.getResultList();
-		for (Orders orders2 : allOrders) {
-			System.out.println(orders2);
-		}
-
 		activeOrders = new ArrayList<Orders>();
 		closedOrders = new ArrayList<Orders>();
 		for (Orders order : allOrders) {

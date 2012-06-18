@@ -52,8 +52,6 @@ public class CustomerManagerTest {
 	CustomerManager customerManager;
 
 	/**
-	 * Test method for
-	 * {@link cz.fi.muni.pv243.eshop.controller.CustomerBean#register()}.
 	 * 
 	 * @throws Exception
 	 */

@@ -51,9 +51,6 @@ public class ProductBeanTest {
 	private ProductManager productManager;
 
 	/**
-	 * Test method for
-	 * {@link cz.fi.muni.pv243.eshop.controller.ProductBean#saveAction(cz.fi.muni.pv243.eshop.model.Product)}
-	 * .
 	 * 
 	 * @throws Exception
 	 */

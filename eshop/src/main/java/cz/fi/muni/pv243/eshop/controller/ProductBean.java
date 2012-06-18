@@ -38,7 +38,7 @@ public class ProductBean implements Serializable {
 	}
 
 	public void onCustomerListChanged(
-			@SuppressWarnings("cdi-observer") @Observes(notifyObserver = Reception.IF_EXISTS) final Product product) {
+			@Observes(notifyObserver = Reception.IF_EXISTS) final Product product) {
 		retrieveAllProducts();
 	}
 

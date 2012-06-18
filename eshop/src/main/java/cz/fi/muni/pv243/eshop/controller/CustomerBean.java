@@ -48,7 +48,7 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void onCustomerListChanged(
-			@SuppressWarnings("cdi-observer") @Observes(notifyObserver = Reception.IF_EXISTS) final Customer customer) {
+			@Observes(notifyObserver = Reception.IF_EXISTS) final Customer customer) {
 		retrieveAllCustomers();
 	}
 

@@ -22,6 +22,7 @@ public class Customer implements User, Serializable {
 	@Id
 	@NotEmpty
 	@Email
+	// TODO better validation
 	private String email;
 
 	// @NotNull

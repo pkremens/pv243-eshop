@@ -65,4 +65,28 @@ public class OrderManagerImpl implements OrderManager {
 
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	@Produces
+	@Named
+	@RequestScoped
+	public List<Orders> getActiveOrders() {
+		return orderDatabase
+				.createQuery(
+						"SELECT o FROM Orders o.open=true ORDER BY o.customer,o.creationDate ASC")
+				.getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	@Produces
+	@Named
+	@RequestScoped
+	public List<Orders> getClosedOrders() {
+		return orderDatabase
+				.createQuery(
+						"SELECT o FROM Orders o.open=false ORDER BY o.customer,o.creationDate ASC")
+				.getResultList();
+	}
+
 }

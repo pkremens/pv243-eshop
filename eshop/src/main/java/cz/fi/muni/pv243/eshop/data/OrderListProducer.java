@@ -1,5 +1,6 @@
 package cz.fi.muni.pv243.eshop.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,15 +26,22 @@ public class OrderListProducer {
 	@Inject
 	private EntityManager em;
 
-	private List<Orders> orders;
+	private List<Orders> activeOrders;
+	private List<Orders> closedOrders;
 
 	@Inject
 	private Identity identity;
 
 	@Produces
-	@Named("customerOrders")
-	public List<Orders> getOrders() {
-		return orders;
+	@Named("customerActiveOrders")
+	public List<Orders> getActiveOrders() {
+		return activeOrders;
+	}
+
+	@Produces
+	@Named("customerClosedOrders")
+	public List<Orders> getClosedOrders() {
+		return closedOrders;
 	}
 
 	public void onOrderListChanged(
@@ -51,8 +59,21 @@ public class OrderListProducer {
 
 		criteria.select(orders).orderBy(cb.asc(orders.get("id")));
 		Expression<Customer> customerExpression = orders.get("customer");
-		this.orders = em.createQuery(
+		List<Orders> allOrders = em.createQuery(
 				criteria.where(cb.equal(customerExpression, customer)))
 				.getResultList();
+		for (Orders orders2 : allOrders) {
+			System.out.println(orders2);
+		}
+
+		activeOrders = new ArrayList<Orders>();
+		closedOrders = new ArrayList<Orders>();
+		for (Orders order : allOrders) {
+			if (order.isOpen()) {
+				activeOrders.add(order);
+			} else {
+				closedOrders.add(order);
+			}
+		}
 	}
 }

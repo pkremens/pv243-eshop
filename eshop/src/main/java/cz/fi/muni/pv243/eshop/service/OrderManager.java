@@ -8,10 +8,14 @@ public interface OrderManager {
 
 	List<Orders> getOrders();
 
+	List<Orders> getActiveOrders();
+
+	List<Orders> getClosedOrders();
+
 	void addOrder(Orders orders);
 
 	Orders getOrderDetails(Long id);
-	
+
 	void closeOrder(Long id);
 
 }

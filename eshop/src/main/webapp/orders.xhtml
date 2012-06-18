@@ -8,7 +8,7 @@
 <ui:define name="content">
 	<div id="active_orders" align="center">
 		<h1><h:outputLabel value="#{identity.user.name} orders"	rendered="#{identity.loggedIn}" /></h1>
-		<h:dataTable value="#{customerOrders}" var="p" styleClass="simpletablestyle">
+		<h:dataTable value="#{customerActiveOrders}" var="p" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">
    		     		Order's id

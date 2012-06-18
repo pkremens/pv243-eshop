@@ -18,4 +18,6 @@ public interface OrderManager {
 
 	void closeOrder(Long id);
 
+	void openOrder(long id);
+
 }

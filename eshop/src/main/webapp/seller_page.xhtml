@@ -8,8 +8,8 @@
 <ui:define name="content">
 	<div id="active_orders" align="center">
 		<div id="all_orders">
-			<h1>All orders</h1>
-			<h:dataTable value="#{orders}" var="p" styleClass="simpletablestyle">
+			<h1>Active orders</h1>
+			<h:dataTable value="#{activeOrders}" var="p" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">
                		Order's id
@@ -34,7 +34,7 @@
 				<f:facet name="header">
                		Opened
             	</f:facet>
-				<h:outputText value="#{p.open}" />
+            	<h:selectBooleanCheckbox disabled="true" value="#{p.open}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -49,7 +49,7 @@
 			</h:column>
 			<h:column>
 				<h:form id="closeOrder">
-					<h:commandButton id="closeOrderButton" value="Close order" action="#{orderController.closeOrder}" />
+					<h:commandButton id="closeOrderButton" value="Close order"  disabled="#{!p.open}"  action="#{orderController.closeOrder}" />
 				</h:form>
 			</h:column>
 			</h:dataTable>

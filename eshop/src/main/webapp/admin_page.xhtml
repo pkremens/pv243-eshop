@@ -193,8 +193,8 @@
 			</h:column>
 			<h:column>
 				<h:form id="closeOrder">
-					<h:commandButton id="closeOrderButton" value="Close order" disabled="#{!p.open}" action="#{orderController.closeOrder}" />
-					
+					<h:commandButton id="closeOrderButton" value="Close order" rendered="#{p.open}" action="#{orderController.closeOrder}" />
+					<h:commandButton id="openOrderButton" value="Re-open order" rendered="#{!p.open}" action="#{orderController.openOrder}" />
 				</h:form>
 			</h:column>
 			</h:dataTable>

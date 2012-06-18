@@ -101,11 +101,15 @@ public class OrderController implements Serializable {
 		long parsedId = Long.parseLong(orderId.getValue().toString());
 		orders = orderManager.getOrderDetails(parsedId);
 	}
-	
-	
+
 	public void closeOrder() {
 		long parsedId = Long.parseLong(orderId.getValue().toString());
 		orderManager.closeOrder(parsedId);
+	}
+
+	public void openOrder() {
+		long parsedId = Long.parseLong(orderId.getValue().toString());
+		orderManager.openOrder(parsedId);
 	}
 
 	@Produces

@@ -73,7 +73,7 @@ public class OrderManagerImpl implements OrderManager {
 	public List<Orders> getActiveOrders() {
 		return orderDatabase
 				.createQuery(
-						"SELECT o FROM Orders o.open=true ORDER BY o.customer,o.creationDate ASC")
+						"SELECT o FROM Orders o WHERE o.open=true ORDER BY o.customer,o.creationDate ASC")
 				.getResultList();
 	}
 
@@ -85,8 +85,20 @@ public class OrderManagerImpl implements OrderManager {
 	public List<Orders> getClosedOrders() {
 		return orderDatabase
 				.createQuery(
-						"SELECT o FROM Orders o.open=false ORDER BY o.customer,o.creationDate ASC")
+						"SELECT o FROM Orders o WHERE o.open=false ORDER BY o.customer,o.creationDate ASC")
 				.getResultList();
+	}
+
+	@Override
+	public void openOrder(long id) {
+		Orders orders = (Orders) orderDatabase
+				.createQuery("SELECT o FROM Orders o WHERE o.id=:id")
+				.setParameter("id", id).getSingleResult();
+		orders.setOpen(true);
+		orderDatabase.merge(orders);
+		logger.info("Re-opening order " + orders.toString());
+		orderEventSrc.fire(orders);
+
 	}
 
 }

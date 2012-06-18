@@ -38,7 +38,6 @@ public class OrderListProducer {
 
 	public void onOrderListChanged(
 			@Observes(notifyObserver = Reception.IF_EXISTS) final Orders orders) {
-		System.out.println("Observing");
 		retrieveAllCustomersOrders();
 	}
 

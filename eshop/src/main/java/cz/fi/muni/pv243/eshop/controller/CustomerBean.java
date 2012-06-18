@@ -33,7 +33,7 @@ public class CustomerBean implements Serializable {
 
 	@Inject
 	private Identity identity;
-	
+
 	private Customer newCustomer;
 
 	@Inject
@@ -44,7 +44,6 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void updateAction(Customer customer) {
-		System.out.println("update");
 		customerManager.update(customer);
 	}
 
@@ -67,11 +66,10 @@ public class CustomerBean implements Serializable {
 	}
 
 	public void register() throws Exception {
-		System.err.println(newCustomer);
-		if (!identity.isLoggedIn()) { 
-			newCustomer.setRole("user"); 
+		if (!identity.isLoggedIn()) {
+			newCustomer.setRole("user");
 		}
-		
+
 		if (newCustomer.getPassword() == null) {
 			facesContext.addMessage("addForm:password", new FacesMessage(
 					"Cannot have empty password"));

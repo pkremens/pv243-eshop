@@ -178,8 +178,8 @@
 				<f:facet name="header">
                		Opened
             	</f:facet>
-				<h:outputText value="#{p.open}" />
-			</h:column>
+            	<h:selectBooleanCheckbox disabled="true" value="#{p.open}" />
+				</h:column>
 			<h:column>
 				<f:facet name="header">
                		Total
@@ -193,7 +193,8 @@
 			</h:column>
 			<h:column>
 				<h:form id="closeOrder">
-					<h:commandButton id="closeOrderButton" value="Close order" action="#{orderController.closeOrder}" />
+					<h:commandButton id="closeOrderButton" value="Close order" disabled="#{!p.open}" action="#{orderController.closeOrder}" />
+					
 				</h:form>
 			</h:column>
 			</h:dataTable>

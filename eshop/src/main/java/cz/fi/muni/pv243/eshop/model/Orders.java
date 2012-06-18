@@ -202,4 +202,16 @@ public class Orders implements Serializable {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", customer=" + customer + ", open=" + open
+				+ ", orderLines=" + orderLines + ", creationDate="
+				+ creationDate + ", totalPrice=" + totalPrice + "]";
+	}
+
 }

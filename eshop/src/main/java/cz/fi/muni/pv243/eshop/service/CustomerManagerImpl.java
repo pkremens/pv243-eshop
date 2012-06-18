@@ -45,7 +45,7 @@ public class CustomerManagerImpl implements CustomerManager {
 			Integer salt = r.nextInt(Integer.MAX_VALUE - 10);
 			customer.setPassword(Security.sha2(customer.getPassword(), salt));
 		} catch (Exception e) {
-			System.err.println("Error creating hash of password");
+			logger.warning("Error creating hash of password");
 		}
 
 		customerDatabase.persist(customer);

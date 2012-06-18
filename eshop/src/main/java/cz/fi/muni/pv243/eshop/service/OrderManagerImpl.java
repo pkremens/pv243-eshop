@@ -59,10 +59,10 @@ public class OrderManagerImpl implements OrderManager {
 				.createQuery("SELECT o FROM Orders o WHERE o.id=:id")
 				.setParameter("id", id).getSingleResult();
 		orders.setOpen(false);
-		orderDatabase.persist(orders);
-		logger.info("Adding " + orders.toString());
+		orderDatabase.merge(orders);
+		logger.info("Closing " + orders.toString());
 		orderEventSrc.fire(orders);
-		
+
 	}
 
 }

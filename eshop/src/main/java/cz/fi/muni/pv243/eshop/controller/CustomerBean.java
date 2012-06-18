@@ -23,7 +23,9 @@ import cz.fi.muni.pv243.eshop.service.CustomerManager;
 @SessionScoped
 public class CustomerBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; // TODO change annotation
+														// as told in server
+														// console
 	@Inject
 	private CustomerManager customerManager;
 

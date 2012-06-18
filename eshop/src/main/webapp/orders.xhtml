@@ -7,20 +7,29 @@
 	
 <ui:define name="content">
 	<div id="active_orders" align="center">
-		<h1><h:outputLabel value="#{identity.user.name} orders"	rendered="#{identity.loggedIn}" /></h1>
-		<h:dataTable value="#{customerActiveOrders}" var="p" styleClass="simpletablestyle">
-			<h:column>
+			<h:panelGroup rendered="#{empty customerActiveOrders}">
+				<em>Customer #{identity.user.name} has no active orders.</em>
+			</h:panelGroup>
+		<h1><h:outputLabel value="#{identity.user.name} active orders"	rendered="#{not empty customerActiveOrders}" /></h1>
+		<h:dataTable value="#{customerActiveOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty customerActiveOrders}">
+			<h:column rendered="false"> <!-- Hidden binding, id is not shown in the page?!? -->
 				<f:facet name="header">
-   		     		Order's id
+   		     		Order's id 
         	    </f:facet>
 				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
 					<f:attribute name="orderId" value="orderId" />
 				</h:outputText>
-			</h:column>
+				</h:column>
 			<h:column>
-				<f:facet name="date">
-	   		         Date
-           		</f:facet>
+				<f:facet name="header">
+   		     		Order's id
+        	    </f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>	
+			<h:column>
+				<f:facet name="header">
+   		     		Date
+        	    </f:facet>
 				<h:outputText value="#{p.creationDate}" />
 			</h:column>
 			<h:column>
@@ -31,9 +40,46 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-    		        Opened
-       		 	</f:facet>
-				<h:outputText value="#{p.open}" />
+		            Total
+    	        </f:facet>
+				<h:outputText value="#{p.totalPrice}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+		            Detail
+    	        </f:facet>
+				<h:form id="showOrderDetails">
+					  <h:commandButton id="getOrderDetail" value="Detail" action="#{orderController.getOrderDetail}" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</div>
+	
+	<div id="closed_orders" align="center">
+	        <h:panelGroup rendered="#{empty customerClosedOrders}">
+				<em>Customer #{identity.user.name} has no closed orders.</em>
+			</h:panelGroup>
+		<h1><h:outputLabel value="#{identity.user.name} closed orders"	rendered="#{not empty customerClosedOrders}" /></h1>
+		<h:dataTable value="#{customerClosedOrders}" var="p" styleClass="simpletablestyle" rendered="#{not empty customerClosedOrders}">
+			<h:column>
+				<f:facet name="header">
+   		     		Order's id
+        	    </f:facet>
+				<h:outputText binding="#{orderController.orderId}" value="#{p.id}">
+					<f:attribute name="orderId" value="orderId" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+   		     		Date
+        	    </f:facet>
+				<h:outputText value="#{p.creationDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+    		        Customer
+            	</f:facet>
+				<h:outputText value="#{p.customer}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">

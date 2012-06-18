@@ -22,7 +22,9 @@ import cz.fi.muni.pv243.eshop.service.ProductManager;
 @SessionScoped
 public class ProductBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; // TODO change annotation
+														// as told in server
+														// console
 	@Inject
 	private ProductManager productManager;
 

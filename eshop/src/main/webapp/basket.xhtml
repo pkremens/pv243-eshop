@@ -61,11 +61,24 @@
 				</h:form>
 			</h:column>
 		</h:dataTable>
+		
+		<div id="total_price" align="right">
+			<br/>
+			<h2>
+				<h:dataTable styleClass="simpletablestyle" value="#{basketController.basketPrice}">
+					<h:column>	
+						<h:outputLabel value="Total price "/>
+					</h:column>
+					<h:column>	
+						<h:outputLabel value="#{basketController.basketPrice}" />
+					</h:column>
+				</h:dataTable>
+			</h2>
+		</div>
 		<br/>
-		<h:outputLabel value="Login to make an order" rendered="#{!identity.loggedIn}" />
+		<h:outputLabel value="Please login or register to make an order" rendered="#{!identity.loggedIn}" />
 		<h:form id="makeOrder">
 			<h:commandButton id="makeOrder" value="Make Order" action="#{orderController.makeOrder}" rendered="#{identity.loggedIn}" />
-			<h:outputLabel value="#{basketController.basketPrice}" />
 		</h:form>
 	</div>
 </ui:define>

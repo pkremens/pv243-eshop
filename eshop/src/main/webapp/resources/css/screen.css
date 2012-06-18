@@ -20,6 +20,10 @@ body {
 	margin-right: 20px;
 }
 
+#total_price{
+	margin-right: 80px;
+}
+
 #basket{
 	width: 47%;
 	float:left;

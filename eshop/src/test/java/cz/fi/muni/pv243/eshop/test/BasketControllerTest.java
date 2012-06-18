@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import cz.fi.muni.pv243.eshop.controller.BasketController;
+import cz.fi.muni.pv243.eshop.model.OrderLine;
 import cz.fi.muni.pv243.eshop.model.Product;
 import cz.fi.muni.pv243.eshop.model.ProductInBasket;
 import cz.fi.muni.pv243.eshop.model.ProductToBasket;
@@ -35,7 +36,7 @@ import cz.fi.muni.pv243.eshop.util.Resources;
  * 
  */
 @RunWith(Arquillian.class)
-public class BasketBeanTest {
+public class BasketControllerTest {
 
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -45,7 +46,7 @@ public class BasketBeanTest {
 						ProductUpdateBasket.class, ProductInBasket.class,
 						BasketBean.class, BasketController.class, Basket.class,
 						ProductManager.class, ProductManagerImpl.class,
-						Product.class, Resources.class)
+						Product.class, Resources.class, OrderLine.class)
 				.addAsResource("test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsWebInfResource("jbossas-ds.xml")
@@ -57,12 +58,25 @@ public class BasketBeanTest {
 	@Inject
 	private BasketController basketController;
 
+	@Inject
+	private ProductManager productManager;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		basketController.initNewProduct();
+		productManager.addProduct(getProduct());
+	}
+
+	private Product getProduct() {
+		Product product = new Product();
+		product.setName("test");
+		product.setPrice(4321);
+		product.setVisible(true);
+		product.setEditable(true);
+		return product;
 	}
 
 	/**
@@ -76,7 +90,7 @@ public class BasketBeanTest {
 	public void testAddProduct() throws Exception {
 		basketController.initNewProduct();
 		HtmlOutputText htmlOutputText = new HtmlOutputText();
-		htmlOutputText.setValue("1234");
+		htmlOutputText.setValue(productManager.getProducts().get(0).getId());
 		basketController.getProductToBasket().setProductId(htmlOutputText);
 		basketController.getProductToBasket().setQuantity(4321);
 		basketController.addProductToBasket();

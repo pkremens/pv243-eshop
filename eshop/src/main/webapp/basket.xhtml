@@ -31,9 +31,15 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					Current Quantity
+					Quantity
 		        </f:facet>
 				<h:outputText value="#{pInB.quantity}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Total price
+		        </f:facet>
+				<h:outputText value="#{pInB.quantity * pInB.product.price}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -59,6 +65,7 @@
 		<h:outputLabel value="Login to make an order" rendered="#{!identity.loggedIn}" />
 		<h:form id="makeOrder">
 			<h:commandButton id="makeOrder" value="Make Order" action="#{orderController.makeOrder}" rendered="#{identity.loggedIn}" />
+			<h:outputLabel value="#{basketController.basketPrice}" />
 		</h:form>
 	</div>
 </ui:define>

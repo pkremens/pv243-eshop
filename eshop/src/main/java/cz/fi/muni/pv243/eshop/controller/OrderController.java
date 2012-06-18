@@ -40,6 +40,8 @@ public class OrderController implements Serializable {
 
 	@Inject
 	private OrderManager orderManager;
+	@Inject
+	private BasketController basketController;
 
 	@Inject
 	private ProductManager productManager;
@@ -80,15 +82,16 @@ public class OrderController implements Serializable {
 			Map<Long, Integer> toOrder = basket.getBasketContent();
 			logger.info("customer " + customer.toLog()
 					+ " is ordering following products:");
-			Long price = 0L;
+			// Long price = 0L;
 			for (Long key : toOrder.keySet()) {
 				Product productToAdd = productManager.findProduct(key);
 				int quantity = toOrder.get(key);
 				lines.add(new OrderLine(productToAdd, quantity));
 				logger.info(productToAdd.toString() + " quantity: " + quantity);
-				price += (productToAdd.getPrice() * quantity);
+				// price += (productToAdd.getPrice() * quantity);
 			}
-			newOrder.setTotalPrice(price);
+			// newOrder.setTotalPrice(price);
+			newOrder.setTotalPrice(basketController.getBasketPrice());
 			newOrder.setOrderLines(lines);
 			orderManager.addOrder(newOrder);
 			basket.initNewBasket();

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/bookSaleTemplate.xhtml">
+
+<ui:define name="content">
+<div id="provider">
+    <h:form id="providersBooks">
+    <h:dataTable value="#{bookController.provider}" var ="p" border="1">
+    	<h:column>
+    		<f:facet name="header">
+    			ID
+    		</f:facet>
+    		<h:outputText value="#{p.id}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			Book's ID
+    		</f:facet>
+    		<h:outputText value="#{p.book.id}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			book isbn
+    		</f:facet>
+    		<h:outputText value="#{p.book.isbn}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			book name
+    		</f:facet>
+    		<h:outputText value="#{p.book.title}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			ammount
+    		</f:facet>
+    		<h:outputText value="#{p.amount}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			price
+    		</f:facet>
+    		<h:inputText value="#{p.price}" />
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			editable
+    		</f:facet>
+    		<h:selectBooleanCheckbox value="#{p.editable}" disabled="true" />
+    	</h:column>
+    	<h:column>
+	       	<f:facet name="header">
+	       		Amount
+	       	</f:facet>
+	       	<h:inputText value="#{p.amount}" size="20"/>
+	    </h:column>
+    	<h:column>
+    		<f:facet name="header">
+    			set price
+    		</f:facet>
+    		    		<h:commandButton value="set price" action="#{bookController.updateSalableBook(p)}">
+    		<f:ajax execute="@form" render="@form" />
+    		</h:commandButton>
+    	</h:column>    	
+    </h:dataTable>
+    </h:form>
+    
+   </div> 
+</ui:define>
+</ui:composition>

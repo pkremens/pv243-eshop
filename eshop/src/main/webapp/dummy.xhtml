@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<body> 
+
+<div>
+    <h1>List of the books</h1>
+    <hr/>
+    <h:form id="dummies">
+    <h:dataTable value="#{dummyController.dummies}" var="d" border="1">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Foo"/>
+            </f:facet>
+            <h:inputText value="#{d.foo}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+            	<h:outputText value="Bar" />   		
+            </f:facet>
+            <h:inputText value="#{d.bar}" />
+        </h:column>
+    </h:dataTable>
+    <h:commandButton id="update" value="update" action="#{dummyController.update()}" />
+    </h:form>
+    </div>
+
+
+</body> 
+</html>

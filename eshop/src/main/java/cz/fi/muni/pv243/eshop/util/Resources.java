@@ -3,8 +3,11 @@ package cz.fi.muni.pv243.eshop.util;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.jms.ConnectionFactory;
+import javax.jms.Queue;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -31,6 +34,16 @@ public class Resources implements Serializable {
 	@Produces
 	@PersistenceContext
 	private EntityManager em;
+
+	@SuppressWarnings("unused")
+	@Produces
+	@Resource(mappedName = "java:/ConnectionFactory")
+	private ConnectionFactory connectionFactory;
+
+	@SuppressWarnings("unused")
+	@Produces
+	@Resource(mappedName = "java:/queue/test")
+	private Queue queue;
 
 	@Produces
 	public Logger produceLog(InjectionPoint injectionPoint) {

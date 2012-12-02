@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>Book sale</h:head> 
+<body> 
+<div id="container">
+   		<div id="header">
+   			<div id="header_left">
+   				<h:link outcome="/index.xhtml">
+        	  		<h:graphicImage value="/resources/gfx/logo.gif" width="113" height="50" alt="Eshop logo" />
+        	  	</h:link>
+        	</div>
+        	<div id="header_center" align="center">
+        		<h1>Welcome to eshop!  </h1>
+        	</div>
+        	<div id="header_right">
+        		<div id="loggedAs" align="right">
+					<h5>
+						<h:link outcome="/newBook.xhtml">
+							new book						
+						</h:link><br />
+						<h:link outcome="/listBooks.xhtml">
+							list books						
+						</h:link><br />
+						<h:link outcome="/booksProvider.xhtml">
+							books provider						
+						</h:link><br />
+						<h:link outcome="/provider.xhtml">
+							product provider						
+						</h:link><br />
+						<a href="http://localhost:8080/eshop/TestMDBServlet">TestMDBServlet</a><br />
+						<a href="http://localhost:8080/eshop/TestServlet">TestServlet</a><br />
+						
+					</h5>
+					
+				</div>
+        	</div>
+      	</div>
+      	
+      	<div id="content">
+         	<ui:insert name="content">
+                    [Template content will be inserted here]
+         	</ui:insert>
+      	</div>
+      	
+      	<div id="footer">
+      		<br/>
+      		<br/>
+			<h2><h:link outcome="/index.xhtml">Back to main page</h:link></h2>
+      	</div>
+   	</div>
+</body> 
+</html>

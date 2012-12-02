@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/bookSaleTemplate.xhtml">
+
+<ui:define name="content">
+
+	<div id="books">
+    <h1>List of the books</h1>
+    <h:form id="booksForm">
+    <h:dataTable value="#{bookController.bookList}" var="bk" border="1">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="ISBN"/>
+            </f:facet>
+            <h:outputText value="#{bk.isbn}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+            	<h:outputText value="Title" />   		
+            </f:facet>
+            <h:outputText value="#{bk.title}" rendered="#{!bk.editable}" />
+            
+			<h:inputText value="#{bk.title}" size="12" rendered="#{bk.editable}" />
+			
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Description"/>
+            </f:facet>
+            <h:outputText value="#{bk.description}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Number Of Pages"/>
+            </f:facet>
+            <h:outputText value="#{bk.nbOfPage}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Illustrations"/>
+            </f:facet>
+            <h:outputText value="#{bk.illustrations}"/>
+        </h:column>
+        
+        <h:column>
+			<f:facet name="header">
+		 			<h:outputText value="Action"/>
+		    </f:facet>
+			<h:commandButton value="Edit" action="#{bookController.editAction(bk)}" rendered="#{not bk.editable}">
+			<f:ajax execute="@form" render=":provForm :booksForm" />
+			</h:commandButton>
+    		<h:commandButton value="Save" action="#{bookController.saveAction(bk)}" rendered="#{bk.editable}">
+    		<f:ajax execute="@form" render=":provForm :booksForm" />
+    		</h:commandButton>
+	    </h:column>
+		<h:column>
+			<f:facet name="header">
+		 		<h:outputText value="Basket"/>
+		    </f:facet>
+			<h:commandButton value="Add" action="#{bookController.addToBasket(bk)}" rendered="#{not bk.inBasket}">
+				<f:ajax render=":booksForm :Sales" />
+			</h:commandButton>
+    		<h:commandButton id="removeButton" value="Remove" action="#{bookController.removeFromBasket(bk)}" rendered="#{bk.inBasket}">
+    		   <f:ajax render=":booksForm :Sales" />
+    		</h:commandButton>
+	    </h:column>
+	    </h:dataTable>
+	    </h:form >
+    </div>
+    
+  <div> 
+  	<br />
+    <div id="echo">
+    <h:commandButton value="echo2" action="#{bookController.echo}">
+    	<f:ajax render="" />
+    </h:commandButton> &nbsp;
+    <h:commandButton value="echo2" action="#{loggingBean.log()}">
+    	<f:ajax render="" />
+    </h:commandButton> &nbsp;
+    <h:commandButton value="Something in Basket?" action="#{bookController.pritnBasket()}" >
+    	<f:ajax render="" />
+    </h:commandButton> 
+    </div>
+  </div>    
+      
+    <div id="newB">
+    <h:form id="newBo">
+        <h:link outcome="newBook.xhtml" value="Create a new book"/><br />      
+    </h:form>
+    </div>
+  <br />
+  <hr/>
+  <h2>Books in basket</h2>
+    <div id="saki">
+    <h:form id="Sales">    
+    <h:dataTable value="#{bookController.booksInBasket}" var="b" border="1" rendered="#{bookController.somethingInBasket}">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="ISBN"/>
+            </f:facet>
+            <h:outputText value="#{b.isbn}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                Title
+            </f:facet>
+            <h:outputText value="#{b.title}"/>
+        </h:column>
+        <h:column>
+        	<f:facet name="header">
+        		Amount
+        	</f:facet>
+        	<h:inputText value="#{b.amount}"  />
+        </h:column>
+    </h:dataTable><br />
+    <h:commandButton value="Make order" action="#{bookController.makeOrder2()}">
+    <f:ajax execute=":Sales :booksForm :provForm" render=":Sales :booksForm :provForm" />
+    </h:commandButton> &nbsp;
+        <h:commandButton value="clear basket" action="#{bookController.clearBasket()}" >
+    	<f:ajax render=":booksForm :Sales" />
+    </h:commandButton> 
+    </h:form>
+    </div><br />
+    <hr/>
+    <h2>Books on store</h2>
+    <div id="prov">
+    <h:form id="provForm">    
+    <h:dataTable value="#{bookController.provider}" var="b" border="1">
+          <h:column>
+            <f:facet name="header">
+                ISBN
+            </f:facet>
+            <h:outputText value="#{b.book.isbn}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                Title
+            </f:facet>
+            <h:outputText value="#{b.book.title}"/>
+        </h:column>
+        <h:column>
+        	<f:facet name="header">
+        		Amount
+        	</f:facet>
+        	<h:outputText value="#{b.amount}"  />
+        </h:column>
+    </h:dataTable>
+    </h:form>
+    </div>
+      
+</ui:define>
+</ui:composition>

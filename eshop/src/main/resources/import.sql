@@ -7,3 +7,8 @@ insert into Product (id, name, price, visible) values (10001, 'broken pipe', 123
 insert into Product (id, name, price, visible) values (10002, 'pocket knife', 234, false);
 insert into Product (id, name, price, visible) values (10003, 'duck tape', 34, true);
 insert into Product (id, name, price, visible) values (10004, 'BFG 9000', 11111134, true);
+insert into Book (description, illustrations, isbn, nbOfPage, title, id) values ('description', true, 1232131, 23, 'title', 1000);
+insert into Book (description, illustrations, isbn, nbOfPage, title, id) values ('description2', true, 14232131, 23, 'title2', 1001);
+insert into Book (description, illustrations, isbn, nbOfPage, title, id) values ('description3', true, 124232131, 23, 'title3', 1002);
+insert into Book (description, illustrations, isbn, nbOfPage, title, id) values ('description4', true, 1232342131, 23, 'title4', 1003);
+insert into Book (description, illustrations, isbn, nbOfPage, title, id) values ('description5', true, 12322134131, 23, 'title5', 1004);

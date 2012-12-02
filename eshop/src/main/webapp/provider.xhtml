@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/bookSaleTemplate.xhtml">
+
+<ui:define name="content">
+		<div id="active_products">
+			<h1>Products</h1>
+			<h:form id="product">
+			<h:panelGroup rendered="#{empty productsBean.productList}">
+				<em>No products</em>
+			</h:panelGroup>
+			<h:dataTable id="productTable" value="#{productsBean.productList}" var="p" rendered="#{not empty productsBean.productList}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+               			ID
+            		</f:facet>
+					<h:outputText value="#{p.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Name
+            		</f:facet>
+					<h:outputText value="#{p.name}" rendered="#{!p.editable}" />
+					<h:inputText value="#{p.name}" size="12" rendered="#{p.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Price
+           			</f:facet>
+					<h:outputText value="#{p.price}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+               			Visible
+           			</f:facet>
+					<h:selectBooleanCheckbox disabled="#{!p.editable}" value="#{p.visible}" />
+				</h:column>
+				<h:column>
+		    		<f:facet name="header">
+		    			Action
+		    		</f:facet>
+		    		<h:commandButton value="Edit" action="#{productsBean.editAction(p)}" rendered="#{not p.editable}" />
+    				<h:commandButton id="saveButton" value="Save" action="#{productsBean.saveAction(p)}" rendered="#{p.editable}" />
+	    	     </h:column>
+
+			</h:dataTable>
+			</h:form>
+		</div>
+</ui:define>
+</ui:composition>
